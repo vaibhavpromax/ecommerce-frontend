@@ -1,0 +1,48 @@
+@import "../../variables.scss";
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  .left {
+    padding: 0 15px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    .logo {
+      .svg {
+        height: 90px;
+        width: 80px;
+      }
+    }
+    .name {
+      font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic",
+        CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L",
+        "Avant Garde", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      color: $white;
+      font-size: 40px;
+    }
+  }
+  .right {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    .btn {
+      font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic",
+        CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L",
+        "Avant Garde", sans-serif;
+      font-style: normal;
+      color: $white;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 27px;
+    }
+    .login {
+    }
+  }
+}
