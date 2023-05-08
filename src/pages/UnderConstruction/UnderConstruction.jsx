@@ -1,8 +1,19 @@
+import { useState } from "react";
+import useUnderConstruction from "../../apis/useUnderConstruction";
 import Button from "../../components/Button/Button";
-
 import styles from "./UnderConstruction.module.scss";
+import { isEmail } from "../../utils/validateEmail";
 
 const UnderConstruction = () => {
+  const [mail, setMail] = useState("");
+
+  const { addMail } = useUnderConstruction();
+
+  const submitHandler = () => {
+    if (!isEmail(mail)) return alert("Veuillez entrer une adresse mail valide");
+    addMail({ mail: mail }, (data) => console.log(data));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.underConstruction}>
@@ -15,8 +26,15 @@ const UnderConstruction = () => {
           votre adresse mail.
         </p>
         <span className={styles.input}>
-          <input type="text" placeholder="bonjour@mail.com" />
-          <Button className={styles.button}>Prévenez-moi</Button>
+          <input
+            value={mail}
+            onChange={(e) => setMail(e.target.value)}
+            type="text"
+            placeholder="bonjour@mail.com"
+          />
+          <Button onClick={submitHandler} className={styles.button}>
+            Prévenez-moi
+          </Button>
         </span>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation, BrowserRouter } from "react-router-dom";
+import axios from "axios";
 import styles from "./App.module.scss";
 import RoleRoutes from "./rbac/RoleRoutes";
 import NotFound from "./pages/NotFound/NotFound";
