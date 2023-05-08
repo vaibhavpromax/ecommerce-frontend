@@ -3,4 +3,9 @@
   background: $secondary-brown;
   height: 100vh;
   width: 100vw;
+  .blur {
+    .routeContainer {
+      height: 100%;
+    }
+  }
 }

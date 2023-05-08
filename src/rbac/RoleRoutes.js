@@ -25,16 +25,15 @@ const RoleRoutes = () => {
     <div className={styles.routePageContainer}>
       <div className={styles.blur}>
         <>
-          {ROUTES_WITH_NAVBAR?.some(
+          {/* {ROUTES_WITH_NAVBAR?.some(
             (route) => route.link === location.pathname
-          ) && (
-            <div className={styles.navbar}>
-              <Navbar routes={ROUTES_NAVBAR} />
-            </div>
-          )}
+          ) && ( */}
+          <div className={styles.navbar}>
+            <Navbar routes={ROUTES_NAVBAR} />
+          </div>
+          {/* )} */}
           <div className={styles.routeContainer}>
             <Routes>
-              
               {ROLE_ROUTES["admin"].map((route) => {
                 return (
                   route.private && (
