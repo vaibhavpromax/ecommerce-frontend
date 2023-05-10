@@ -7,13 +7,18 @@ import { isEmail } from "../../utils/validateEmail";
 const UnderConstruction = () => {
   const [mail, setMail] = useState("");
 
-  const { addMail } = useUnderConstruction();
+  const { addMail, error } = useUnderConstruction();
 
   const submitHandler = () => {
     if (!isEmail(mail)) return alert("Veuillez entrer une adresse mail valide");
-    addMail({ mail: mail }, (data) => console.log(data));
-  };
 
+    // addMail({ mail: mail });
+    addMail({ mail: mail }, () => {
+      setMail("");
+    }).catch((err) => {
+      alert("mail exists");
+    });
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.underConstruction}>

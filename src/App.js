@@ -11,6 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<UnderConstruction />} path="/"></Route>
+          {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
+
           <Route path="/*" element={<RoleRoutes />}></Route>
         </Routes>
       </BrowserRouter>

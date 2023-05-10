@@ -15,14 +15,15 @@
     width: 789px;
     .title {
       align-self: flex-start;
-      font-family: "Gelasio";
+      font-family: "Gelasio", serif;
       font-style: normal;
       font-weight: 500;
       font-size: 56px;
     }
     p {
       margin-top: 30px;
-      font-family: "Futura Lt BT";
+      // font-family: "Futura Lt BT";
+      font-family: "Nunito Sans", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 25px;
@@ -47,7 +48,7 @@
         position: absolute;
         width: 60%;
         height: 18px;
-        font-family: "Futura";
+        font-family: "Nunito Sans", sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
@@ -61,10 +62,10 @@
         color: $white;
         width: 217px;
         height: 54px;
-        font-family: "Gelasio";
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
+        // font-family: "Gelasio", serif;
+        // font-style: normal;
+        // font-weight: 600;
+        // font-size: 20px;
         line-height: 25px;
       }
     }

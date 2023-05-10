@@ -1,17 +1,16 @@
 @import "../../variables.scss";
 
 .navbar {
-  background: transparent;
-  width: 100%;
-  background: #917d6a;
+  width: 100vw;
   padding-bottom: 10px;
-  // position: absolute;
+  position: absolute;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 20px;
   .left {
-    padding: 0 15px;
+    padding: 0 30px;
     display: flex;
     gap: 20px;
     align-items: center;
@@ -22,9 +21,7 @@
       }
     }
     .name {
-      font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic",
-        CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L",
-        "Avant Garde", sans-serif;
+      font-family: "Nunito Sans", sans-serif;
       font-style: normal;
       font-weight: 500;
       color: $white;
@@ -32,14 +29,12 @@
     }
   }
   .right {
-    padding: 0 30px;
+    padding: 0 50px;
     display: flex;
     align-items: center;
     gap: 30px;
     .btn {
-      font-family: Futura, Futura-Medium, "Futura Medium", "Century Gothic",
-        CenturyGothic, "Apple Gothic", AppleGothic, "URW Gothic L",
-        "Avant Garde", sans-serif;
+      font-family: "Nunito Sans", sans-serif;
       font-style: normal;
       color: $white;
       font-weight: 500;
@@ -47,6 +42,13 @@
       font-size: 27px;
     }
     .login {
+      height: 64.0291976928711px;
+      width: 216.09854125976562px;
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      color: $white;
+      font-weight: 500;
+      border-radius: 10px;
     }
   }
 }

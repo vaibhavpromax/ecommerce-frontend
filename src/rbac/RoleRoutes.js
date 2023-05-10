@@ -10,14 +10,7 @@ import NotFound from "../pages/NotFound/NotFound";
 
 //components
 
-const ROUTES_WITH_NAVBAR = ROLE_ROUTES["user"]?.filter(
-  (route) => route.navbarVisible === true
-);
-
 const RoleRoutes = () => {
-  const ROUTES_NAVBAR = ROLE_ROUTES["user"]?.filter(
-    (route) => route.navbar === true
-  );
   //   const { admin } = useAuth();
   const admin = { accessToken: "123" };
   const location = useLocation();
@@ -25,11 +18,11 @@ const RoleRoutes = () => {
     <div className={styles.routePageContainer}>
       <div className={styles.blur}>
         <>
-          {/* {ROUTES_WITH_NAVBAR?.some(
+          {/* {ROLE_ROUTES?.some(
             (route) => route.link === location.pathname
           ) && ( */}
           <div className={styles.navbar}>
-            <Navbar routes={ROUTES_NAVBAR} />
+            <Navbar routes={ROLE_ROUTES["user"]} />
           </div>
           {/* )} */}
           <div className={styles.routeContainer}>

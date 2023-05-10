@@ -1,0 +1,80 @@
+.outerdivimg {
+  margin: 4% 0 4% 0;
+  width: 12%;
+  height: 20vh;
+  background-image: url("../../../../../assets/coffeeheart.svg");
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-size: 100% 100%;
+  margin-left: 40%;
+}
+
+.outerdiv {
+  background-image: url("../../../../../assets/curv.png");
+  background-position: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.innerdiv {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .left {
+      background-image: url("../../../../../assets/coffeetray.svg");
+      background-position: cover;
+      background-size: 100% 100%;
+      width: 500px;
+      height: 350px;
+    }
+
+    .right {
+      width: 50%;
+      h3 {
+        font-family: "Gelasio";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 56px;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        .listitem {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          svg {
+            height: 22.61px;
+            width: 28.44px;
+          }
+          p {
+            width: 88%;
+            font-family: "Nunito Sans", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 22px;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+  .bottom {
+    margin-top: 40px;
+    .btn {
+      width: 450.17px;
+      height: 64.03px;
+    }
+  }
+}

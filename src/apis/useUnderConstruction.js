@@ -6,18 +6,16 @@ const useUnderConstruction = () => {
   const [error, setError] = useState(null);
 
   const addMail = async (payload, cb) => {
-    setError("");
+    // setError(null);
     setLoading(true);
     try {
-      const res = await axios.post(
-        `/ecommerce/construction`,
-        payload
-      );
-      if (res.statusText !== "OK")
-        throw new Error(res.msg || "Some error occured, please try again");
+      const res = await axios.post(`/ecommerce/construction`, payload);
+      // if (res.statusText !== "OK")
+      //   throw new Error(res.msg || "Some error occured, please try again");
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
-      setError(err.message);
+      // console.log(err);
+      throw new Error(err);
     } finally {
       setLoading(false);
     }
@@ -25,6 +23,7 @@ const useUnderConstruction = () => {
 
   return {
     addMail,
+    error,
   };
 };
 

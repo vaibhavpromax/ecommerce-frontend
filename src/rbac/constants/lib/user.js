@@ -14,12 +14,14 @@ const USER_ROUTES = [
     component: <Contact />,
     navbar: true,
     navbarVisible: true,
+    transparentNavbar: false,
   },
   {
     link: "/faq",
     name: "FAQ",
     component: <FAQ />,
     navbar: false,
+    transparentNavbar: false,
     navbarVisible: true,
   },
   {
@@ -27,6 +29,7 @@ const USER_ROUTES = [
     name: "Giftcard",
     component: <GiftCard />,
     navbar: false,
+    transparentNavbar: false,
     navbarVisible: true,
   },
   {
@@ -34,6 +37,7 @@ const USER_ROUTES = [
     name: "Home",
     component: <Home />,
     navbar: true,
+    transparentNavbar: true,
     navbarVisible: true,
   },
 
@@ -48,6 +52,7 @@ const USER_ROUTES = [
     link: "/policy",
     name: "Policy",
     component: <PrivacyPolicy />,
+    transparentNavbar: false,
     navbar: false,
     navbarVisible: true,
   },
@@ -56,6 +61,7 @@ const USER_ROUTES = [
     name: "Shop",
     component: <Shop />,
     navbar: true,
+    transparentNavbar: false,
     navbarVisible: true,
   },
   {
@@ -63,6 +69,7 @@ const USER_ROUTES = [
     name: "UserLogin",
     component: <UserLogin />,
     navbar: true,
+    transparentNavbar: false,
     navbarVisible: false,
   },
 ];
