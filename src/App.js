@@ -10,10 +10,10 @@ function App() {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route element={<UnderConstruction />} path="/"></Route>
-          {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
+          {/* <Route element={<UnderConstruction />} path="/"></Route> */}
+          <Route element={<UnderConstruction />} path="/*"></Route>
 
-          <Route path="/*" element={<RoleRoutes />}></Route>
+          {/* <Route path="/*" element={<RoleRoutes />}></Route> */}
         </Routes>
       </BrowserRouter>
     </div>
