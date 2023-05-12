@@ -1,4 +1,6 @@
 import styles from "./ForthPage.module.scss";
+import Footer from "./Footer";
+import { FooterData } from "../FooterData";
 const ForthPage = () => {
   return (
     <>
@@ -21,7 +23,10 @@ const ForthPage = () => {
             </div>
             <div className={styles.upperright}></div>
           </div>
-          <footer>
+
+          <Footer footerdata={FooterData} />
+
+          {/*           <footer>
             <img src="../assets/vector.png" alt="" />
             <div className={styles.fleft}>
               <span>A PROPOS</span>
@@ -43,7 +48,7 @@ const ForthPage = () => {
               <span>@ungraindanslaboite</span>
               <span>Un grain dans la boîte</span>
             </div>
-          </footer>
+          </footer>*/}
         </div>
       </section>
     </>
