@@ -1,6 +1,5 @@
 import styles from "./ForthPage.module.scss";
-import Footer from "./Footer";
-import { FooterData } from "../FooterData";
+import Footer from "../../../../../components/Footer/Footer"
 const ForthPage = () => {
   return (
     <>
@@ -23,8 +22,8 @@ const ForthPage = () => {
             </div>
             <div className={styles.upperright}></div>
           </div>
-
-          <Footer footerdata={FooterData} />
+         <Footer/>
+          {/* <Footer footerdata={FooterData} /> */}
 
           {/*           <footer>
             <img src="../assets/vector.png" alt="" />
