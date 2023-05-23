@@ -14,6 +14,7 @@ const UnderConstruction = () => {
 
     // addMail({ mail: mail });
     addMail({ mail: mail }, () => {
+      alert("Votre email a bien été enregistré");
       setMail("");
     }).catch((err) => {
       alert("mail existe, essayez avec un autre");

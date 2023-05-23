@@ -28,5 +28,8 @@
   }
   &:hover {
     box-shadow: none;
+    border: 2px solid $primary-brown;
+    color: $primary-brown;
+    background-color: $white;
   }
 }
