@@ -1,4 +1,5 @@
-import styles from "../../pages/User/Home/components/FourthPage/ForthPage.module.scss";
+//import styles from "../../pages/User/Home/components/FourthPage/ForthPage.module.scss";
+import styles from "./Footer.module.scss"
 const Footer=()=>{
 return (
          <footer>
