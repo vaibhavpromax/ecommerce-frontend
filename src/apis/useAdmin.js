@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 
-const useUnderConstruction = () => {
+const useAdmin = () => {
   const [loading, setLoading] = useState(false);
 
-  const addMail = async (payload, cb) => {
+  const getRegisteredEmails = async (cb) => {
     setLoading(true);
     try {
-      const res = await axios.post(`/ecommerce/construction`, payload);
+      const res = await axios.get(`/ecommerce/admin/get_emails`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);
@@ -17,8 +17,8 @@ const useUnderConstruction = () => {
   };
 
   return {
-    addMail,
+    getRegisteredEmails,
   };
 };
 
-export default useUnderConstruction;
+export default useAdmin;
