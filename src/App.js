@@ -12,11 +12,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route element={<UnderConstruction />} path="/"></Route> */}
-          <Route element={<UnderConstruction />} path="/*"></Route>
+          {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
           <Route element={<RegisteredEmails />} path="/admin/emails"></Route>
           <Route element={<NotFound />} path="/not-found"></Route>
 
-          {/* <Route path="/*" element={<RoleRoutes />}></Route> */}
+          <Route path="/*" element={<RoleRoutes />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
