@@ -6,6 +6,7 @@ import NotFound from "../../../pages/NotFound/NotFound";
 import PrivacyPolicy from "../../../pages/User/PrivacyPolicy/PrivacyPolicy";
 import Shop from "../../../pages/User/Shop/Shop";
 import UserLogin from "../../../pages/User/UserLogin/UserLogin";
+import Profile from "../../../pages/Profile/Profile";
 
 const USER_ROUTES = [
   {
@@ -68,6 +69,14 @@ const USER_ROUTES = [
     link: "/login",
     name: "UserLogin",
     component: <UserLogin />,
+    navbar: true,
+    transparentNavbar: false,
+    navbarVisible: false,
+  },
+  {
+    link: "/profile",
+    name: "Profile",
+    component: <Profile />,
     navbar: true,
     transparentNavbar: false,
     navbarVisible: false,
