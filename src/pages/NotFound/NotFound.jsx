@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./NotFound.module.scss";
 import Footer from "../../../src/components/Footer/Footer";
+
 const NotFound = () => {
   return (
     <div className={styles.NotFoundContainer}>
@@ -15,6 +16,7 @@ const NotFound = () => {
         <div className={styles.upperright}></div>
       </div>
       <Footer />
+      
     </div>
   );
 };
