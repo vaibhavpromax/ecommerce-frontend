@@ -33,7 +33,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
-    link: "/home",
+    link: "/",
     name: "Home",
     component: <Home />,
     navbar: true,
