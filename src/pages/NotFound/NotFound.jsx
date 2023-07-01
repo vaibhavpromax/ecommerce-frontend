@@ -16,7 +16,6 @@ const NotFound = () => {
         <div className={styles.upperright}></div>
       </div>
       <Footer />
-      
     </div>
   );
 };
