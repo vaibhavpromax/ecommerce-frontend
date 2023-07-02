@@ -1,0 +1,78 @@
+@import "../../variables.scss";
+
+.profile {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-family: "Jost", sans-serif;
+
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    padding: 20px;
+    .info {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+      img {
+        border-radius: 61px;
+        border: 2px solid #fff;
+        width: 61px;
+        height: 61px;
+        background: lightgray 50% / cover no-repeat;
+      }
+      .name {
+        color: $brown6;
+        h3 {
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 112.953%;
+        }
+        h4 {
+          margin-top: 10px;
+          line-height: 112.953%;
+        }
+      }
+    }
+    hr {
+      width: 80%;
+      height: 1px;
+    }
+    .bottom {
+      display: flex;
+      gap: 30px;
+      flex-direction: column;
+      .listOption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 20px;
+        color: $brown5;
+        font-weight: 400;
+        font-size: 20px;
+        // line-height: 112.953%;
+        .active {
+          font-weight: 600;
+        }
+        .option {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          width: 200px;
+        }
+      }
+    }
+  }
+
+  .right {
+    background-color: white;
+    flex: 5;
+    padding: 20px;
+  }
+}

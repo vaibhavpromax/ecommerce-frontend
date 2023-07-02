@@ -1,0 +1,11 @@
+<svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="credit-card" clip-path="url(#clip0_1089_904)">
+<path id="Vector" d="M19.2513 4.1665H2.7513C1.73878 4.1665 0.917969 4.98732 0.917969 5.99984V16.9998C0.917969 18.0124 1.73878 18.8332 2.7513 18.8332H19.2513C20.2638 18.8332 21.0846 18.0124 21.0846 16.9998V5.99984C21.0846 4.98732 20.2638 4.1665 19.2513 4.1665Z" stroke="#433E40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M0.917969 9.6665H21.0846" stroke="#433E40" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1089_904">
+<rect width="22" height="22" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
+</svg>

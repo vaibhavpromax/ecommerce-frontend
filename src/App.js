@@ -5,6 +5,7 @@ import RoleRoutes from "./rbac/RoleRoutes";
 import NotFound from "./pages/NotFound/NotFound";
 import UnderConstruction from "./pages/UnderConstruction/UnderConstruction";
 import RegisteredEmails from "./pages/Admin/RegisteredEmails/RegisteredEmails";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -13,9 +14,8 @@ function App() {
         <Routes>
           {/* <Route element={<UnderConstruction />} path="/"></Route> */}
           {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
-          <Route element={<RegisteredEmails />} path="/admin/emails"></Route>
-          <Route element={<NotFound />} path="/not-found"></Route>
-
+          {/* <Route element={<RegisteredEmails />} path="/admin/emails"></Route> */}
+          {/* <Route element={<NotFound />} path="/not-found"></Route> */}
           <Route path="/*" element={<RoleRoutes />}></Route>
         </Routes>
       </BrowserRouter>
