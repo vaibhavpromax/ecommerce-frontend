@@ -37,9 +37,9 @@ const USER_ROUTES = [
     link: "/",
     name: "Home",
     component: <Home />,
-    navbar: true,
-    transparentNavbar: true,
-    navbarVisible: true,
+    //navbar: true,
+   // transparentNavbar: true,
+    //navbarVisible: true,
   },
 
   //   {
