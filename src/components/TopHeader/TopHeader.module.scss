@@ -1,0 +1,55 @@
+@import "../../variables.scss";
+
+.navbar {
+  width: 100vw;
+  padding-bottom: 10px;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  .left {
+    padding: 0 30px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    .logo {
+      svg {
+        height: 67px;
+        width: 60px;
+      }
+    }
+    .name {
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      color: $white;
+      font-size: 20px;
+    }
+  }
+  .right {
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    .btn {
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      color: $white;
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .login {
+      width: 161.511px;
+      height: 47.855px;
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      font-size: 20px;
+      color: $white;
+      font-weight: 500;
+      border-radius: 10px;
+    }
+  }
+}
