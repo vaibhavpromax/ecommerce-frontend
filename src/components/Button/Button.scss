@@ -29,7 +29,8 @@
   &:hover {
     box-shadow: none;
     border: 2px solid $primary-brown;
-    color: $primary-brown;
+  //  color: $primary-brown;
+  color:black;
     background-color: $white;
   }
 }

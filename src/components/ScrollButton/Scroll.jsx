@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Scroll.module.scss";
+import Scroll from "../../assets/Scroll.svg";
 
 const ScrollButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,7 +14,7 @@ const ScrollButton = () => {
 
   const handleScroll = () => {
     const button = window.pageYOffset || document.documentElement.scrollTop;
-    setIsVisible(button > 200); 
+    setIsVisible(button > 200);
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const ScrollButton = () => {
     <div>
       {isVisible && (
         <button onClick={handleClick} className={styles.scrollbutton}>
-          Scroll Up
+        <img src={Scroll} alt="" />
         </button>
       )}
     </div>

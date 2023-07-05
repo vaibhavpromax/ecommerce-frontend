@@ -1,5 +1,4 @@
 @import "../../variables.scss";
-
 .navbar {
   width: 100vw;
   padding-bottom: 10px;
@@ -50,6 +49,11 @@
       color: $white;
       font-weight: 500;
       border-radius: 10px;
+      &:hover {
+      
+      color:black;
+        background-color: $white;
+      }
     }
   }
 }

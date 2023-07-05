@@ -4,13 +4,9 @@ import styles from "./TopHeader.module.scss";
 import { ICONS } from "../../icons";
 import Button from "../Button/Button";
 
-
-
 const Navbar = () => {
- 
   return (
-    <div   className={styles.navbar}
-    >
+    <div className={styles.navbar}>
       <div className={styles.left}>
         <div className={styles.logo}>{ICONS.logo}</div>
         <div className={styles.name}>
