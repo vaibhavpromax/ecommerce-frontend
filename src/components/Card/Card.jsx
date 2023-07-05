@@ -12,7 +12,7 @@ const Card = ({
   onAddToCart = () => {},
   onIncreaseQuantity = () => {},
   onDecreaseQuantity = () => {},
-  quantity = "0",
+  quantity = "1",
 }) => {
   const cardStyle = {
     width,

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from "./Password.module.scss";
+import { ICONS } from "../../icons";
 const Password = ({
   value,
   setValue,
   className,
-  width,
-  height,
+  width = "400px",
+  height = "44px",
   placeholder,
   label,
 }) => {
@@ -24,16 +25,10 @@ const Password = ({
           placeholder={placeholder}
           style={{ width, height, borderRadius: "4px" }}
         />
-        <img
-          className={styles.eyeicon}
-          src={
-            showPassword
-              ? require("../../assets/eye-open.png")
-              : require("../../assets/eye-close.png")
-          }
-          alt={showPassword ? "Hide Password" : "Show Password"}
-          onClick={togglePasswordVisibility}
-        />
+
+        <div className={styles.eyeicon} onClick={togglePasswordVisibility}>
+          {!showPassword ? ICONS.eyeOpen : ICONS.eyeClose}
+        </div>
       </div>
     </div>
   );
