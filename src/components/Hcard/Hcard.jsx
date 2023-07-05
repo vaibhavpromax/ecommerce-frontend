@@ -2,14 +2,15 @@
 import React from "react";
 import styles from "./Hcard.module.scss";
 import Trash from "../../assets/trash.svg";
-import svgImage from  "../../assets/TeaPacket.svg"
+import svgImage from "../../assets/TeaPacket.svg";
+import { ICONS } from "../../icons";
 const HCard = ({
   width = "100%",
-  height = "300px",
+  height = "160px",
   heading = "African Kahawa blend",
   discountedprice = "20.15$ per unit",
-  rate = "$22.00 (10% off)",
-  
+  rate = "$22.00",
+
   onIncreaseQuantity = () => {},
   onDecreaseQuantity = () => {},
   quantity = "1",
@@ -38,11 +39,11 @@ const HCard = ({
             -
           </button>
         </div>
-        <img src={Trash} alt="Delete" className={styles.trash} />
+        {ICONS.trash}
       </div>
       <div className={styles.p3}>
         <p className={styles.discountedprice}>{discountedprice}</p>
-        <p className={styles.rate}>{rate}</p>
+        <p className={styles.rate}>{rate} (10% off)</p>
       </div>
     </div>
   );

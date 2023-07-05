@@ -7,6 +7,8 @@ import PrivacyPolicy from "../../../pages/User/PrivacyPolicy/PrivacyPolicy";
 import Shop from "../../../pages/User/Shop/Shop";
 import UserLogin from "../../../pages/User/UserLogin/UserLogin";
 import Profile from "../../../pages/Profile/Profile";
+import Cart from "../../../pages/Cart/Cart";
+import Wishlist from "../../../pages/Wishlist/Wishlist";
 
 const USER_ROUTES = [
   {
@@ -38,7 +40,7 @@ const USER_ROUTES = [
     name: "Home",
     component: <Home />,
     //navbar: true,
-   // transparentNavbar: true,
+    // transparentNavbar: true,
     //navbarVisible: true,
   },
 
@@ -79,7 +81,23 @@ const USER_ROUTES = [
     component: <Profile />,
     navbar: true,
     transparentNavbar: false,
-    navbarVisible: false,
+    navbarVisible: true,
+  },
+  {
+    link: "/cart",
+    name: "Cart",
+    component: <Cart />,
+    navbar: true,
+    transparentNavbar: false,
+    navbarVisible: true,
+  },
+  {
+    link: "/wishlist",
+    name: "Wishlist",
+    component: <Wishlist />,
+    navbar: true,
+    transparentNavbar: false,
+    navbarVisible: true,
   },
 ];
 
