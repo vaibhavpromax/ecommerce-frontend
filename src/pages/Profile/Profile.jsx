@@ -19,7 +19,7 @@ const Profile = () => {
             <h4>Hello There</h4>
           </div>
         </div>
-        <hr />
+        <div className={styles.hr} />
         <div className={styles.bottom}>
           {profileOptions.map((pro, index) => {
             return (

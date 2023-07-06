@@ -4,12 +4,16 @@
   height: 100vh;
   width: 100vw;
   .blur {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     height: 100vh;
     width: 100vw;
     max-width: 100%;
     .routeContainer {
-      height: 100vh;
-      width: 100vw;
+      height: calc(100vh - 76px);
+      // height: 100vh;
+      // width: 100vw;
     }
   }
 }

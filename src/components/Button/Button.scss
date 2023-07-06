@@ -13,24 +13,29 @@
   text-align: center;
   gap: 10px;
   padding: 0.5rem 1rem;
-  color: $secondary-brown;
   cursor: pointer;
   border: none;
   width: fit-content;
-  background: $primary-brown;
   border-radius: 10px;
-  &.theme-dark {
-    background-color: #1e4552;
+  &.WHITE {
+    background-color: white;
+    border: 1px solid $primary-brown;
+    color: $primary-brown;
+  }
+  &.BROWN {
     color: white;
+    background: $primary-brown;
   }
-  &.hidden {
-    visibility: hidden;
-  }
-  &:hover {
+  &.BROWN:hover {
     box-shadow: none;
-    border: 2px solid $primary-brown;
-  //  color: $primary-brown;
-  color:black;
+    border: 1px solid $primary-brown;
+    color: $primary-brown;
     background-color: $white;
+  }
+  &.WHITE:hover {
+    box-shadow: none;
+    border: none;
+    color: white;
+    background: $primary-brown;
   }
 }

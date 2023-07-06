@@ -1,0 +1,35 @@
+.checkbox {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+
+  height: 20px;
+  width: 20px;
+  .checkmark {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    background: #fff;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input {
+    display: none;
+
+    &:checked ~ .checkmark {
+      // background: $txt-dark-2;
+      background: #433e40;
+    }
+
+    &:disabled ~ .checkmark {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

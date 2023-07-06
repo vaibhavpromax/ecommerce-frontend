@@ -55,6 +55,7 @@ const Details = () => {
           <div className={styles.btnrow}>
             <Button>Save</Button>
             <Button
+              theme="WHITE"
               onClick={() => setView("details")}
               className={styles.cancel}
             >
