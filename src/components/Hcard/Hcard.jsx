@@ -39,7 +39,9 @@ const HCard = ({
             -
           </button>
         </div>
+        <span className={styles.trash}>
         {ICONS.trash}
+        </span>
       </div>
       <div className={styles.p3}>
         <p className={styles.discountedprice}>{discountedprice}</p>
