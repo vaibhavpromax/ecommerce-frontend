@@ -49,32 +49,33 @@
     flex-direction: row;
     width:30%;
     .p2sub {
-      margin-top: -1%;
+      display:flex;
+      flex-direction: row;
+      margin-top: 1%;
       width:65%;
       margin-left:35px;
+      height:6vh;
+      box-sizing: border-box;
+      padding:2px;
       
       .add {
         background-color: #e8e4e1;
-        width: 19%;
-        border-radius: 4px 0 0 4px;
-        padding: 7px;
+        width: 20%;
         border: none;
-        height:43px;
+        height:100%;
         margin-left:8px;
         border-radius: 8px 0 0 8px;
+        box-sizing:border-box;
+
       }
       .minus {
         background-color: #e8e4e1;
-        width: 19%;
-        border-radius: 0px 4px 4px 0px;
-        margin-top: 10.8px;
-        padding: 5px;
+        width: 20%;
         border: none;
-        height:43px;
+        height:100%;
         border-radius: 0 8px  8px 0;
-        
-        
-      }
+        box-sizing:border-box;
+         }
       .quantity {
         color: #3f373a;
         text-align: center;
@@ -83,18 +84,18 @@
         font-style: normal;
         font-weight: 500;
         background-color: #e8e4e1;
-        width: 19%;
-        margin-top: 10px;
-        padding: 7px;
+        width: 20%;
         border: none;
-        height:42.8px;
+        height:100%;
+        box-sizing:border-box;
+
         
       }
     }
     .trash {
       
       width:10%;  
-      margin-top:6%;
+      margin-top:5%;
       margin-left:-12%
       
     }
