@@ -10,7 +10,6 @@ const HCard = ({
   heading = "African Kahawa blend",
   discountedprice = "20.15$ per unit",
   rate = "$22.00",
-
   onIncreaseQuantity = () => {},
   onDecreaseQuantity = () => {},
   quantity = "1",

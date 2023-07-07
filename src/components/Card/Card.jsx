@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./Card.module.scss";
 import svgImage from "../../assets/TeaPacket.svg";
+import Button from "../Button/Button";
 
 const Card = ({
-  width = "266px",
+  width = "280px",
   height = "396px",
   backgroundColor = "#F7F6F5",
   heading = "African Kahawa blend",
@@ -35,16 +36,18 @@ const Card = ({
           <span className={styles.firstletter}>{rate.substr(0, 3)}</span>
           {rate.slice(3)}
         </span>
-        <button className={styles.addtocart} onClick={onAddToCart}>
-          Add to Cart
-        </button>
-        <button className={styles.add} onClick={onIncreaseQuantity}>
-          +
-        </button>
-        <button className={styles.quantity}>{quantity}</button>
-        <button className={styles.minus} onClick={onDecreaseQuantity}>
-          -
-        </button>
+        <div className={styles.btnrow}>
+          <Button className={styles.atcbtn} onClick={onAddToCart}>
+            Add to Cart
+          </Button>
+          <button className={styles.add} onClick={onIncreaseQuantity}>
+            -
+          </button>
+          <button className={styles.quantity}>{quantity}</button>
+          <button className={styles.minus} onClick={onDecreaseQuantity}>
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
