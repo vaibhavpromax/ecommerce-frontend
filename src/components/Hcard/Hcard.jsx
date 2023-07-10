@@ -30,17 +30,15 @@ const HCard = ({
       </div>
       <div className={styles.p2}>
         <div className={styles.p2sub}>
-          <button className={styles.add} onClick={onIncreaseQuantity}>
-            +
+          <button className={styles.minus} onClick={onDecreaseQuantity}>
+            {ICONS.minus}
           </button>
           <button className={styles.quantity}>{quantity}</button>
-          <button className={styles.minus} onClick={onDecreaseQuantity}>
-            -
+          <button className={styles.add} onClick={onIncreaseQuantity}>
+            {ICONS.plus}
           </button>
         </div>
-        <span className={styles.trash}>
-        {ICONS.trash}
-        </span>
+        <span className={styles.trash}>{ICONS.trash}</span>
       </div>
       <div className={styles.p3}>
         <p className={styles.discountedprice}>{discountedprice}</p>

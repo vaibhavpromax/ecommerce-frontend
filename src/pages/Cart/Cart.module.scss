@@ -1,11 +1,13 @@
 .cart {
   display: flex;
-  padding: 30px;
+  // padding: 30px;
   gap: 24px;
+  height: 100%;
   .left {
     border-radius: 10px;
     background: #fff;
     padding: 36px;
+    margin: 32px;
     flex: 3.5;
     h4 {
       color: #3f373a;
@@ -26,6 +28,8 @@
   }
 
   .right {
+    margin-top: 32px;
+    margin-right: 26px;
     border-radius: 10px;
     background: #fff;
     flex: 1;

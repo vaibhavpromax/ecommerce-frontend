@@ -19,8 +19,17 @@ import { ReactComponent as Trash } from "../assets/trash.svg";
 import { ReactComponent as Tick } from "../assets/tick.svg";
 import { ReactComponent as Settings } from "../assets/settings.svg";
 import { ReactComponent as Plus } from "../assets/add.svg";
+import { ReactComponent as Recycle } from "../assets/recycle.svg";
+import { ReactComponent as Star } from "../assets/star.svg";
+import { ReactComponent as DropDownArrow } from "../assets/dropdownarrow.svg";
+import { ReactComponent as CartFilled } from "../assets/cartFilled.svg";
+import { ReactComponent as Truck } from "../assets/truck.svg";
+import { ReactComponent as HeartCutOutline } from "../assets/heartCutOutline.svg";
+import { ReactComponent as Home } from "../assets/home.svg";
+import { ReactComponent as Minus } from "../assets/minus.svg";
 
 export const ICONS = {
+  dropDownArrow: <DropDownArrow />,
   eyeOpen: <EyeOpen />,
   eyeClose: <EyeClosed />,
   logo: <Logo />,
@@ -40,5 +49,12 @@ export const ICONS = {
   settings: <Settings />,
   trash: <Trash />,
   tick: <Tick />,
-  plus:<Plus/>
+  plus: <Plus />,
+  star: <Star />,
+  recycle: <Recycle />,
+  cartFilled: <CartFilled />,
+  truck: <Truck />,
+  home: <Home />,
+  heartCutOutline: <HeartCutOutline />,
+  minus: <Minus />,
 };

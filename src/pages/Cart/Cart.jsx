@@ -12,6 +12,8 @@ const Cart = () => {
           <HCard />
           <HCard />
           <HCard />
+          <HCard />
+          <HCard />
         </div>
       </div>
 

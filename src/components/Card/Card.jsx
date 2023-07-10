@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Card.module.scss";
 import svgImage from "../../assets/TeaPacket.svg";
 import Button from "../Button/Button";
+import { ICONS } from "../../icons";
 
 const Card = ({
   width = "280px",
@@ -24,9 +25,7 @@ const Card = ({
       <div className={styles.upper} style={{ backgroundColor }}>
         <div className={styles.center}>
           <img src={svgImage} alt="CenterImage" />
-          <div className={styles.circle}>
-            <span>&#9825;</span>
-          </div>
+          <div className={styles.circle}>{ICONS.heartCutOutline}</div>
         </div>
       </div>
       <div className={styles.lower}>
@@ -40,12 +39,12 @@ const Card = ({
           <Button className={styles.atcbtn} onClick={onAddToCart}>
             Add to Cart
           </Button>
-          <button className={styles.add} onClick={onIncreaseQuantity}>
-            -
+          <button className={styles.minus} onClick={onDecreaseQuantity}>
+            {ICONS.minus}
           </button>
           <button className={styles.quantity}>{quantity}</button>
-          <button className={styles.minus} onClick={onDecreaseQuantity}>
-            +
+          <button className={styles.add} onClick={onIncreaseQuantity}>
+            {ICONS.plus}
           </button>
         </div>
       </div>
