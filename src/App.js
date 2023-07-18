@@ -1,11 +1,11 @@
-import { Route, Routes, useLocation, BrowserRouter } from "react-router-dom";
-import axios from "axios";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+
 import styles from "./App.module.scss";
 import RoleRoutes from "./rbac/RoleRoutes";
-import NotFound from "./pages/NotFound/NotFound";
-import UnderConstruction from "./pages/UnderConstruction/UnderConstruction";
-import RegisteredEmails from "./pages/Admin/RegisteredEmails/RegisteredEmails";
-import Profile from "./pages/Profile/Profile";
+
+//import UnderConstruction from "./pages/UnderConstruction/UnderConstruction";
+//import RegisteredEmails from "./pages/Admin/RegisteredEmails/RegisteredEmails";
+//import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           {/* <Route element={<UnderConstruction />} path="/"></Route> */}
           {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
           {/* <Route element={<RegisteredEmails />} path="/admin/emails"></Route> */}
-          {/* <Route element={<NotFound />} path="/not-found"></Route> */}
+           {/* <Route element={<NotFound/>} path="/notfound"></Route>  */}
           <Route path="/*" element={<RoleRoutes />}></Route>
         </Routes>
       </BrowserRouter>

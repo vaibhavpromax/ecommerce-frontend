@@ -1,9 +1,10 @@
 // HCard.jsx
 import React from "react";
 import styles from "./Hcard.module.scss";
-import Trash from "../../assets/trash.svg";
 import svgImage from "../../assets/TeaPacket.svg";
 import { ICONS } from "../../icons";
+import Counter from "../Counter/Counter";
+
 const HCard = ({
   width = "100%",
   height = "160px",
@@ -30,18 +31,12 @@ const HCard = ({
         <a href="abc.com">View Product</a>
       </div>
       <div className={styles.p2}>
-        <div className={styles.p2sub}>
-          <button className={styles.add} onClick={onIncreaseQuantity}>
-            +
-          </button>
-          <button className={styles.quantity}>{quantity}</button>
-          <button className={styles.minus} onClick={onDecreaseQuantity}>
-            -
-          </button>
-        </div>
-        <span className={styles.trash}>
-        {ICONS.trash}
-        </span>
+        <Counter
+          onIncreaseQuantity={onIncreaseQuantity}
+          onDecreaseQuantity={onDecreaseQuantity}
+          quantity={quantity}
+        />
+        <span className={styles.trash}>{ICONS.trash}</span>
       </div>
       <div className={styles.p3}>
         <p className={styles.discountedprice}>{discountedprice}</p>

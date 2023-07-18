@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./NotFound.module.scss";
 import Footer from "../../../src/components/Footer/Footer";
+import TeaBag from "../../../src/components/TeaBag/TeaBag"
 
 const NotFound = () => {
   return (
+    
     <div className={styles.NotFoundContainer}>
       <div className={styles.upper}>
         <div className={styles.upperleft}>
@@ -16,6 +18,7 @@ const NotFound = () => {
         <div className={styles.upperright}></div>
       </div>
       <Footer />
+      <TeaBag/>
     </div>
   );
 };
