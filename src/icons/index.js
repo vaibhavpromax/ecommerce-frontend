@@ -26,6 +26,7 @@ import { ReactComponent as CartFilled } from "../assets/cartFilled.svg";
 import { ReactComponent as Truck } from "../assets/truck.svg";
 import { ReactComponent as HeartCutOutline } from "../assets/heartCutOutline.svg";
 import { ReactComponent as Home } from "../assets/home.svg";
+import { ReactComponent as Magnify } from "../assets/magnify.svg";
 import { ReactComponent as Minus } from "../assets/minus.svg";
 
 export const ICONS = {
@@ -57,4 +58,5 @@ export const ICONS = {
   home: <Home />,
   heartCutOutline: <HeartCutOutline />,
   minus: <Minus />,
+  magnify: <Magnify />,
 };
