@@ -18,9 +18,17 @@ const theme = createTheme({
       styleOverrides: {
         rail: {
           backgroundColor: "white",
+          height: "4px",
+        },
+        track: {
+          height: "4px",
         },
         root: {
-          width: "90%",
+          width: "80%",
+        },
+        thumb: {
+          width: "14px",
+          height: "14px",
         },
         valueLabel: {
           color: "#615C5E",
@@ -135,6 +143,7 @@ const ShopFilter = () => {
             }}
             value={value1}
             onChange={handleSliderChange}
+            valueLabelFormat={(n) => `${n}$`}
             valueLabelDisplay="on"
             color="primary"
             // getAriaValueText={slidertooltip}

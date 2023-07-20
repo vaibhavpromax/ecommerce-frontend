@@ -29,6 +29,7 @@ import { ReactComponent as Home } from "../assets/home.svg";
 import { ReactComponent as Magnify } from "../assets/magnify.svg";
 import { ReactComponent as Minus } from "../assets/minus.svg";
 
+
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
   eyeOpen: <EyeOpen />,
