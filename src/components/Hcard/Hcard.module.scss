@@ -23,13 +23,14 @@
     flex-direction: column;
     .p1Text {
       color: #636363;
-      font-size: 24px;
       font-family: Jost;
+      font-size: 24px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
     }
     a {
+      margin-top: 2px;
       color: #b06934;
       font-size: 16px;
       font-family: Jost;
@@ -50,10 +51,15 @@
     }
   }
   .p3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 50px;
+    margin-top: 15px;
     .discountedprice {
       color: #b06934;
-      font-size: 24px;
       font-family: Jost;
+      font-size: 24px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;

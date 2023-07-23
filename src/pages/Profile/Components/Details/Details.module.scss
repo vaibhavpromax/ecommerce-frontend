@@ -73,17 +73,14 @@
     display: flex;
     gap: 14px;
 
-    .cancel {
-      border-radius: 10px;
-      border: 1px solid #433e40;
-      display: flex;
+    button {
+      font-family: Jost;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%;
       width: 116px;
       height: 46px;
-      padding: 8px;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
     }
   }
 }

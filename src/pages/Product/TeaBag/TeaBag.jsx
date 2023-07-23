@@ -1,7 +1,7 @@
 import React from 'react';
-import Heart from "../../assets/heart.svg";
-import TeaBag from "../../assets/TeaBag.svg";
-import Beans from "../../assets/Beans.svg";
+import Heart from "../../../assets/heart.svg";
+import TeaBag from "../../../assets/TeaBag.svg";
+import Beans from "../../../assets/Beans.svg";
 import "./TeaBag.css"
 
 const TeaBags = () => {

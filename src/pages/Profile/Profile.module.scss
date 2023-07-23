@@ -12,12 +12,12 @@
     flex-direction: column;
     gap: 40px;
     align-items: center;
-    padding: 20px;
+    padding: 0px 32px;
     .info {
       margin-top: 30px;
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 18px;
       width: 100%;
       img {
         border-radius: 61px;
@@ -29,19 +29,27 @@
       .name {
         color: $brown6;
         h3 {
+          color: #3f373a;
+          font-family: Jost;
           font-size: 16px;
+          font-style: normal;
           font-weight: 300;
           line-height: 112.953%;
         }
         h4 {
-          margin-top: 10px;
+          color: #3f373a;
+          font-family: Jost;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
           line-height: 112.953%;
         }
       }
     }
-    hr {
-      width: 80%;
+    .hr {
+      width: 95%;
       height: 1px;
+      background: #a9a5a2;
     }
     .bottom {
       display: flex;
@@ -53,18 +61,25 @@
         justify-content: space-between;
         width: 100%;
         gap: 20px;
-        color: $brown5;
-        font-weight: 400;
+        color: #615c5e;
+        font-family: Jost;
         font-size: 20px;
-        // line-height: 112.953%;
+        font-style: normal;
+        line-height: 112.953%;
         .active {
-          font-weight: 600;
+          font-weight: 500;
         }
         .option {
           display: flex;
           align-items: center;
           gap: 10px;
+          font-weight: 400;
           width: 200px;
+          cursor: pointer;
+          svg {
+            width: 22px;
+            height: 22px;
+          }
         }
       }
     }

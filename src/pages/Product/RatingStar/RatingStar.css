@@ -1,0 +1,17 @@
+/* StarRating.css */
+
+.star-rating {
+  font-size: 55px; /* Adjust the font size to set the star size */
+  display: flex;
+  justify-content: start; /* It should be "start" instead of "star" */
+  height: 80px;
+  width: 350px;
+}
+
+.star {
+  color: #B06934; 
+}
+
+.filled-star {
+  padding-right: 0.5em; /* Add some padding to the filled stars to adjust for half-filled stars */
+}

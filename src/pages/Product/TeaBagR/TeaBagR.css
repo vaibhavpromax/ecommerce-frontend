@@ -1,0 +1,153 @@
+.tbrcontainer {
+    width: 650px;
+    height: 560px;
+    display: flex;
+    background-color: white;
+}
+
+.tbheading {
+    width: 289px;
+    height: 36px;
+    font-family: Gelasio;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+}
+
+.tbrl {
+    width: 109px;
+    height: 48px;
+    font-family: Jost;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 49px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #B06934;
+}
+
+.tbrm {
+    width: 65px;
+    height: 21px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.tbrr {
+    width: 65px;
+    height: 21px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+}
+
+.tbrp {
+    margin-top: 15px;
+    width: 662px;
+    height: 66px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #636363;
+    margin-bottom: 15px;
+}
+
+.tbrhl {
+    margin-top: 25px;
+    width: 128px;
+    height: 22px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #433E40;
+}
+
+.tbrhm {
+    margin-top: 15px;
+    width: 152px;
+    height: 22px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #433E40;
+}
+
+.tbrhr {
+    margin-top: 15px;
+    width: 160px;
+    height: 22px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #433E40;
+    
+}
+
+.tbrratingstar {
+    padding:15px 0;
+    width: 160px;
+    height: 30px;
+    margin-bottom:60px;    
+}
+
+.tbrlist{
+margin-top:25px;    
+margin-bottom:25px;    
+}
+
+.tbrdd{
+display:block;    
+margin-top:18px;
+width:160px;
+height:30px;
+padding-right: 15px;
+margin-bottom: 25px;
+}
+
+.tbrbtnl{
+    width:138px;
+    height:47px;    
+    color:black;
+    size:20px;
+    
+padding: 12px 26px 12px 26px;
+border-radius: 10px;
+margin-right: 8px
+}
+
+.tbrbtnr{
+    width:138px;
+    height:47px;    
+    background: #433E40;
+    size:20px;
+    color:white;
+padding: 12px 26px 12px 26px;
+border-radius: 10px;
+margin-right: 8px
+
+
+
+    }

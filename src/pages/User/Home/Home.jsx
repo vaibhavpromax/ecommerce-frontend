@@ -4,9 +4,9 @@ import TopPage from "./components/TopPage/TopPage";
 import SecondPage from "./components/SecondPage/SecondPage";
 import ThirdPage from "./components/ThirdPage/ThirdPage";
 import ForthPage from "./components/FourthPage/ForthPage";
-import TeaBags from "../../../components/TeaBag/TeaBag";
-import TeaBagR from "../../../components/TeaBagR/TeaBagR";
-import SortDD from "../../../components/SortDropdown/SortDropdown";
+//import TeaBags from "../../Product/TeaBag/TeaBag";
+//import TeaBagR from "../../../components/TeaBagR/TeaBagR";
+//import SortDD from "../../../components/SortDropdown/SortDropdown";
 
 const Home = () => {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Textbox.module.scss"
+import styles from "./Textbox.module.scss";
 const TextBox = ({
   label,
   className,

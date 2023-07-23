@@ -2,13 +2,14 @@ import Contact from "../../../pages/User/Contact/Contact";
 import FAQ from "../../../pages/User/FAQ/FAQ";
 import GiftCard from "../../../pages/User/GiftCard/BuyGiftCard/BuyGiftCard";
 import Home from "../../../pages/User/Home/Home";
-import NotFound from "../../../pages/NotFound/NotFound";
+//import NotFound from "../../../pages/NotFound/NotFound";
 import PrivacyPolicy from "../../../pages/User/PrivacyPolicy/PrivacyPolicy";
 import Shop from "../../../pages/User/Shop/Shop";
 import UserLogin from "../../../pages/User/UserLogin/UserLogin";
 import Profile from "../../../pages/Profile/Profile";
 import Cart from "../../../pages/Cart/Cart";
 import Wishlist from "../../../pages/Wishlist/Wishlist";
+import Product from "../../../pages/Product/Product.jsx"
 
 const USER_ROUTES = [
   {
@@ -44,13 +45,13 @@ const USER_ROUTES = [
     //navbarVisible: true,
   },
 
-  //   {
-  //     link: "/notfound",
-  //     name: "Notfound",
-  //     component: <NotFound />,
-  //     navbar: false,
-  //     navbarVisible: true,
-  //   },
+  //  {
+  //    link: "/notfound",
+  //    name: "Notfound",
+  //    component: <NotFound />,
+  //    navbar: false,
+  //   navbarVisible: true,
+  //  },
   {
     link: "/policy",
     name: "Policy",
@@ -97,6 +98,13 @@ const USER_ROUTES = [
     component: <Wishlist />,
     navbar: true,
     transparentNavbar: false,
+    navbarVisible: true,
+  },
+  {
+    link: "/product",
+    name: "Product",
+    component: <Product />,
+    navbar: false,
     navbarVisible: true,
   },
 ];

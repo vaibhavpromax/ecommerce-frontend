@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import starSvg from "../../assets/Star.svg";
+import starSvg from "../../assets/star.svg";
 import Blank from "../../assets/Blank.svg";
 const RatingStar = () => {
   const [arr, setArr] = useState([

@@ -1,0 +1,85 @@
+@import "../../../../../variables.scss";
+
+.filter {
+  background: $lightBrown;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  .top {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 25px;
+    width: 90%;
+    input {
+      padding: 11px 22px;
+      height: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: 1px solid #c4c4c4;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    svg {
+      position: absolute;
+      right: 15%;
+    }
+  }
+
+  .filter1,
+  .filter2,
+  .filter3,
+  .filter4 {
+    width: 100%;
+    margin-left: 40px;
+    margin-top: 20px;
+    h4 {
+      color: $brown5;
+      font-family: Jost;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 20.332px */
+    }
+
+    // .slider {
+    //   margin: auto;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    // }
+
+    .filterOptions {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-top: 10px;
+      .filterOption {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        span {
+          color: #615c5e;
+          font-family: Jost;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  button {
+    color: #fff;
+    text-align: center;
+    font-family: Jost;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 40px auto;
+  }
+}
