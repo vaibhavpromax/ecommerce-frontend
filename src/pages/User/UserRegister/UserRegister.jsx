@@ -92,7 +92,9 @@ const UserRegister = () => {
           </div>
           <div className={styles.bottomText}>
             <span>Already have an account?</span>{" "}
-            <span className={styles.signin}>Signin</span>
+            <span onClick={() => navigate("/login")} className={styles.signin}>
+              Signin
+            </span>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import loginleft from "../../../assets/loginleft.png";
 import styles from "./UserLogin.module.scss";
 import TextBox from "../../../components/TextBox/TextBox";
@@ -26,11 +26,10 @@ const UserLogin = () => {
     });
   };
 
-
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     if (user) {
-      navigate('/profile');
+      navigate("/profile");
     }
   }, []);
 
@@ -75,7 +74,12 @@ const UserLogin = () => {
           </div>
           <div className={styles.bottomText}>
             <span>Already have an account?</span>{" "}
-            <span className={styles.signin}>Register</span>
+            <span
+              onClick={() => navigate("/register")}
+              className={styles.signin}
+            >
+              Register
+            </span>
           </div>
         </div>
       </div>
