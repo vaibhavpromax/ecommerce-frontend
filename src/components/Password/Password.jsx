@@ -5,8 +5,8 @@ const Password = ({
   value,
   setValue,
   className,
-  width = "400px",
-  height = "44px",
+  width = "100%",
+  height = "40px",
   placeholder,
   label,
 }) => {
@@ -17,13 +17,13 @@ const Password = ({
   return (
     <div className={`${styles.password} ${className}`}>
       <label>{label}</label>
-      <div className={styles.inputwrapper} style={{ position: "relative" }}>
+      <div className={styles.inputwrapper}>
         <input
           type={showPassword ? "text" : "password"}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
-          style={{ width, height, borderRadius: "4px" }}
+          style={{ width, height }}
         />
 
         <div className={styles.eyeicon} onClick={togglePasswordVisibility}>

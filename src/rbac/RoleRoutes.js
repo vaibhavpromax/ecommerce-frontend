@@ -7,11 +7,12 @@ import Navbar from "../components/Navbar/Navbar";
 import NotFound from "../pages/NotFound/NotFound";
 
 //context
-
+import { useAuth } from "../contexts/AuthContext";
 //components
 
 const RoleRoutes = () => {
   //   const { admin } = useAuth();
+  const { user } = useAuth();
   const admin = { accessToken: "123" };
   const location = useLocation();
   return (
@@ -40,11 +41,15 @@ const RoleRoutes = () => {
               })}
               {ROLE_ROUTES["user"].map((route) => {
                 return (
-                  <Route
-                    path={route.link}
-                    key={route.name}
-                    element={route.component}
-                  />
+                  route.private && (
+                    <Route
+                      path={route.link}
+                      key={route.name}
+                      element={
+                        user?.token ? route.component : <Navigate to="/login" />
+                      }
+                    />
+                  )
                 );
               })}
 

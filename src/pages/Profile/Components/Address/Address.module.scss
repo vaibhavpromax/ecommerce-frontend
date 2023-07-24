@@ -25,6 +25,9 @@
     display: flex;
     gap: 34px;
     margin-top: 40px;
+    flex-wrap: wrap;
+    height: 65vh;
+    overflow-y: scroll;
 
     .defadd {
       border: 1px solid #a49c97;

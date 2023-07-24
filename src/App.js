@@ -6,6 +6,11 @@ import NotFound from "./pages/NotFound/NotFound";
 import UnderConstruction from "./pages/UnderConstruction/UnderConstruction";
 import RegisteredEmails from "./pages/Admin/RegisteredEmails/RegisteredEmails";
 import Profile from "./pages/Profile/Profile";
+import { useEffect, useState } from "react";
+import UserLogin from "./pages/User/UserLogin/UserLogin";
+import UserRegister from "./pages/User/UserRegister/UserRegister";
+import AuthProvider from "./contexts/AuthContext";
+import Home from "./pages/User/Home/Home";
 
 function App() {
   return (
@@ -16,7 +21,17 @@ function App() {
           {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
           {/* <Route element={<RegisteredEmails />} path="/admin/emails"></Route> */}
           {/* <Route element={<NotFound />} path="/not-found"></Route> */}
-          <Route path="/*" element={<RoleRoutes />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<UserLogin />}></Route>
+          <Route path="/register" element={<UserRegister />}></Route>
+          <Route
+            path="/*"
+            element={
+              <AuthProvider>
+                <RoleRoutes />
+              </AuthProvider>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -41,7 +41,14 @@ const Navbar = ({ routes }) => {
       <div className={styles.right}>
         <div className={styles.btn}>La box du moment</div>
         <div className={styles.btn}>Nous contacter</div>
-        <div className={styles.btn}>Shop</div>
+        <div
+          onClick={() => {
+            navigate("/shop");
+          }}
+          className={styles.btn}
+        >
+          Shop
+        </div>
         <div
           onClick={() => {
             navigate("/wishlist");

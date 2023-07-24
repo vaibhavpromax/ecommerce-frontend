@@ -9,9 +9,11 @@ import UserLogin from "../../../pages/User/UserLogin/UserLogin";
 import Profile from "../../../pages/Profile/Profile";
 import Cart from "../../../pages/Cart/Cart";
 import Wishlist from "../../../pages/Wishlist/Wishlist";
+import UserRegister from "../../../pages/User/UserRegister/UserRegister";
 
 const USER_ROUTES = [
   {
+    private: false,
     link: "/contact",
     name: "Contact",
     component: <Contact />,
@@ -20,6 +22,7 @@ const USER_ROUTES = [
     transparentNavbar: false,
   },
   {
+    private: false,
     link: "/faq",
     name: "FAQ",
     component: <FAQ />,
@@ -28,6 +31,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
+    private: false,
     link: "/giftcard",
     name: "Giftcard",
     component: <GiftCard />,
@@ -35,14 +39,15 @@ const USER_ROUTES = [
     transparentNavbar: false,
     navbarVisible: true,
   },
-  {
-    link: "/",
-    name: "Home",
-    component: <Home />,
-    //navbar: true,
-    // transparentNavbar: true,
-    //navbarVisible: true,
-  },
+  // {
+  //   private: false,
+  //   link: "/",
+  //   name: "Home",
+  //   component: <Home />,
+  //   //navbar: true,
+  //   // transparentNavbar: true,
+  //   //navbarVisible: true,
+  // },
 
   //   {
   //     link: "/notfound",
@@ -52,6 +57,7 @@ const USER_ROUTES = [
   //     navbarVisible: true,
   //   },
   {
+    private: false,
     link: "/policy",
     name: "Policy",
     component: <PrivacyPolicy />,
@@ -60,6 +66,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
+    private: true,
     link: "/shop",
     name: "Shop",
     component: <Shop />,
@@ -68,14 +75,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
-    link: "/login",
-    name: "UserLogin",
-    component: <UserLogin />,
-    navbar: true,
-    transparentNavbar: false,
-    navbarVisible: false,
-  },
-  {
+    private: true,
     link: "/profile",
     name: "Profile",
     component: <Profile />,
@@ -84,6 +84,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
+    private: true,
     link: "/cart",
     name: "Cart",
     component: <Cart />,
@@ -92,6 +93,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
+    private: true,
     link: "/wishlist",
     name: "Wishlist",
     component: <Wishlist />,

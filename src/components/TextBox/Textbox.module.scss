@@ -1,3 +1,29 @@
-.first{
-border-radius: 8px;
+.first {
+  label {
+    color: var(--mid, #6b677b);
+    font-family: Jost;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  input {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    border-radius: 5px;
+    color: #9894a6;
+    border: 1px solid #a9a5a2;
+    background: #f7f6f5;
+    font-family: Jost;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    ::placeholder {
+      font-weight: 400;
+    }
+  }
 }
