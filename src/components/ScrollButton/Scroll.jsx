@@ -24,13 +24,11 @@ const ScrollButton = () => {
     };
   }, []);
 
-  console.log(window.pageYOffset);
-
   return (
     <div>
       {isVisible && (
         <button onClick={handleClick} className={styles.scrollbutton}>
-        <img src={Scroll} alt="" />
+          <img src={Scroll} alt="" />
         </button>
       )}
     </div>

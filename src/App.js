@@ -22,8 +22,7 @@ function App() {
           {/* <Route element={<RegisteredEmails />} path="/admin/emails"></Route> */}
           {/* <Route element={<NotFound />} path="/not-found"></Route> */}
           <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<UserLogin />}></Route>
-          <Route path="/register" element={<UserRegister />}></Route>
+
           <Route
             path="/*"
             element={

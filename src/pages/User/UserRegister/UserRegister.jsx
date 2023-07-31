@@ -29,6 +29,7 @@ const UserRegister = () => {
       last_name: regData.last_name,
     };
     registerUser(payload, (data) => {
+      localStorage.removeItem("session");
       localStorage.setItem("user", JSON.stringify(data.data));
       navigate("/shop");
     });

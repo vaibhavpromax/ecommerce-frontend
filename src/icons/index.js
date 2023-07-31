@@ -30,6 +30,8 @@ import { ReactComponent as Magnify } from "../assets/magnify.svg";
 import { ReactComponent as Minus } from "../assets/minus.svg";
 import { ReactComponent as Google } from "../assets/google.svg";
 import { ReactComponent as LogoIconWhite } from "../assets/logoIconWhite.svg";
+import { ReactComponent as ArrowRight } from "../assets/arrowRight.svg";
+import { ReactComponent as ArrowLeft } from "../assets/arrowLeft.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
@@ -62,5 +64,7 @@ export const ICONS = {
   minus: <Minus />,
   magnify: <Magnify />,
   google: <Google />,
+  arrowLeft: <ArrowLeft />,
+  arrowRight: <ArrowRight />,
   logoIconWhite: <LogoIconWhite />,
 };

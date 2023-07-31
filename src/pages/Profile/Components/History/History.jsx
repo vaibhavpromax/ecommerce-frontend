@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./History.module.scss";
 import HistoryCard from "./components/HistoryCard/HistoryCard";
-import Select from "../Select/Select";
+import Select from "../../../../components/Select/Select";
 
 const month_options = {
   3: "Past 3 months",

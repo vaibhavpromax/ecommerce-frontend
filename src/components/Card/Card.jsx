@@ -1,51 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.scss";
 import svgImage from "../../assets/TeaPacket.svg";
 import Button from "../Button/Button";
 import { ICONS } from "../../icons";
+import { useNavigate } from "react-router-dom";
+import useWishlist from "../../apis/useWishlist";
+import useCart from "../../apis/useCart";
+import Counter from "../Counter/Counter";
 
 const Card = ({
   width = "280px",
   height = "396px",
-  backgroundColor = "#F7F6F5",
-  heading = "African Kahawa blend",
-  paragraph = "Lorem ipsum dolor sit amet, consectetur ad..",
-  rate = "20$ per unit",
-  onAddToCart = () => {},
-  onIncreaseQuantity = () => {},
-  onDecreaseQuantity = () => {},
-  quantity = "1",
+  product,
+  fetchWishlist,
+  fetchProducts,
+  renderFromWishlist,
 }) => {
+  const navigate = useNavigate();
   const cardStyle = {
     width,
     height,
   };
+  const { removeFromWishlist, addToWishlist } = useWishlist();
+  const { addToCart, addToCartLoading } = useCart();
+  const [counterValue, setCounterValue] = useState(1);
+  const openProductHandler = () => {
+    navigate(`/product/${product?.product_id}`);
+  };
+
+  const removeFromWishListHandler = () => {
+    removeFromWishlist(product.product_id, () => {
+      if (renderFromWishlist) fetchWishlist();
+      else fetchProducts();
+    });
+  };
+
+  const addToWishListHandler = () => {
+    addToWishlist(product.product_id, () => {
+      fetchProducts();
+    });
+  };
+
+  const addToCartHandler = () => {
+    addToCart(
+      { product_id: product.product_id, quantity: counterValue },
+      () => {}
+    );
+  };
+
   return (
     <div className={styles.card} style={cardStyle}>
-      <div className={styles.upper} style={{ backgroundColor }}>
+      <div className={styles.upper}>
         <div className={styles.center}>
-          <img src={svgImage} alt="CenterImage" />
-          <div className={styles.circle}>{ICONS.heartCutOutline}</div>
+          <img
+            onClick={openProductHandler}
+            src={product?.Images[0]?.image_url}
+            alt="CenterImage"
+          />
+          <div
+            onClick={
+              product?.is_wishlisted
+                ? removeFromWishListHandler
+                : addToWishListHandler
+            }
+            className={styles.circle}
+          >
+            {product?.is_wishlisted
+              ? ICONS.heartCutOutline
+              : ICONS.heartOutline}
+          </div>
         </div>
       </div>
       <div className={styles.lower}>
-        <h2>{heading}</h2>
-        <p>{paragraph}</p>
+        <h2>{product?.name}</h2>
+        <p>{product?.description}</p>
         <span className={styles.rate}>
-          <span className={styles.firstletter}>{rate.substr(0, 3)}</span>
-          {rate.slice(3)}
+          <span className={styles.firstletter}>{product?.selling_price}$ </span>{" "}
+          per unit
         </span>
         <div className={styles.btnrow}>
-          <Button className={styles.atcbtn} onClick={onAddToCart}>
+          <Button className={styles.atcbtn} onClick={addToCartHandler}>
             Add to Cart
           </Button>
-          <button className={styles.minus} onClick={onDecreaseQuantity}>
-            {ICONS.minus}
-          </button>
-          <button className={styles.quantity}>{quantity}</button>
-          <button className={styles.add} onClick={onIncreaseQuantity}>
-            {ICONS.plus}
-          </button>
+          <Counter
+            counterValue={counterValue}
+            setCounterValue={setCounterValue}
+          />
         </div>
       </div>
     </div>

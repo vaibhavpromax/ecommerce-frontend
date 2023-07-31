@@ -4,6 +4,7 @@ import { useState } from "react";
 const useUserAuthentication = () => {
   const [loginLoading, setLoginLoading] = useState(false);
   const [registerLoading, setRegisterLoading] = useState(false);
+  const [getSessionLoading, setGetSessionLoading] = useState(false);
 
   const loginUser = async (data, cb) => {
     setLoginLoading(true);
@@ -29,11 +30,25 @@ const useUserAuthentication = () => {
     }
   };
 
+  const getSession = async (cb) => {
+    setGetSessionLoading(true);
+    try {
+      const res = await axios.get(`/ecommerce/user/get-session`);
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setGetSessionLoading(false);
+    }
+  };
+
   return {
     loginUser,
     loginLoading,
     registerUser,
     registerLoading,
+    getSessionLoading,
+    getSession,
   };
 };
 

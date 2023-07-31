@@ -12,7 +12,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const RoleRoutes = () => {
   //   const { admin } = useAuth();
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const admin = { accessToken: "123" };
   const location = useLocation();
   return (
@@ -40,16 +40,20 @@ const RoleRoutes = () => {
                 );
               })}
               {ROLE_ROUTES["user"].map((route) => {
-                return (
-                  route.private && (
-                    <Route
-                      path={route.link}
-                      key={route.name}
-                      element={
-                        user?.token ? route.component : <Navigate to="/login" />
-                      }
-                    />
-                  )
+                return route.private ? (
+                  <Route
+                    path={route.link}
+                    key={route.name}
+                    element={
+                      user?.token ? route.component : <Navigate to="/login" />
+                    }
+                  />
+                ) : (
+                  <Route
+                    path={route.link}
+                    key={route.name}
+                    element={route.component}
+                  />
                 );
               })}
 

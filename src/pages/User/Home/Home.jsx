@@ -6,7 +6,7 @@ import ThirdPage from "./components/ThirdPage/ThirdPage";
 import ForthPage from "./components/FourthPage/ForthPage";
 
 const Home = () => {
-  
+
   return (
     <div className={styles.wrapper}>
       <TopPage />

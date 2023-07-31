@@ -10,6 +10,7 @@ import Profile from "../../../pages/Profile/Profile";
 import Cart from "../../../pages/Cart/Cart";
 import Wishlist from "../../../pages/Wishlist/Wishlist";
 import UserRegister from "../../../pages/User/UserRegister/UserRegister";
+import Product from "../../../pages/Product/Product";
 
 const USER_ROUTES = [
   {
@@ -66,7 +67,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
-    private: true,
+    private: false,
     link: "/shop",
     name: "Shop",
     component: <Shop />,
@@ -84,7 +85,7 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
-    private: true,
+    private: false,
     link: "/cart",
     name: "Cart",
     component: <Cart />,
@@ -93,13 +94,40 @@ const USER_ROUTES = [
     navbarVisible: true,
   },
   {
-    private: true,
+    private: false,
     link: "/wishlist",
     name: "Wishlist",
     component: <Wishlist />,
     navbar: true,
     transparentNavbar: false,
     navbarVisible: true,
+  },
+  {
+    private: false,
+    link: "/product/:id",
+    name: "Product",
+    component: <Product />,
+    navbar: true,
+    transparentNavbar: false,
+    navbarVisible: true,
+  },
+  {
+    private: false,
+    link: "/login",
+    name: "login",
+    component: <UserLogin />,
+    navbar: false,
+    transparentNavbar: false,
+    navbarVisible: false,
+  },
+  {
+    private: false,
+    link: "/register",
+    name: "Register",
+    component: <UserRegister />,
+    navbar: false,
+    transparentNavbar: false,
+    navbarVisible: false,
   },
 ];
 
