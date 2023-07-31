@@ -3,15 +3,15 @@ import styles from "./ImageViewer.module.scss";
 import { ICONS } from "../../../../icons";
 import useWishlist from "../../../../apis/useWishlist";
 
-const images = [
-  "https://i.pinimg.com/originals/16/2c/80/162c8076aee14e1f8b9277c077471d4d.jpg",
-  "https://static.vecteezy.com/system/resources/previews/004/731/813/original/instant-coffee-in-a-paper-package-with-the-label-coffee-illustration-in-doodle-style-vector.jpg",
-  "https://static.vecteezy.com/system/resources/previews/015/400/106/non_2x/coffee-takeaway-cup-realistic-and-sack-with-coffee-beans-coffee-to-go-lettering-close-up-take-out-coffee-with-brown-cap-and-cup-holder-illustration-for-cafe-voucher-flyer-template-vector.jpg",
-  "https://thumbs.dreamstime.com/b/coffee-cup-sweets-delicious-vector-modern-icons-coffee-shop-coffee-house-colorful-template-cooking-restaurant-95959851.jpg",
-];
+// const images = [
+//   "https://i.pinimg.com/originals/16/2c/80/162c8076aee14e1f8b9277c077471d4d.jpg",
+//   "https://static.vecteezy.com/system/resources/previews/004/731/813/original/instant-coffee-in-a-paper-package-with-the-label-coffee-illustration-in-doodle-style-vector.jpg",
+//   "https://static.vecteezy.com/system/resources/previews/015/400/106/non_2x/coffee-takeaway-cup-realistic-and-sack-with-coffee-beans-coffee-to-go-lettering-close-up-take-out-coffee-with-brown-cap-and-cup-holder-illustration-for-cafe-voucher-flyer-template-vector.jpg",
+//   "https://thumbs.dreamstime.com/b/coffee-cup-sweets-delicious-vector-modern-icons-coffee-shop-coffee-house-colorful-template-cooking-restaurant-95959851.jpg",
+// ];
 
 const ImageViewer = ({ product, fetchProduct }) => {
-  // const images = product?.Images;
+  const images = product?.Images;
   const [activeImage, setActiveImage] = useState(images[0].image_url);
 
   const { addToWishlist, removeFromWishlist } = useWishlist();
