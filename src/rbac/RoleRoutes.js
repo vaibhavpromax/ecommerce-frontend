@@ -3,11 +3,11 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 //styles
 import styles from "./RoleRoutes.module.scss";
-import Navbar from "../components/Navbar/Navbar";
 import NotFound from "../pages/NotFound/NotFound";
 
 //context
 import { useAuth } from "../contexts/AuthContext";
+import Sidebar from "../components/Sidebar/Sidebar";
 //components
 
 const RoleRoutes = () => {
@@ -19,7 +19,7 @@ const RoleRoutes = () => {
     <div className={styles.routePageContainer}>
       <div className={styles.blur}>
         <>
-          <Navbar routes={ROLE_ROUTES["user"]} />
+          <Sidebar />
           <div className={styles.routeContainer}>
             <Routes>
               {ROLE_ROUTES["admin"].map((route) => {
@@ -39,24 +39,6 @@ const RoleRoutes = () => {
                   )
                 );
               })}
-              {ROLE_ROUTES["user"].map((route) => {
-                return route.private ? (
-                  <Route
-                    path={route.link}
-                    key={route.name}
-                    element={
-                      user?.token ? route.component : <Navigate to="/login" />
-                    }
-                  />
-                ) : (
-                  <Route
-                    path={route.link}
-                    key={route.name}
-                    element={route.component}
-                  />
-                );
-              })}
-
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </div>

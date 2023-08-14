@@ -11,18 +11,15 @@ import UserLogin from "./pages/User/UserLogin/UserLogin";
 import UserRegister from "./pages/User/UserRegister/UserRegister";
 import AuthProvider from "./contexts/AuthContext";
 import Home from "./pages/User/Home/Home";
+import OrderManagement from "./pages/Admin/OrderManagement/OrderManagement";
 
 function App() {
   return (
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          {/* <Route element={<UnderConstruction />} path="/"></Route> */}
-          {/* <Route element={<UnderConstruction />} path="/*"></Route> */}
-          {/* <Route element={<RegisteredEmails />} path="/admin/emails"></Route> */}
-          {/* <Route element={<NotFound />} path="/not-found"></Route> */}
-          <Route path="/" element={<Home />}></Route>
-
+          <Route element={<RegisteredEmails />} path="/emails"></Route>
+          <Route path="/" element={<OrderManagement />}></Route>
           <Route
             path="/*"
             element={

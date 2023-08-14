@@ -1,0 +1,53 @@
+.sidebar {
+  height: 100vh;
+  width: 275px;
+  background: #433e40;
+
+  .logo {
+    margin-top: 27px;
+    margin-left: 24px;
+    svg {
+      width: 141px;
+      height: 34.083px;
+    }
+    flex-shrink: 0;
+  }
+  .bottom {
+    margin-top: 60px;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .listOption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80%;
+      gap: 20px;
+      color: white;
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      line-height: 112.953%;
+      svg {
+        color: white;
+      }
+      .active {
+        font-weight: 500;
+      }
+      .option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 400;
+        width: 200px;
+        cursor: pointer;
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
+}

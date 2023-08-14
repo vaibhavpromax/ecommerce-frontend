@@ -32,6 +32,9 @@ import { ReactComponent as Google } from "../assets/google.svg";
 import { ReactComponent as LogoIconWhite } from "../assets/logoIconWhite.svg";
 import { ReactComponent as ArrowRight } from "../assets/arrowRight.svg";
 import { ReactComponent as ArrowLeft } from "../assets/arrowLeft.svg";
+import { ReactComponent as Promotions } from "../assets/promotions.svg";
+import { ReactComponent as Customers } from "../assets/customersStick.svg";
+import { ReactComponent as Briefcase } from "../assets/briefcase.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
@@ -67,4 +70,7 @@ export const ICONS = {
   arrowLeft: <ArrowLeft />,
   arrowRight: <ArrowRight />,
   logoIconWhite: <LogoIconWhite />,
+  briefCase: <Briefcase />,
+  cusotmers: <Customers />,
+  promotions: <Promotions />,
 };
