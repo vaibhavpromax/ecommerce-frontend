@@ -22,6 +22,7 @@ import { ReactComponent as Plus } from "../assets/add.svg";
 import { ReactComponent as Recycle } from "../assets/recycle.svg";
 import { ReactComponent as Star } from "../assets/star.svg";
 import { ReactComponent as DropDownArrow } from "../assets/dropdownarrow.svg";
+import { ReactComponent as Download } from "../assets/download.svg";
 import { ReactComponent as CartFilled } from "../assets/cartFilled.svg";
 import { ReactComponent as Truck } from "../assets/truck.svg";
 import { ReactComponent as HeartCutOutline } from "../assets/heartCutOutline.svg";
@@ -61,6 +62,7 @@ export const ICONS = {
   star: <Star />,
   recycle: <Recycle />,
   cartFilled: <CartFilled />,
+  download: <Download />,
   truck: <Truck />,
   home: <Home />,
   heartCutOutline: <HeartCutOutline />,

@@ -1,0 +1,29 @@
+.tabNavContainer {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  padding: 0.35rem;
+  background: transparent;
+  cursor: pointer;
+  .activePill {
+    transition: 0.5s left;
+    position: absolute;
+    left: 0;
+    height: 85%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  &.slider {
+    border-radius: 0;
+    .activePill {
+      height: 3px;
+      top: 95%;
+    }
+    .inactive {
+      height: 5px;
+      top: 95%;
+    }
+  }
+}
