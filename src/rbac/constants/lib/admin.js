@@ -1,6 +1,7 @@
 import AdminPage from "../../../pages/Admin/AdminPage/AdminPage";
 import CouponManagement from "../../../pages/Admin/CouponManagement/CouponManagement";
 import CustomerManagement from "../../../pages/Admin/CustomerManagement/CustomerManagement";
+import OrderDetails from "../../../pages/Admin/OrderDetails/OrderDetails";
 import OrderManagement from "../../../pages/Admin/OrderManagement/OrderManagement";
 import ProductManagement from "../../../pages/Admin/ProductManagement/ProductManagement";
 
@@ -17,6 +18,13 @@ const ADMIN_ROUTES = [
     name: "order page",
     component: <OrderManagement />,
   },
+  {
+    private: true,
+    link: "/order/:id",
+    name: "order info page",
+    component: <OrderDetails />,
+  },
+
   {
     private: true,
     link: "/customer",

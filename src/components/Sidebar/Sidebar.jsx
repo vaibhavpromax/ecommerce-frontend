@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Sidebar.module.scss";
 import { ICONS } from "../../icons";
 import { adminOptions } from "./const";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [isSelected, setIsSelected] = useState(adminOptions[0]);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    adminOptions.map((opt) => {
+      if (opt.navigateTo == location.pathname) {
+        setIsSelected(opt);
+        return;
+      }
+    });
+  }, []);
 
   return (
     <div className={styles.sidebar}>

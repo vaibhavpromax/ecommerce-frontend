@@ -106,11 +106,14 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    gap: 5px;
+    // gap: 5px;
+    padding: 5px 20px;
+
     .orderItemRow {
+      background: #fbfafa;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      // justify-content: space-around;
       width: 90%;
       .col1 {
         display: flex;
@@ -119,6 +122,7 @@
         padding: 4.675px 16.965px 5.525px 16.115px;
         justify-content: center;
         align-items: center;
+        margin-left: 5%;
         img {
           width: 34.921px;
           height: 57.8px;
@@ -152,8 +156,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        margin-left: 18%;
       }
       .col4 {
+        margin-left: 15%;
         color: var(--highlight, #b06934);
         font-family: Jost;
         font-size: 14px;
@@ -162,6 +168,7 @@
         line-height: 20px; /* 142.857% */
       }
       .col5 {
+        margin-left: 13%;
         color: var(--font-dark, #3f373a);
         text-align: right;
         font-family: Jost;

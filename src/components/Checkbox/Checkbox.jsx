@@ -8,6 +8,7 @@ const Checkbox = ({
   tick,
   onChange,
   className,
+  shadowed = false,
   ...rest
 }) => {
   return (
@@ -23,7 +24,9 @@ const Checkbox = ({
         onChange={() => null}
         {...rest}
       />
-      <span className={styles.checkmark}>{tick && ICONS.tick}</span>
+      <span className={` ${shadowed && styles.shadow}  ${styles.checkmark}`}>
+        {tick && ICONS.tick}
+      </span>
     </label>
   );
 };

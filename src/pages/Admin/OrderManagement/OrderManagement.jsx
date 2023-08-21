@@ -62,6 +62,9 @@ const OrderManagement = () => {
         <OrderRow />
         <OrderRow />
         <OrderRow />
+        <OrderRow />
+        <OrderRow />
+        <OrderRow />
       </div>
     </div>
   );

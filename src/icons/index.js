@@ -36,6 +36,7 @@ import { ReactComponent as ArrowLeft } from "../assets/arrowLeft.svg";
 import { ReactComponent as Promotions } from "../assets/promotions.svg";
 import { ReactComponent as Customers } from "../assets/customersStick.svg";
 import { ReactComponent as Briefcase } from "../assets/briefcase.svg";
+import { ReactComponent as RedTrash } from "../assets/red-trash.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
@@ -62,6 +63,7 @@ export const ICONS = {
   star: <Star />,
   recycle: <Recycle />,
   cartFilled: <CartFilled />,
+  redTrash: <RedTrash />,
   download: <Download />,
   truck: <Truck />,
   home: <Home />,
