@@ -1,3 +1,4 @@
+import AddProductPage from "../../../pages/Admin/AddProductPage/AddProductPage";
 import AdminPage from "../../../pages/Admin/AdminPage/AdminPage";
 import CouponManagement from "../../../pages/Admin/CouponManagement/CouponManagement";
 import CustomerManagement from "../../../pages/Admin/CustomerManagement/CustomerManagement";
@@ -36,6 +37,12 @@ const ADMIN_ROUTES = [
     link: "/product",
     name: "product page",
     component: <ProductManagement />,
+  },
+  {
+    private: true,
+    link: "/add-product",
+    name: "add product",
+    component: <AddProductPage />,
   },
   {
     private: true,

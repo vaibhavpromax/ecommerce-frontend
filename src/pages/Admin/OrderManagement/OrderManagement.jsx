@@ -6,13 +6,7 @@ import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
 import Button from "../../../components/Button/Button";
 import OrderRow from "./components/OrderRow/OrderRow";
 
-const DisplayPill = ({ value, color }) => {
-  return (
-    <div className={styles.pill} style={{ background: color }}>
-      {value}
-    </div>
-  );
-};
+
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
