@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./AdminProductRow.module.scss";
 import Checkbox from "../../../../../components/Checkbox/Checkbox";
 import { ICONS } from "../../../../../icons";
+import { useNavigate } from "react-router-dom";
 
 const AdminProductRow = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.productRow}>
       <div className={styles.col1}>
@@ -11,7 +13,14 @@ const AdminProductRow = () => {
       </div>
       <div className={styles.col2}>#12340987</div>
       <div
-        style={{ color: "#B06934", textDecorationLine: "underline" }}
+        onClick={() => {
+          navigate("/order/23423");
+        }}
+        style={{
+          cursor: "pointer",
+          color: "#B06934",
+          textDecorationLine: "underline",
+        }}
         className={styles.col3}
       >
         Karadibetta Estate

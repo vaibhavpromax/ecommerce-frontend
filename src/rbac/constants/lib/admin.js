@@ -25,7 +25,6 @@ const ADMIN_ROUTES = [
     name: "order info page",
     component: <OrderDetails />,
   },
-
   {
     private: true,
     link: "/customer",

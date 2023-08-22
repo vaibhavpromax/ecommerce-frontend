@@ -6,6 +6,7 @@ import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
 import Button from "../../../components/Button/Button";
 import Checkbox from "../../../components/Checkbox/Checkbox";
 import AdminProductRow from "./components/AdminProductRow/AdminProductRow";
+import { useNavigate } from "react-router-dom";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -14,6 +15,7 @@ const options = [
 
 const ProductManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.productManagement}>
@@ -36,7 +38,14 @@ const ProductManagement = () => {
         </div>
 
         <div className={styles.buttons}>
-          <Button className={styles.btn}>{ICONS.plus} Add new Product </Button>
+          <Button
+            onClick={() => {
+              navigate("/add-product");
+            }}
+            className={styles.btn}
+          >
+            {ICONS.plus} Add new Product{" "}
+          </Button>
           <Button className={styles.btn} theme="WHITE">
             {ICONS.download} Export all
           </Button>
