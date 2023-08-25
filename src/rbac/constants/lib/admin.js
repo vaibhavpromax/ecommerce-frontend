@@ -9,7 +9,7 @@ import ProductManagement from "../../../pages/Admin/ProductManagement/ProductMan
 const ADMIN_ROUTES = [
   {
     private: true,
-    link: "/admin",
+    link: "/settings",
     name: "Admin",
     component: <AdminPage />,
   },

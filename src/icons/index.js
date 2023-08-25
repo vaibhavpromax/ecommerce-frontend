@@ -32,6 +32,8 @@ import { ReactComponent as Minus } from "../assets/minus.svg";
 import { ReactComponent as Google } from "../assets/google.svg";
 import { ReactComponent as LogoIconWhite } from "../assets/logoIconWhite.svg";
 import { ReactComponent as ArrowRight } from "../assets/arrowRight.svg";
+import { ReactComponent as AddImage } from "../assets/add-image.svg";
+import { ReactComponent as ReplaceImage } from "../assets/replace-image.svg";
 import { ReactComponent as ArrowLeft } from "../assets/arrowLeft.svg";
 import { ReactComponent as Promotions } from "../assets/promotions.svg";
 import { ReactComponent as Customers } from "../assets/customersStick.svg";
@@ -77,4 +79,6 @@ export const ICONS = {
   briefCase: <Briefcase />,
   cusotmers: <Customers />,
   promotions: <Promotions />,
+  addImage: <AddImage />,
+  replaceImage: <ReplaceImage />,
 };

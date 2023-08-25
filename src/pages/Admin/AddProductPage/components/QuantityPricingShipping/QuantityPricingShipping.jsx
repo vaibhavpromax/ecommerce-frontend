@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./QuantityPricingShipping.module.scss";
 import TextBox from "../../../../../components/TextBox/TextBox";
-const QuantityPricingShipping = () => {
+const QuantityPricingShipping = ({ productInfo, setProductInfo }) => {
   return (
     <div className={styles.qps}>
       <div className={styles.section}>
@@ -40,15 +40,37 @@ const QuantityPricingShipping = () => {
       <div className={styles.section}>
         <div className={styles.left}>Pricing</div>
         <div className={styles.right}>
-          <TextBox label="Base price" />
-          <TextBox label="Discount" />
-          <TextBox label="Selling price" />
+          <TextBox
+            value={productInfo.cost_price}
+            setValue={(e) => setProductInfo({ ...productInfo, cost_price: e })}
+            label="Base price"
+          />
+          <TextBox
+            value={productInfo.discount_value}
+            setValue={(e) =>
+              setProductInfo({ ...productInfo, discount_value: e })
+            }
+            label="Discount"
+          />
+          <TextBox
+            value={productInfo.selling_price}
+            setValue={(e) =>
+              setProductInfo({ ...productInfo, selling_price: e })
+            }
+            label="Selling price"
+          />
         </div>
       </div>
       <div className={styles.section}>
-        <div className={styles.left}>Shipping and delivery</div>
+        <div className={styles.left}>Inventory and delivery</div>
         <div className={styles.right}>
-          <TextBox label="Shipping charges" />
+          <TextBox
+            value={productInfo.inventory_quantity}
+            setValue={(e) =>
+              setProductInfo({ ...productInfo, inventory_quantity: e })
+            }
+            label="Inventory quantity"
+          />
         </div>
       </div>
     </div>

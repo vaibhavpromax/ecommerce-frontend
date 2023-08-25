@@ -7,7 +7,7 @@ const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem("admin")));
 
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
@@ -15,9 +15,8 @@ const AuthProvider = ({ children }) => {
 
   const init = async () => {
     let token;
-    if (user) token = user?.token;
+    if (admin) token = admin?.token;
 
-    console.log(authenticated, token);
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setAuthenticated(true);
     setLoading(false);
@@ -32,7 +31,7 @@ const AuthProvider = ({ children }) => {
   // }, []);
 
   return authenticated ? (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ admin }}>{children}</AuthContext.Provider>
   ) : (
     `Loading`
   );

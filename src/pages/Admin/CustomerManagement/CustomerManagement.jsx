@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CustomerManagement.module.scss";
 import { ICONS } from "../../../icons";
 import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
@@ -6,6 +6,7 @@ import Checkbox from "../../../components/Checkbox/Checkbox";
 import TextBox from "../../../components/TextBox/TextBox";
 import Button from "../../../components/Button/Button";
 import CustomerRow from "./components/CustomerRow/CustomerRow";
+import useCustomer from "../../../apis/useCustomer";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -14,6 +15,14 @@ const options = [
 
 const CustomerManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const [customers, setCustomers] = useState([]);
+  const { getCustomers, getCustomersLoading } = useCustomer();
+  const fetchCustomers = async () => {
+    getCustomers((res) => setCustomers(res?.data));
+  };
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
 
   return (
     <div className={styles.orderManagement}>
@@ -54,18 +63,9 @@ const CustomerManagement = () => {
           <div className={styles.col8}>ACTIONS</div>
         </div>
         <div className={styles.list}>
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
-          <CustomerRow />
+          {customers?.map((customer, key) => {
+            return <CustomerRow customer={customer} key={key} />;
+          })}
         </div>
       </div>
     </div>

@@ -1,7 +1,5 @@
-import ADMIN_ROUTES from './lib/admin';
-import USER_ROUTES from './lib/user';
+import ADMIN_ROUTES from "./lib/admin";
 
 export const ROLE_ROUTES = {
   admin: ADMIN_ROUTES,
-  user: USER_ROUTES
 };

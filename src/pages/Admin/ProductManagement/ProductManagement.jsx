@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductManagement.module.scss";
 import { ICONS } from "../../../icons";
 import TextBox from "../../../components/TextBox/TextBox";
@@ -7,6 +7,7 @@ import Button from "../../../components/Button/Button";
 import Checkbox from "../../../components/Checkbox/Checkbox";
 import AdminProductRow from "./components/AdminProductRow/AdminProductRow";
 import { useNavigate } from "react-router-dom";
+import useProduct from "../../../apis/useProduct";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -15,7 +16,19 @@ const options = [
 
 const ProductManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const [products, setProducts] = useState([]);
+  const { getProducts, getProductsLoading } = useProduct();
   const navigate = useNavigate();
+
+  const fetchProducts = async () => {
+    await getProducts((res) => {
+      setProducts(res?.data);
+    });
+  };
+  console.log(products);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <div className={styles.productManagement}>
@@ -66,17 +79,15 @@ const ProductManagement = () => {
           <div className={styles.col9}>ACTIONS</div>
         </div>
         <div className={styles.list}>
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
-          <AdminProductRow />
+          {getProductsLoading ? (
+            <h3>Loading</h3>
+          ) : (
+            <>
+              {products?.map((product, key) => {
+                return <AdminProductRow product={product} />;
+              })}
+            </>
+          )}
         </div>
       </div>
     </div>

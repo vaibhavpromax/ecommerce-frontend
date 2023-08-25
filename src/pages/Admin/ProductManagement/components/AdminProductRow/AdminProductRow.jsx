@@ -3,15 +3,16 @@ import styles from "./AdminProductRow.module.scss";
 import Checkbox from "../../../../../components/Checkbox/Checkbox";
 import { ICONS } from "../../../../../icons";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
-const AdminProductRow = () => {
+const AdminProductRow = ({ product }) => {
   const navigate = useNavigate();
   return (
     <div className={styles.productRow}>
       <div className={styles.col1}>
         <Checkbox shadowed={true} />
       </div>
-      <div className={styles.col2}>#12340987</div>
+      <div className={styles.col2}>#{product?.product_id.split("-")[0]}</div>
       <div
         onClick={() => {
           navigate("/order/23423");
@@ -23,13 +24,15 @@ const AdminProductRow = () => {
         }}
         className={styles.col3}
       >
-        Karadibetta Estate
+        {product?.name}
       </div>
-      <div className={styles.col4}>Coffee beans</div>
-      <div className={styles.col5}>Arabica</div>
-      <div className={styles.col6}>27 June, 2023</div>
-      <div className={styles.col7}>29.25$</div>
-      <div className={styles.col8}>2045</div>
+      <div className={styles.col4}>{product?.product_type}</div>
+      <div className={styles.col5}>{product?.product_origin}</div>
+      <div className={styles.col6}>
+        {moment(new Date(product?.createdAt)).format("DD MMM, YYYY")}
+      </div>
+      <div className={styles.col7}>{product?.cost_price} $</div>
+      <div className={styles.col8}>{product?.quantity_purchased}</div>
       <div className={styles.col9}>
         {ICONS.pen}
         {ICONS.redTrash}

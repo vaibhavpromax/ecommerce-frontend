@@ -1,0 +1,85 @@
+.details {
+  padding: 20px;
+  .header {
+    color: var(--font-dark, #3f373a);
+    font-family: Jost;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 112.953%; /* 27.109px */
+  }
+  .bottom {
+    .profilepic {
+      margin-top: 44px;
+      width: 86px;
+      height: 86px;
+      flex-shrink: 0;
+      border-radius: 86px;
+      border: 2.295px solid #fff;
+      background-color: #615c5e;
+    }
+    .info {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      .line {
+        display: flex;
+        gap: 55px;
+        h4 {
+          width: 100px;
+          color: #615c5e;
+          font-size: 18px;
+          font-family: Jost;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 112.953%;
+        }
+        h5 {
+          color: #615c5e;
+          font-size: 18px;
+          font-family: Jost;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 112.953%;
+        }
+      }
+    }
+
+    .chng {
+      margin-top: 57px;
+      cursor: pointer;
+      color: #b06934;
+      font-size: 20px;
+      font-family: Jost;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 112.953%;
+      text-decoration-line: underline;
+    }
+  }
+
+  .fields {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+  }
+
+  .btnrow {
+    margin-top: 72px;
+    display: flex;
+    gap: 14px;
+
+    button {
+      font-family: Jost;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%;
+      width: 116px;
+      height: 46px;
+    }
+  }
+}

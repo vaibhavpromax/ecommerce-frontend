@@ -32,7 +32,7 @@ const RoleRoutes = () => {
                         admin?.accessToken ? (
                           route.component
                         ) : (
-                          <Navigate to="/admin/login" />
+                          <Navigate to="/login" />
                         )
                       }
                     />

@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AddProductPage.module.scss";
 import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import QuantityPricingShipping from "./components/QuantityPricingShipping/QuantityPricingShipping";
 import AddProductDescription from "./components/AddProductDescription/AddProductDescription";
+import AddImage from "./components/AddImage/AddImage";
+import useProduct from "../../../apis/useProduct";
 
 const AddProductPage = () => {
+  const { addProduct } = useProduct();
+  const [productInfo, setProductInfo] = useState({
+    name: "",
+    description: "",
+    inventory_quantity: "",
+    product_type: "",
+    beans_type: "",
+    product_origin: "",
+    product_height: "",
+    product_weight: "",
+    product_width: "",
+    product_length: "",
+    cost_price: "",
+    selling_price: "",
+    is_discount_percentage: true,
+    is_discount_present: true,
+    discount_value: "",
+    discount_begin_date: "",
+    discount_end_date: "",
+    sec_images: [],
+    primary_image: "",
+  });
+
+  const addProductHandler = async () => {
+    addProduct(productInfo, (res) => {
+      console.log(res?.data?.data);
+    });
+  };
+
+  console.log(productInfo);
   return (
     <div className={styles.addProductPage}>
       <div className={styles.top}>
@@ -29,15 +61,26 @@ const AddProductPage = () => {
       </div>
       <div className={styles.topBar}>
         <div className={styles.topLeft}>
-          <span className={styles.id}>Product #1256</span>{" "}
-          <span className={styles.view}>View product</span>
-          <div className={styles.date}>14 July, 2023 at 23:04</div>
+          {/*
+            <span className={styles.id}>Product #1256</span>{" "}
+            <span className={styles.view}>View product</span>
+            <div className={styles.date}>14 July, 2023 at 23:04</div>
+            */}
         </div>
-        <Button className={styles.saveBtn}>Save changes</Button>
+        <Button onClick={addProductHandler} className={styles.saveBtn}>
+          Save changes
+        </Button>
       </div>
       <div className={styles.params}>
-        <AddProductDescription />
-        <QuantityPricingShipping />
+        <AddProductDescription
+          productInfo={productInfo}
+          setProductInfo={setProductInfo}
+        />
+        <AddImage productInfo={productInfo} setProductInfo={setProductInfo} />
+        <QuantityPricingShipping
+          productInfo={productInfo}
+          setProductInfo={setProductInfo}
+        />
       </div>
     </div>
   );
