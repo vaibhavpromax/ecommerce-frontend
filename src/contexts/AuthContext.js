@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
   const init = async () => {
     let token;
     if (admin) token = admin?.token;
-
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setAuthenticated(true);
     setLoading(false);

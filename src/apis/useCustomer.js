@@ -7,7 +7,7 @@ const useCustomer = () => {
   const getCustomers = async (cb) => {
     setGetCustomersLoading(true);
     try {
-      const res = await axios.get(`/ecommerce/admin/get-products`);
+      const res = await axios.get(`/ecommerce/admin/get-customers`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);

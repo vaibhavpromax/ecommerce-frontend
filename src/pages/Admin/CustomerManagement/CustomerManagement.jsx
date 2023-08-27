@@ -7,6 +7,7 @@ import TextBox from "../../../components/TextBox/TextBox";
 import Button from "../../../components/Button/Button";
 import CustomerRow from "./components/CustomerRow/CustomerRow";
 import useCustomer from "../../../apis/useCustomer";
+import { CSVLink } from "react-csv";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -19,13 +20,14 @@ const CustomerManagement = () => {
   const { getCustomers, getCustomersLoading } = useCustomer();
   const fetchCustomers = async () => {
     getCustomers((res) => setCustomers(res?.data));
+    console.log(customers);
   };
   useEffect(() => {
     fetchCustomers();
   }, []);
 
   return (
-    <div className={styles.orderManagement}>
+    <div className={styles.customerManagement}>
       {" "}
       <div className={styles.top}>
         <div className={styles.left}>Customers</div>
@@ -45,9 +47,14 @@ const CustomerManagement = () => {
           {ICONS.magnify}
         </div>
 
-        <Button className={styles.btn} theme="WHITE">
+        <CSVLink
+          style={{ textDecoration: "none" }}
+          data={customers}
+          className={styles.btn}
+          theme="WHITE"
+        >
           {ICONS.download} Export all
-        </Button>
+        </CSVLink>
       </div>
       <div className={styles.customerList}>
         <div className={styles.listHeader}>
