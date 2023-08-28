@@ -29,9 +29,19 @@ const HCard = ({
   const navigate = useNavigate();
   const { addToCart, addToCartLoading } = useCart();
   const removeFromCart = () => {
-    addToCart({ product_id: product?.product_id, quantity: 0 }, () => {
-      fetchCart();
-    });
+    if (user) {
+      addToCart({ product_id: product?.product_id, quantity: 0 }, () => {
+        fetchCart();
+      });
+    } else {
+      const newArray = JSON.parse(localStorage.getItem("cart")).filter((it) => {
+        return it.id != product?.product_id;
+      });
+      console.log(newArray);
+      localStorage.setItem("cart", JSON.stringify(newArray));
+      fetchShop(); 
+      setLocalCart(newArray);
+    }
   };
 
   useEffect(() => {
@@ -48,19 +58,23 @@ const HCard = ({
       localCart.map((item) => {
         if (item.id == product?.product_id) {
           if (counterValue == 0) {
-            const newArray = localCart.filter((it) => it != item);
-            localStorage.setItem(JSON.stringify(newArray));
+            const newArray = JSON.parse(localStorage.getItem("cart")).filter(
+              (it) => it.id != item
+            );
+            localStorage.setItem("cart", JSON.stringify(newArray));
             setLocalCart(newArray);
             //remove product from local storage
           } else {
             // set the quantity to the desired
-            const newArray = localCart.map((it) => {
-              if (it.id == product?.product_id) {
-                return { quantity: counterValue, id: product?.product_id };
-              } else {
-                return it;
+            const newArray = JSON.parse(localStorage.getItem("cart")).map(
+              (it) => {
+                if (it.id == product?.product_id) {
+                  return { quantity: counterValue, id: product?.product_id };
+                } else {
+                  return it;
+                }
               }
-            });
+            );
             localStorage.setItem("cart", JSON.stringify(newArray));
             setLocalCart(newArray);
           }
@@ -90,7 +104,7 @@ const HCard = ({
     }
   }, []);
 
-  console.log(product);
+  // console.log(product);
 
   return (
     <div className={styles.hcard} style={cardStyle}>

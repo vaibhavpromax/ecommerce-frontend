@@ -12,36 +12,71 @@ const Cart = () => {
     JSON.parse(localStorage.getItem("cart"))
   );
   const [cartitems, setCartitems] = useState([]);
-  const [discount, setDiscount] = useState(null);
+  const [cartInfo, setCartInfo] = useState({
+    discount: "",
+    total: "",
+    quantity: "",
+  });
   const { getCart, getCartLoading } = useCart();
   const { getProducts, getProductsLoading } = useShop();
 
   const fetchCart = async () => {
     await getCart((data) => {
       setCartitems(data.data);
-      data?.data?.CartItems?.map((item) => {
-        setDiscount(
-          (prev) =>
-            prev + (item.Product.selling_price - item.Product.cost_price)
-        );
+      setCartInfo({
+        discount: "",
+        total: data?.data?.cart_total,
+        quantity: data?.data?.cart_quantity,
       });
+      // data?.data?.CartItems?.map((item) => {
+      //   // setDiscount(
+      //   //   (prev) =>
+      //   //     prev + (item.Product.selling_price - item.Product.cost_price)
+      //   // );
+      // });
     });
   };
 
   const fetchShop = async () => {
-    const passCart = localCart?.map((item) => {
+    let total = 0,
+      quantity = 0;
+
+    const passCart = JSON.parse(localStorage.getItem("cart"))?.map((item) => {
+      quantity = quantity + item?.quantity;
       return item.id;
     });
-    console.log(passCart);
+    // console.log(passCart);
     getProducts({ product_arr: passCart }, (data) => {
       setCartitems({ CartItems: data?.data });
+      // data?.data?.map((item) => {
+      //   console.log(item);
+      //   setDiscount((prev) => prev + (item.selling_price - item.cost_price));
+      // });
+
       data?.data?.map((item) => {
-        setDiscount((prev) => prev + (item.selling_price - item.cost_price));
+        const quantity = JSON.parse(localStorage.getItem("cart")).filter(
+          (it) => {
+            if (it.id == item.product_id) {
+              return it?.quantity;
+            }
+          }
+        );
+        console.log(quantity[0]?.quantity);
+        total =
+          total +
+          parseInt(item.selling_price) * parseInt(quantity[0]?.quantity);
+      });
+
+      console.log(total);
+      setCartInfo({
+        discount: "",
+        total: total,
+        quantity: quantity,
       });
     });
   };
 
-  console.log(localCart);
+  // console.log(localCart);
 
   useEffect(() => {
     if (user) fetchCart();
@@ -83,9 +118,9 @@ const Cart = () => {
 
       <div className={styles.right}>
         <div className={styles.amount}>
-          Sub total ({cartitems?.cart_quantity}{" "}
-          {cartitems?.cart_quantity > 1 ? "items" : "items"}) :
-          <span>${cartitems?.cart_total} </span>
+          Sub total ({cartInfo?.quantity}{" "}
+          {cartInfo?.quantity > 1 ? "items" : "item"}) :
+          <span>${cartInfo?.total} </span>
         </div>
 
         <p>
