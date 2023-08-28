@@ -36,6 +36,12 @@ const Cart = () => {
     getProducts(passCart, (data) => {
       setCartitems(data?.data);
     });
+
+    cartitems?.map((item) => {
+      setDiscount(
+        (prev) => prev + (item.Product.selling_price - item.Product.cost_price)
+      );
+    });
   };
 
   useEffect(() => {
