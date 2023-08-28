@@ -44,10 +44,13 @@ const Card = ({
         else fetchProducts();
       });
     } else {
-      const updatedList = localWish.filter((item) => {
-        return item != product?.product_id;
-      });
+      const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
+        (item) => {
+          return item != product?.product_id;
+        }
+      );
       setLocalWish(updatedList);
+      setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
     }
   };
@@ -58,29 +61,68 @@ const Card = ({
         fetchProducts();
       });
     } else {
-      setLocalWish([...localWish, product?.product_id]);
-      localStorage.setItem("wishlist", JSON.stringify(localWish));
+      if (JSON.parse(localStorage.getItem("wishlist")) == null) {
+        localStorage.setItem("wishlist", JSON.stringify([product?.product_id]));
+        setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
+        setIsWishlisted(true);
+      } else {
+        setLocalWish([
+          ...JSON.parse(localStorage.getItem("wishlist")),
+          product?.product_id,
+        ]);
+        localStorage.setItem(
+          "wishlist",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("wishlist")),
+            product?.product_id,
+          ])
+        );
+        setIsWishlisted(true);
+      }
     }
   };
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
+    // if user is logged in
     if (user) {
       addToCart(
         { product_id: product.product_id, quantity: counterValue },
         () => {}
       );
     } else {
-      setLocalCart([
-        ...localCart,
-        { id: product?.product_id, quantity: counterValue },
-      ]);
-      localStorage.setItem("cart", JSON.stringify(localCart));
+      // if user is not logged in
+      if (JSON.parse(localStorage.getItem("cart")) === null) {
+        console.log("absent", JSON.parse(localStorage.getItem("cart")));
+
+        // if no cart in local storage make an item
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([{ id: product?.product_id, quantity: counterValue }])
+        );
+
+        // console.log([{ id: product?.product_id, quantity: counterValue }]);
+
+        setLocalCart([{ id: product?.product_id, quantity: counterValue }]);
+      } else {
+        console.log("present ", JSON.parse(localStorage.getItem("cart")));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("cart")),
+            { id: product?.product_id, quantity: counterValue },
+          ])
+        );
+        setLocalCart([
+          ...JSON.parse(localStorage.getItem("cart")),
+          { id: product?.product_id, quantity: counterValue },
+        ]);
+      }
     }
   };
-  console.log(localWish, localCart);
+  // console.log(localWish, localCart);
 
   useEffect(() => {
-    localWish.includes(product.product_id)
+    localWish?.includes(product.product_id)
       ? setIsWishlisted(true)
       : setIsWishlisted(false);
   }, [localWish]);
@@ -100,9 +142,7 @@ const Card = ({
             }
             className={styles.circle}
           >
-            {product?.is_wishlisted
-              ? ICONS.heartCutOutline
-              : ICONS.heartOutline}
+            {isWishlisted ? ICONS.heartCutOutline : ICONS.heartOutline}
           </div>
         </div>
       </div>

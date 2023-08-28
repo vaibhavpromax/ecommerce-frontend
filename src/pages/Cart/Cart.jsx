@@ -14,17 +14,17 @@ const Cart = () => {
   const [cartitems, setCartitems] = useState([]);
   const [discount, setDiscount] = useState(null);
   const { getCart, getCartLoading } = useCart();
-  const { getProducts } = useShop();
+  const { getProducts, getProductsLoading } = useShop();
 
   const fetchCart = async () => {
     await getCart((data) => {
       setCartitems(data.data);
-    });
-
-    cartitems?.CartItems?.map((item) => {
-      setDiscount(
-        (prev) => prev + (item.Product.selling_price - item.Product.cost_price)
-      );
+      data?.data?.CartItems?.map((item) => {
+        setDiscount(
+          (prev) =>
+            prev + (item.Product.selling_price - item.Product.cost_price)
+        );
+      });
     });
   };
 
@@ -33,16 +33,15 @@ const Cart = () => {
       return item.id;
     });
     console.log(passCart);
-    getProducts(passCart, (data) => {
-      setCartitems(data?.data);
-    });
-
-    cartitems?.map((item) => {
-      setDiscount(
-        (prev) => prev + (item.Product.selling_price - item.Product.cost_price)
-      );
+    getProducts({ product_arr: passCart }, (data) => {
+      setCartitems({ CartItems: data?.data });
+      data?.data?.map((item) => {
+        setDiscount((prev) => prev + (item.selling_price - item.cost_price));
+      });
     });
   };
+
+  console.log(localCart);
 
   useEffect(() => {
     if (user) fetchCart();
@@ -56,17 +55,18 @@ const Cart = () => {
       <div className={styles.left}>
         <h4>Shopping Cart</h4>
         <div className={styles.cartitems}>
-          {!getCartLoading ? (
+          {!getCartLoading || !getProductsLoading ? (
             <>
               {cartitems ? (
                 <>
                   {cartitems?.CartItems?.map((item, index) => {
                     return (
                       <HCard
+                        key={index}
                         cart_quantity={user ? item?.cart_quantity : null}
                         fetchCart={fetchCart}
                         fetchShop={fetchShop}
-                        product={item.Product}
+                        product={user ? item.Product : item}
                       />
                     );
                   })}

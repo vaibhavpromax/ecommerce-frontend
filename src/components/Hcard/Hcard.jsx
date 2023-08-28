@@ -61,7 +61,7 @@ const HCard = ({
                 return it;
               }
             });
-            localStorage.setItem(JSON.stringify(newArray));
+            localStorage.setItem("cart", JSON.stringify(newArray));
             setLocalCart(newArray);
           }
         }
@@ -89,6 +89,8 @@ const HCard = ({
       });
     }
   }, []);
+
+  console.log(product);
 
   return (
     <div className={styles.hcard} style={cardStyle}>

@@ -17,7 +17,7 @@ const ShopItems = () => {
   const { getProducts, getProductsLoading } = useShop();
 
   const fetchProducts = async () => {
-    getProducts((data) => {
+    getProducts({ product_arr: null }, (data) => {
       setProducts(data.data);
     });
   };
@@ -37,7 +37,7 @@ const ShopItems = () => {
       </div>
       <div className={styles.list}>
         {products?.map((prod) => {
-          return <Card  fetchProducts={fetchProducts} product={prod} />;
+          return <Card fetchProducts={fetchProducts} product={prod} />;
         })}
       </div>
     </div>

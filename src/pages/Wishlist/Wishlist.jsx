@@ -8,7 +8,7 @@ import useShop from "../../apis/useShop";
 const Wishlist = () => {
   const { getWishlist, getWishlistLoading } = useWishlist();
   const { getProducts, getProductsLoading } = useShop();
-  const user = useAuth();
+  const { user } = useAuth();
   const [localWish, setLocalWish] = useState(
     JSON.parse(localStorage.getItem("wishlist"))
   );
@@ -21,14 +21,21 @@ const Wishlist = () => {
   };
 
   const fetchProducts = async () => {
-    await getProducts(localWish, (data) => {
-      setWishlist(data?.data);
-    });
+    await getProducts(
+      { product_arr: JSON.parse(localStorage.getItem("wishlist")) },
+      (data) => {
+        setWishlist(data?.data);
+      }
+    );
   };
 
   useEffect(() => {
-    if (user) fetchWishlist();
-    else fetchProducts();
+    if (user) {
+      console.log("first", user);
+      fetchWishlist();
+    } else {
+      fetchProducts();
+    }
   }, []);
 
   console.log(wishlist);
@@ -37,9 +44,9 @@ const Wishlist = () => {
       <h5>Your wishlist</h5>
 
       <div className={styles.wishlistitems}>
-        {!getWishlistLoading ? (
+        {!getWishlistLoading || !getProductsLoading ? (
           <>
-            {wishlist.length !== 0 ? (
+            {wishlist?.length !== 0 ? (
               <>
                 {wishlist?.map((item, index) => {
                   return (
