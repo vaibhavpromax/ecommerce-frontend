@@ -4,10 +4,10 @@ import { useState } from "react";
 const useShop = () => {
   const [getProductsLoading, setGetProductsLoading] = useState(false);
 
-  const getProducts = async (cb) => {
+  const getProducts = async (data, cb) => {
     setGetProductsLoading(true);
     try {
-      const res = await axios.get(`/ecommerce/products/get-products`);
+      const res = await axios.post(`/ecommerce/products/get-products`, data);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);

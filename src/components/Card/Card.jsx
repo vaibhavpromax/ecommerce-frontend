@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Card.module.scss";
 import svgImage from "../../assets/TeaPacket.svg";
 import Button from "../Button/Button";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useWishlist from "../../apis/useWishlist";
 import useCart from "../../apis/useCart";
 import Counter from "../Counter/Counter";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Card = ({
   width = "280px",
@@ -22,31 +23,67 @@ const Card = ({
     height,
   };
   const { removeFromWishlist, addToWishlist } = useWishlist();
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [localWish, setLocalWish] = useState(
+    JSON.parse(localStorage.getItem("wishlist"))
+  );
+  const [localCart, setLocalCart] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
   const { addToCart, addToCartLoading } = useCart();
+  const { user } = useAuth();
   const [counterValue, setCounterValue] = useState(1);
   const openProductHandler = () => {
     navigate(`/product/${product?.product_id}`);
   };
 
   const removeFromWishListHandler = () => {
-    removeFromWishlist(product.product_id, () => {
-      if (renderFromWishlist) fetchWishlist();
-      else fetchProducts();
-    });
+    if (user) {
+      removeFromWishlist(product.product_id, () => {
+        if (renderFromWishlist) fetchWishlist();
+        else fetchProducts();
+      });
+    } else {
+      const updatedList = localWish.filter((item) => {
+        return item != product?.product_id;
+      });
+      setLocalWish(updatedList);
+      localStorage.setItem("wishlist", JSON.stringify(updatedList));
+    }
   };
 
   const addToWishListHandler = () => {
-    addToWishlist(product.product_id, () => {
-      fetchProducts();
-    });
+    if (user) {
+      addToWishlist(product.product_id, () => {
+        fetchProducts();
+      });
+    } else {
+      setLocalWish([...localWish, product?.product_id]);
+      localStorage.setItem("wishlist", JSON.stringify(localWish));
+    }
   };
 
   const addToCartHandler = () => {
-    addToCart(
-      { product_id: product.product_id, quantity: counterValue },
-      () => {}
-    );
+    if (user) {
+      addToCart(
+        { product_id: product.product_id, quantity: counterValue },
+        () => {}
+      );
+    } else {
+      setLocalCart([
+        ...localCart,
+        { id: product?.product_id, quantity: counterValue },
+      ]);
+      localStorage.setItem("cart", JSON.stringify(localCart));
+    }
   };
+  console.log(localWish, localCart);
+
+  useEffect(() => {
+    localWish.includes(product.product_id)
+      ? setIsWishlisted(true)
+      : setIsWishlisted(false);
+  }, [localWish]);
 
   return (
     <div className={styles.card} style={cardStyle}>
@@ -59,9 +96,7 @@ const Card = ({
           />
           <div
             onClick={
-              product?.is_wishlisted
-                ? removeFromWishListHandler
-                : addToWishListHandler
+              isWishlisted ? removeFromWishListHandler : addToWishListHandler
             }
             className={styles.circle}
           >

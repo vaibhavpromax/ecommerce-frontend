@@ -12,7 +12,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const RoleRoutes = () => {
   //   const { admin } = useAuth();
-  const { user, session } = useAuth();
+  const { user } = useAuth();
   const admin = { accessToken: "123" };
   const location = useLocation();
   return (

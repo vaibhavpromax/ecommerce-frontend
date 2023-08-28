@@ -21,7 +21,6 @@ const UserLogin = () => {
     const payload = { email: regData.username, password: regData.password };
     console.log(payload);
     loginUser(payload, (data) => {
-      localStorage.removeItem("session");
       localStorage.setItem("user", JSON.stringify(data.data));
       navigate("/shop");
     });

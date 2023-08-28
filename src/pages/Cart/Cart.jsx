@@ -3,11 +3,18 @@ import styles from "./Cart.module.scss";
 import HCard from "../../components/Hcard/Hcard";
 import Button from "../../components/Button/Button";
 import useCart from "../../apis/useCart";
+import { useAuth } from "../../contexts/AuthContext";
+import useShop from "../../apis/useShop";
 
 const Cart = () => {
+  const { user } = useAuth();
+  const [localCart, setLocalCart] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
   const [cartitems, setCartitems] = useState([]);
   const [discount, setDiscount] = useState(null);
   const { getCart, getCartLoading } = useCart();
+  const { getProducts } = useShop();
 
   const fetchCart = async () => {
     await getCart((data) => {
@@ -15,14 +22,27 @@ const Cart = () => {
     });
 
     cartitems?.CartItems?.map((item) => {
-      console.log(item.Product.selling_price - item.Product.cost_price);
       setDiscount(
         (prev) => prev + (item.Product.selling_price - item.Product.cost_price)
       );
     });
   };
+
+  const fetchShop = async () => {
+    const passCart = localCart?.map((item) => {
+      return item.id;
+    });
+    console.log(passCart);
+    getProducts(passCart, (data) => {
+      setCartitems(data?.data);
+    });
+  };
+
   useEffect(() => {
-    fetchCart();
+    if (user) fetchCart();
+    else {
+      fetchShop();
+    }
   }, []);
 
   return (
@@ -37,8 +57,9 @@ const Cart = () => {
                   {cartitems?.CartItems?.map((item, index) => {
                     return (
                       <HCard
-                        cart_quantity={item?.cart_quantity}
+                        cart_quantity={user ? item?.cart_quantity : null}
                         fetchCart={fetchCart}
+                        fetchShop={fetchShop}
                         product={item.Product}
                       />
                     );
