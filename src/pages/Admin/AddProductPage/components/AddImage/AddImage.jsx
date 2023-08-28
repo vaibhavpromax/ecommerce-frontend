@@ -34,7 +34,7 @@ const AddImage = ({ productInfo, setProductInfo }) => {
     uploadImage(formdata, (res) => {
       if (isPrimary) {
         setPrimaryImage(res?.data);
-        setProductInfo({ ...productInfo, primaryImage: res?.data });
+        setProductInfo({ ...productInfo, primary_image: res?.data });
         return;
       }
 

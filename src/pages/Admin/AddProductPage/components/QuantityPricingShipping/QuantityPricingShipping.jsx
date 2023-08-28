@@ -10,28 +10,60 @@ const QuantityPricingShipping = ({ productInfo, setProductInfo }) => {
           <div className={styles.unitInput}>
             <div className={styles.label}>Weight</div>
             <div className={styles.inputWrapper}>
-              <input type="text" />
+              <input
+                onChange={(e) =>
+                  setProductInfo({
+                    ...productInfo,
+                    product_weight: e.target.value,
+                  })
+                }
+                type="text"
+              />
               <div className={styles.unit}>Gms</div>
             </div>
           </div>
           <div className={styles.unitInput}>
             <div className={styles.label}>Length</div>
             <div className={styles.inputWrapper}>
-              <input type="text" />
+              <input
+                onChange={(e) =>
+                  setProductInfo({
+                    ...productInfo,
+                    product_length: e.target.value,
+                  })
+                }
+                type="text"
+              />
               <div className={styles.unit}>cm</div>
             </div>
           </div>
           <div className={styles.unitInput}>
             <div className={styles.label}>Width</div>
             <div className={styles.inputWrapper}>
-              <input type="text" />
+              <input
+                onChange={(e) =>
+                  setProductInfo({
+                    ...productInfo,
+                    product_width: e.target.value,
+                  })
+                }
+                type="text"
+              />
               <div className={styles.unit}>cm</div>
             </div>
           </div>
           <div className={styles.unitInput}>
             <div className={styles.label}>Height</div>
             <div className={styles.inputWrapper}>
-              <input type="text" />
+              <input
+                onChange={(e) =>
+                  setProductInfo({
+                    ...productInfo,
+                    product_height: e.target.value,
+                  })
+                }
+                type="text"
+              />
               <div className={styles.unit}>cm</div>
             </div>
           </div>
