@@ -8,6 +8,7 @@ import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import useUserAuthentication from "../../../apis/userAuthentication";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const UserRegister = () => {
   const [regData, setRegData] = useState({
@@ -17,6 +18,7 @@ const UserRegister = () => {
     password: "",
     confirm_password: "",
   });
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const { registerLoading, registerUser } = useUserAuthentication();
@@ -29,7 +31,9 @@ const UserRegister = () => {
       last_name: regData.last_name,
     };
     registerUser(payload, (data) => {
+      console.log(data);
       localStorage.setItem("user", JSON.stringify(data.data));
+      setUser(JSON.stringify(data.data));
       navigate("/shop");
     });
   };

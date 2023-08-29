@@ -37,13 +37,25 @@ const Card = ({
     navigate(`/product/${product?.product_id}`);
   };
 
+  console.log(renderFromWishlist);
+
   const removeFromWishListHandler = () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
+        const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
+          (item) => {
+            return item != product?.product_id;
+          }
+        );
+        setLocalWish(updatedList);
+        setIsWishlisted(false);
+        localStorage.setItem("wishlist", JSON.stringify(updatedList));
+
         if (renderFromWishlist) fetchWishlist();
         else fetchProducts();
       });
     } else {
+      console.log("Inside");
       const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
         (item) => {
           return item != product?.product_id;
@@ -52,12 +64,35 @@ const Card = ({
       setLocalWish(updatedList);
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
+      fetchProducts();
     }
   };
 
   const addToWishListHandler = () => {
     if (user) {
       addToWishlist(product.product_id, () => {
+        // set wishlist in local storage as well for checking on rendering
+        if (JSON.parse(localStorage.getItem("wishlist")) == null) {
+          localStorage.setItem(
+            "wishlist",
+            JSON.stringify([product?.product_id])
+          );
+          setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
+          setIsWishlisted(true);
+        } else {
+          setLocalWish([
+            ...JSON.parse(localStorage.getItem("wishlist")),
+            product?.product_id,
+          ]);
+          localStorage.setItem(
+            "wishlist",
+            JSON.stringify([
+              ...JSON.parse(localStorage.getItem("wishlist")),
+              product?.product_id,
+            ])
+          );
+          setIsWishlisted(true);
+        }
         fetchProducts();
       });
     } else {
@@ -125,6 +160,8 @@ const Card = ({
     localWish?.includes(product.product_id)
       ? setIsWishlisted(true)
       : setIsWishlisted(false);
+
+    if (renderFromWishlist) setIsWishlisted(true);
   }, [localWish]);
 
   return (

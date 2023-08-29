@@ -16,7 +16,8 @@ const Wishlist = () => {
 
   const fetchWishlist = async () => {
     await getWishlist((data) => {
-      setWishlist(data.data?.Product);
+      console.log(data?.data);
+      setWishlist(data?.data);
     });
   };
 
@@ -31,7 +32,6 @@ const Wishlist = () => {
 
   useEffect(() => {
     if (user) {
-      console.log("first", user);
       fetchWishlist();
     } else {
       fetchProducts();
@@ -53,8 +53,9 @@ const Wishlist = () => {
                     <Card
                       key={index}
                       renderFromWishlist={true}
+                      fetchProducts={fetchProducts}
                       fetchWishlist={fetchWishlist}
-                      product={item}
+                      product={user ? item?.Product : item}
                     />
                   );
                 })}

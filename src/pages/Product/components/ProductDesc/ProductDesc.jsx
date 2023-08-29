@@ -8,6 +8,7 @@ import ImageViewer from "../ImageViewer/ImageViewer";
 import StarRatings from "react-star-ratings";
 import useProduct from "../../../../apis/useProduct";
 import useCart from "../../../../apis/useCart";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const quantityOptions = {
   1: "1",
@@ -21,13 +22,20 @@ const ProductDesc = () => {
   const { getProduct, getProductLoading } = useProduct();
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
   const { addToCart, addToCartLoading } = useCart();
   const [product, setProduct] = useState(null);
+  const { user } = useAuth();
   const { id } = useParams();
 
   const fetchProduct = async () => {
     await getProduct(id, (data) => {
       setProduct(data.data);
+      JSON.parse(localStorage.getItem("wishlist"))?.includes(
+        data.data?.product_id
+      )
+        ? setIsWishlisted(true)
+        : setIsWishlisted(false);
     });
   };
   useEffect(() => {
@@ -35,13 +43,41 @@ const ProductDesc = () => {
   }, []);
 
   const addToCartHandler = () => {
-    const payload = {
-      product_id: product?.product_id,
-      quantity: quantity,
-    };
-    addToCart(payload, () => {
+    // const payload = {
+    //   product_id: product?.product_id,
+    //   quantity: quantity,
+    // };
+    // addToCart(payload, () => {
+    //   setAddedToCart(true);
+    // });
+
+    // if user is logged in
+    if (user) {
+      addToCart({ product_id: product.product_id, quantity: quantity }, () => {
+        setAddedToCart(true);
+      });
+    } else {
+      // if user is not logged in
+      if (JSON.parse(localStorage.getItem("cart")) === null) {
+        console.log("absent", JSON.parse(localStorage.getItem("cart")));
+
+        // if no cart in local storage make an item
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([{ id: product?.product_id, quantity: quantity }])
+        );
+      } else {
+        console.log("present ", JSON.parse(localStorage.getItem("cart")));
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("cart")),
+            { id: product?.product_id, quantity: quantity },
+          ])
+        );
+      }
       setAddedToCart(true);
-    });
+    }
   };
 
   return (
@@ -50,7 +86,12 @@ const ProductDesc = () => {
         <>
           <div className={styles.left}>
             {product && (
-              <ImageViewer fetchProduct={fetchProduct} product={product} />
+              <ImageViewer
+                setIsWishlisted={setIsWishlisted}
+                isWishlisted={isWishlisted}
+                fetchProduct={fetchProduct}
+                product={product}
+              />
             )}
           </div>
           <div className={styles.right}>

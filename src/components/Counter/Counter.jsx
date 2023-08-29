@@ -2,7 +2,13 @@ import React from "react";
 import styles from "./Counter.module.scss";
 import { ICONS } from "../../icons";
 
-const Counter = ({ counterValue, setCounterValue }) => {
+const Counter = ({
+  counterValue,
+  setCounterValue,
+  onChange = () => {
+    return;
+  },
+}) => {
   return (
     <div className={styles.counter}>
       <button
@@ -10,6 +16,7 @@ const Counter = ({ counterValue, setCounterValue }) => {
         onClick={() => {
           if (counterValue == 1) return;
           setCounterValue(counterValue - 1);
+          onChange(counterValue - 1);
         }}
       >
         {ICONS.minus}
@@ -20,6 +27,7 @@ const Counter = ({ counterValue, setCounterValue }) => {
         onClick={() => {
           if (counterValue == 5) return;
           setCounterValue(counterValue + 1);
+          onChange(counterValue + 1);
         }}
       >
         {ICONS.plus}

@@ -28,6 +28,7 @@ const HCard = ({
   const { user } = useAuth();
   const navigate = useNavigate();
   const { addToCart, addToCartLoading } = useCart();
+
   const removeFromCart = () => {
     if (user) {
       addToCart({ product_id: product?.product_id, quantity: 0 }, () => {
@@ -39,25 +40,23 @@ const HCard = ({
       });
       console.log(newArray);
       localStorage.setItem("cart", JSON.stringify(newArray));
-      fetchShop(); 
+      fetchShop();
       setLocalCart(newArray);
     }
   };
 
-  useEffect(() => {
-    // if (counterValue != cart_quantity) {
-    // console.log("update cart");
+  const handleCartQuantityUpdate = (count) => {
     if (user) {
       addToCart(
-        { product_id: product?.product_id, quantity: counterValue },
+        { product_id: product?.product_id, quantity: count},
         () => {
           fetchCart();
         }
       );
     } else {
-      localCart.map((item) => {
+      JSON.parse(localStorage.getItem("cart"))?.map((item) => {
         if (item.id == product?.product_id) {
-          if (counterValue == 0) {
+          if (count == 0) {
             const newArray = JSON.parse(localStorage.getItem("cart")).filter(
               (it) => it.id != item
             );
@@ -66,37 +65,28 @@ const HCard = ({
             //remove product from local storage
           } else {
             // set the quantity to the desired
+            console.log(count);
             const newArray = JSON.parse(localStorage.getItem("cart")).map(
               (it) => {
                 if (it.id == product?.product_id) {
-                  return { quantity: counterValue, id: product?.product_id };
+                  return { quantity: count, id: product?.product_id };
                 } else {
                   return it;
                 }
               }
             );
+            console.log(newArray);
             localStorage.setItem("cart", JSON.stringify(newArray));
             setLocalCart(newArray);
           }
         }
       });
     }
-    // }
-  }, [counterValue]);
+  };
 
   useEffect(() => {
-    if (user) {
-      localCart.map(async (item) => {
-        await addToCart(
-          { product_id: item.id, quantity: item.quantity },
-          (data) => {
-            console.log(data);
-          }
-        );
-      });
-      // delete cart from local storage
-    } else {
-      localCart.map((item) => {
+    if (!user) {
+      JSON.parse(localStorage.getItem("cart"))?.map((item) => {
         if (item.id == product?.product_id) {
           setCounterValue(item.quantity);
         }
@@ -124,6 +114,7 @@ const HCard = ({
       </div>
       <div className={styles.p2}>
         <Counter
+          onChange={handleCartQuantityUpdate}
           counterValue={counterValue}
           setCounterValue={setCounterValue}
         />

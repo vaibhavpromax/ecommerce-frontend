@@ -17,7 +17,7 @@ const Cart = () => {
     total: "",
     quantity: "",
   });
-  const { getCart, getCartLoading } = useCart();
+  const { getCart, getCartLoading, addToCart } = useCart();
   const { getProducts, getProductsLoading } = useShop();
 
   const fetchCart = async () => {
@@ -41,6 +41,16 @@ const Cart = () => {
     let total = 0,
       quantity = 0;
 
+    if (!JSON.parse(localStorage.getItem("cart"))) {
+      setCartitems(null);
+      setCartInfo({
+        discount: "",
+        total: 0,
+        quantity: 0,
+      });
+      return;
+    }
+
     const passCart = JSON.parse(localStorage.getItem("cart"))?.map((item) => {
       quantity = quantity + item?.quantity;
       return item.id;
@@ -48,26 +58,19 @@ const Cart = () => {
     // console.log(passCart);
     getProducts({ product_arr: passCart }, (data) => {
       setCartitems({ CartItems: data?.data });
-      // data?.data?.map((item) => {
-      //   console.log(item);
-      //   setDiscount((prev) => prev + (item.selling_price - item.cost_price));
-      // });
-
       data?.data?.map((item) => {
-        const quantity = JSON.parse(localStorage.getItem("cart")).filter(
+        const quantity = JSON.parse(localStorage.getItem("cart"))?.filter(
           (it) => {
             if (it.id == item.product_id) {
-              return it?.quantity;
+              return it;
             }
           }
         );
-        console.log(quantity[0]?.quantity);
         total =
           total +
           parseInt(item.selling_price) * parseInt(quantity[0]?.quantity);
       });
 
-      console.log(total);
       setCartInfo({
         discount: "",
         total: total,
@@ -75,10 +78,20 @@ const Cart = () => {
       });
     });
   };
-
   // console.log(localCart);
 
   useEffect(() => {
+    if (user) {
+      JSON.parse(localStorage.getItem("cart"))?.map(async (item) => {
+        await addToCart(
+          { product_id: item.id, quantity: item.quantity },
+          (data) => {
+            localStorage.removeItem("cart");
+          }
+        );
+      });
+      // delete cart from local storage
+    }
     if (user) fetchCart();
     else {
       fetchShop();
