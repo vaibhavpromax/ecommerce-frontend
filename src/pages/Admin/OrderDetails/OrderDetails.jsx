@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./OrderDetails.module.scss";
 import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
+import useOrder from "../../../apis/useOrder";
 
 const OrderDetails = () => {
+  const { getSingleOrderDetails } = useOrder();
+  const [order, setOrder] = useState({});
+  const fetchOrderDetails = async () => {
+    await getSingleOrderDetails(
+      "bd93c69b-d73d-4077-b0ef-327523f26e4e",
+      (res) => {
+        setOrder(res?.data);
+      }
+    );
+  };
+
+  useEffect(() => {
+    fetchOrderDetails();
+  }, []);
+  console.log(order);
+
   return (
     <div className={styles.orderdetails}>
       <div className={styles.top}>
         <div className={styles.left}>
           <span className={styles.yellow}>Orders</span>
-          {">>"} Order #3433
+          {">>"} Order #{order?.order_id?.substring(0, 4)}
         </div>
         <div className={styles.right}>
           <Button>{ICONS.pen} Edit order</Button>
@@ -27,14 +44,14 @@ const OrderDetails = () => {
       <div className={styles.bottom}>
         <div className={styles.btleft}>
           <div className={styles.btleftTop}>
-            <div className={styles.btleftHeader}>Order #1256</div>
+            <div className={styles.btleftHeader}>
+              Order #{order?.order_id?.substring(0, 4)}
+            </div>
             <div className={styles.btleftBottom}>
               <div className={styles.proList}>
-                <ProductOrderRow />
-                <ProductOrderRow />
-                <ProductOrderRow />
-                <ProductOrderRow />
-                <ProductOrderRow />
+                {order?.OrderItems?.map((it, key) => {
+                  return <ProductOrderRow product={it} />;
+                })}
               </div>
               <div className={styles.hrLine}></div>
               <div className={styles.orderTotal}>
@@ -54,12 +71,14 @@ const OrderDetails = () => {
                       style={{ fontWeight: "600" }}
                       className={styles.orderRightRowRight}
                     >
-                      $49.10
+                      ${order?.total_price}
                     </div>
                   </div>
                   <div className={styles.orderRightRow}>
                     <div className={styles.orderRightRowLeft}>Shipping:</div>
-                    <div className={styles.orderRightRowRight}>$4.10</div>
+                    <div className={styles.orderRightRowRight}>
+                      ${order?.shipping_price}
+                    </div>
                   </div>
                   <div className={styles.orderRightRow}>
                     <div className={styles.orderRightRowLeft}>Total:</div>
@@ -67,7 +86,7 @@ const OrderDetails = () => {
                       style={{ fontSize: "18px", fontWeight: "600" }}
                       className={styles.orderRightRowRight}
                     >
-                      $98.10
+                      ${order?.total_price + order?.shipping_price}
                     </div>
                   </div>
                 </div>
@@ -79,10 +98,10 @@ const OrderDetails = () => {
 
             <div className={styles.progressbarContainer}>
               <div className={styles.progressbar}>
-              <div className={styles.step}>Order Placed</div>
-              <div className={styles.step}>Processing</div>
-              <div className={styles.step}>Shipping</div>
-              <div className={styles.step}>Delivered</div>
+                <div className={styles.step}>Order Placed</div>
+                <div className={styles.step}>Processing</div>
+                <div className={styles.step}>Shipping</div>
+                <div className={styles.step}>Delivered</div>
               </div>
             </div>
           </div>
@@ -100,10 +119,10 @@ const OrderDetails = () => {
                 </div>
               </div>
               <div className={styles.secRight}>
-                <div className={styles.name}>Vaibhav</div>
-                <div className={styles.secContent}>
-                  johnslovoskyii@gmail.com
+                <div className={styles.name}>
+                  {order?.User?.first_name + order?.User?.last_name}
                 </div>
+                <div className={styles.secContent}>{order?.User?.email}</div>
                 <div className={styles.secContent}>
                   IP address : 98.155.40.227
                 </div>
@@ -124,7 +143,15 @@ const OrderDetails = () => {
             <div className={styles.sectionDescRow}>
               <div className={styles.sectionDescLeft}>Address:</div>
               <div className={styles.sectionDescRight}>
-                41 Quai des Belges, Martigues, Provence-Alpes-Côte d'Azur, 13500
+                {order?.Address?.street_no +
+                  " " +
+                  order?.Address?.street_name +
+                  " " +
+                  order?.Address?.city +
+                  " " +
+                  order?.Address?.country +
+                  " " +
+                  order?.Address?.postal_code}
               </div>
             </div>
             <div className={styles.sectionDescRow}>
@@ -142,12 +169,22 @@ const OrderDetails = () => {
             <div className={styles.sectionDescRow}>
               <div className={styles.sectionDescLeft}>Address:</div>
               <div className={styles.sectionDescRight}>
-                41 Quai des Belges, Martigues, Provence-Alpes-Côte d'Azur, 13500
+                {order?.Address?.street_no +
+                  " " +
+                  order?.Address?.street_name +
+                  " " +
+                  order?.Address?.city +
+                  " " +
+                  order?.Address?.country +
+                  " " +
+                  order?.Address?.postal_code}
               </div>
             </div>
             <div className={styles.sectionDescRow}>
               <div className={styles.sectionDescLeft}>Contact number:</div>
-              <div className={styles.sectionDescRight}>9712783456</div>
+              <div className={styles.sectionDescRight}>
+                {order?.User?.phone_no}
+              </div>
             </div>
             <div className={styles.yellow}>{ICONS.mapPin} View on map</div>
           </div>
