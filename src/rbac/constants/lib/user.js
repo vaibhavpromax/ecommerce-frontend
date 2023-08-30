@@ -11,6 +11,8 @@ import Cart from "../../../pages/Cart/Cart";
 import Wishlist from "../../../pages/Wishlist/Wishlist";
 import UserRegister from "../../../pages/User/UserRegister/UserRegister";
 import Product from "../../../pages/Product/Product";
+import AddPayMethod from "../../../pages/AddPayMethod/AddPayMethod";
+import Payment from "../../../pages/Payment/Payment";
 
 const USER_ROUTES = [
   {
@@ -116,6 +118,24 @@ const USER_ROUTES = [
     link: "/login",
     name: "login",
     component: <UserLogin />,
+    navbar: false,
+    transparentNavbar: false,
+    navbarVisible: false,
+  },
+  {
+    private: false,
+    link: "/add-payment",
+    name: "payment",
+    component: <AddPayMethod />,
+    navbar: false,
+    transparentNavbar: false,
+    navbarVisible: false,
+  },
+  {
+    private: false,
+    link: "/confirm-payment",
+    name: "payment",
+    component: <Payment />,
     navbar: false,
     transparentNavbar: false,
     navbarVisible: false,

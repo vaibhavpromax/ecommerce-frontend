@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import style from "./PaymentForm.module.scss";
+import style from "./AddPayMethod.module.scss";
 
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 
@@ -108,7 +108,6 @@ export default function AddPayMethod() {
           axios
             .post(
               "ecommerce/payment/attach",
-
               {
                 paymentMethod: resp.paymentMethod,
               },
@@ -116,7 +115,7 @@ export default function AddPayMethod() {
                 headers: {
                   Authorization:
                     "Bearer " +
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfaWQiOiI2YTQwYzJlOC1jOGJlLTQ1ODUtYmZiMS1hZGZkNGEzNzM1NDgiLCJlbWFpbCI6Imp1bmVAZ21haWwuY29tIiwiZmlyc3RfbmFtZSI6Ikp1bmUiLCJsYXN0X25hbWUiOiJtb250aCIsInBob25lX25vIjoiNzk4NDEyMzQ1IiwidXNlcm5hbWUiOiJqdW5lIiwicGFzc3dvcmQiOiIkMmEkMTIkQnJKTTZLUklZbzhwb1FsVS5yVHRHZUVWTlkvLzJtYUxyZkRaNERqOG9QVkdNaUJlaDk4ZGkiLCJnZW5kZXIiOiJtYWxlIiwidXBkYXRlZEF0IjoiMjAyMy0wNi0xNVQxNDowMzoxMi40NzRaIiwiY3JlYXRlZEF0IjoiMjAyMy0wNi0xNVQxNDowMzoxMi40NzRaIn0sImlhdCI6MTY4NjgzNzc5MiwiZXhwIjoxNjg3MDk2OTkyfQ.ZJNu1NG_u8k9HYZUTuK_itIsuJK3xZMHi85IyqewrMI",
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdF9uYW1lIjoiQ2FwdGFpbiIsImxhc3RfbmFtZSI6IkFtZXJpY2EiLCJ1c2VyX2lkIjoiYTQ2MzdhMGEtZjk4My00N2I0LTgyMmItMzk1MDU4ZmRlM2Y5IiwiaXNfYXV0aGVudGljYXRlZCI6dHJ1ZSwiaWF0IjoxNjkzMjk2MzI1LCJleHAiOjE2OTM1NTU1MjV9.EsmGpVgrv7WLL60a5XLtoE__y8gPkcJLXXSD_Wb6Chw"
                 },
               }
             )

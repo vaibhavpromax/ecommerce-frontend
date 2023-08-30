@@ -11,7 +11,7 @@ import UserLogin from "./pages/User/UserLogin/UserLogin";
 import UserRegister from "./pages/User/UserRegister/UserRegister";
 import AuthProvider from "./contexts/AuthContext";
 import Home from "./pages/User/Home/Home";
-
+import StripeWrapper from "./StripeWrapper";
 function App() {
   return (
     <div className={styles.app}>
@@ -26,9 +26,11 @@ function App() {
           <Route
             path="/*"
             element={
-              <AuthProvider>
-                <RoleRoutes />
-              </AuthProvider>
+              <StripeWrapper>
+                <AuthProvider>
+                  <RoleRoutes />
+                </AuthProvider>
+              </StripeWrapper>
             }
           ></Route>
         </Routes>
