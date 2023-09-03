@@ -23,16 +23,28 @@ const Cart = () => {
   const fetchCart = async () => {
     await getCart((data) => {
       setCartitems(data.data);
-      setCartInfo({
-        discount: "",
-        total: data?.data?.cart_total,
-        quantity: data?.data?.cart_quantity,
+
+      let cart_total = 0,
+        cart_quantity = 0;
+
+      data?.data?.map((cartItem) => {
+        cart_total =
+          cart_total +
+          parseInt(cartItem.cart_quantity) *
+            parseFloat(cartItem?.Product?.selling_price);
+        cart_quantity = cart_quantity + parseInt(cartItem.cart_quantity);
       });
-      // data?.data?.CartItems?.map((item) => {
-      //   // setDiscount(
-      //   //   (prev) =>
-      //   //     prev + (item.Product.selling_price - item.Product.cost_price)
-      //   // );
+
+      setCartInfo({
+        total: cart_total,
+        discount: "",
+        quantity: cart_quantity,
+      });
+
+      // setCartInfo({
+      //   discount: "",
+      //   total: data?.data?.cart_total,
+      //   quantity: data?.data?.cart_quantity,
       // });
     });
   };
