@@ -26,11 +26,9 @@ function App() {
           <Route
             path="/*"
             element={
-              <StripeWrapper>
                 <AuthProvider>
                   <RoleRoutes />
                 </AuthProvider>
-              </StripeWrapper>
             }
           ></Route>
         </Routes>

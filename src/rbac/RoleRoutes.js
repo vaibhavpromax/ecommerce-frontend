@@ -41,6 +41,7 @@ const RoleRoutes = () => {
               })}
               {ROLE_ROUTES["user"].map((route) => {
                 return route.private ? (
+                  
                   <Route
                     path={route.link}
                     key={route.name}

@@ -210,13 +210,7 @@ export default function Payment() {
 
             <div className={style.row}>
               <label>Enter Cvc/Cvv </label>
-              <div className={style.cvcInput}>
-                <CardCvcElement
-                  onChange={() => {
-                    setCvcError(null);
-                  }}
-                />
-              </div>
+              <div className={style.cvcInput}></div>
               <p className={style.cvcError}>{cvcError}</p>
             </div>
           </div>

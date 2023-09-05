@@ -13,6 +13,8 @@ import UserRegister from "../../../pages/User/UserRegister/UserRegister";
 import Product from "../../../pages/Product/Product";
 import AddPayMethod from "../../../pages/AddPayMethod/AddPayMethod";
 import Payment from "../../../pages/Payment/Payment";
+import Checkout from "../../../pages/Checkout/Checkout";
+import Stripe from "../../../StripeWrapper";
 
 const USER_ROUTES = [
   {
@@ -100,6 +102,19 @@ const USER_ROUTES = [
     link: "/wishlist",
     name: "Wishlist",
     component: <Wishlist />,
+    navbar: true,
+    transparentNavbar: false,
+    navbarVisible: true,
+  },
+  {
+    private: true,
+    link: "/checkout",
+    name: "Checkout",
+    component: (
+      <Stripe>
+        <Checkout />
+      </Stripe>
+    ),
     navbar: true,
     transparentNavbar: false,
     navbarVisible: true,

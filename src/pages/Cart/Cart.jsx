@@ -5,9 +5,11 @@ import Button from "../../components/Button/Button";
 import useCart from "../../apis/useCart";
 import { useAuth } from "../../contexts/AuthContext";
 import useShop from "../../apis/useShop";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [localCart, setLocalCart] = useState(
     JSON.parse(localStorage.getItem("cart"))
   );
@@ -110,6 +112,10 @@ const Cart = () => {
     }
   }, []);
 
+  const onCheckoutHandler = () => {
+    navigate("/checkout");
+  };
+
   return (
     <div className={styles.cart}>
       <div className={styles.left}>
@@ -119,7 +125,7 @@ const Cart = () => {
             <>
               {cartitems ? (
                 <>
-                  {cartitems?.CartItems?.map((item, index) => {
+                  {cartitems?.map((item, index) => {
                     return (
                       <HCard
                         key={index}
@@ -152,7 +158,9 @@ const Cart = () => {
           Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod
           tempor incididunt ut ero labore
         </p>
-        <Button className={styles.chckbtn}>Checkout</Button>
+        <Button onClick={onCheckoutHandler} className={styles.chckbtn}>
+          Checkout
+        </Button>
       </div>
     </div>
   );

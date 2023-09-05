@@ -11,7 +11,6 @@ import axios from "axios";
 
 export default function AddPayMethod() {
   const stripe = useStripe();
-
   const elements = useElements();
   const card = useRef();
 
@@ -110,15 +109,7 @@ export default function AddPayMethod() {
               "ecommerce/payment/attach",
               {
                 paymentMethod: resp.paymentMethod,
-              },
-              {
-                headers: {
-                  Authorization:
-                    "Bearer " +
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdF9uYW1lIjoiQ2FwdGFpbiIsImxhc3RfbmFtZSI6IkFtZXJpY2EiLCJ1c2VyX2lkIjoiYTQ2MzdhMGEtZjk4My00N2I0LTgyMmItMzk1MDU4ZmRlM2Y5IiwiaXNfYXV0aGVudGljYXRlZCI6dHJ1ZSwiaWF0IjoxNjkzMjk2MzI1LCJleHAiOjE2OTM1NTU1MjV9.EsmGpVgrv7WLL60a5XLtoE__y8gPkcJLXXSD_Wb6Chw"
-                },
-              }
-            )
+              },            )
             .then((res) => {
               console.log(resp);
               /* Handle success */
