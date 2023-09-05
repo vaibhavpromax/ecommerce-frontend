@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styles from "./OrderRow.module.scss";
 import { Link } from "react-router-dom";
 import { ICONS } from "../../../../../icons";
+import { formatDate } from "../../../../../utils/dateFormatter";
 
-const OrderRow = () => {
+const OrderRow = ({ order }) => {
   const [showAccordion, setShowAccordion] = useState(false);
 
   return (
@@ -12,15 +13,19 @@ const OrderRow = () => {
         <div className={styles.col1}>
           <div className={styles.row1}>
             <div className={styles.no}>Order #1234</div>
-            <Link className={styles.viewdetails}> View details</Link>
+            <Link to={`/order/${order?.order_id}`} className={styles.viewdetails}> View details</Link>
           </div>
           <div className={styles.row2}>
-            <div className={styles.orderdate}>28 June, 2023 at 02:36PM</div>
+            <div className={styles.orderdate}>
+              {formatDate(order?.created_at)}
+            </div>
             <div className={styles.shippingno}>Shipping No: 1234567889 </div>
           </div>
         </div>
         <div className={styles.col2}>
-          <div className={styles.row1}>Delivered {ICONS.tick}</div>
+          <div className={styles.row1}>
+            {order?.order_status} {ICONS.tick}
+          </div>
           <div className={styles.row2}>30 June, 2023</div>
         </div>
         <div className={styles.col3}>
@@ -28,8 +33,10 @@ const OrderRow = () => {
           <div className={styles.row2}> </div>
         </div>
         <div className={styles.col4}>
-          <div className={styles.orderPrice}>$24.55</div>
-          <div className={styles.orderStatus}>Status:Paid</div>
+          <div className={styles.orderPrice}>${order?.total_price}</div>
+          <div className={styles.orderStatus}>
+            Status:{order?.payment_status}
+          </div>
         </div>
         <div
           onClick={() =>

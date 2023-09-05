@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./OrderManagement.module.scss";
 import TextBox from "../../../components/TextBox/TextBox";
 import { ICONS } from "../../../icons";
 import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
 import Button from "../../../components/Button/Button";
 import OrderRow from "./components/OrderRow/OrderRow";
-
-
+import useOrder from "../../../apis/useOrder";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -22,6 +21,18 @@ const options = [
 
 const OrderManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const [orders, setOrders] = useState(null);
+  const { getAllOrders } = useOrder();
+
+  const fetchOrders = async () => {
+    await getAllOrders((data) => {
+      setOrders(data?.data);
+    });
+  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   return (
     <div className={styles.orders}>
       <div className={styles.top}>
@@ -53,12 +64,9 @@ const OrderManagement = () => {
         </Button>
       </div>
       <div className={styles.orderList}>
-        <OrderRow />
-        <OrderRow />
-        <OrderRow />
-        <OrderRow />
-        <OrderRow />
-        <OrderRow />
+        {orders?.map((order, index) => {
+          return <OrderRow order={order} key={index} />;
+        })}
       </div>
     </div>
   );

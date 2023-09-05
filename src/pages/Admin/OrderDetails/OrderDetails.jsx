@@ -4,17 +4,16 @@ import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
 import useOrder from "../../../apis/useOrder";
+import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
   const { getSingleOrderDetails } = useOrder();
+  const { id } = useParams();
   const [order, setOrder] = useState({});
   const fetchOrderDetails = async () => {
-    await getSingleOrderDetails(
-      "bd93c69b-d73d-4077-b0ef-327523f26e4e",
-      (res) => {
-        setOrder(res?.data);
-      }
-    );
+    await getSingleOrderDetails(id, (res) => {
+      setOrder(res?.data);
+    });
   };
 
   useEffect(() => {
