@@ -21,104 +21,6 @@ const VIEWS = {
   PAY: "PAY",
 };
 
-const paymentMethod = {
-  id: "pm_1NkYnpAq4N7xgsNeyGBBjNtw",
-  object: "payment_method",
-  billing_details: {
-    address: {
-      city: null,
-      country: null,
-      line1: "lucknow",
-      line2: null,
-      postal_code: null,
-      state: null,
-    },
-    email: null,
-    name: "vaibhav singh",
-    phone: null,
-  },
-  card: {
-    brand: "visa",
-    checks: {
-      address_line1_check: null,
-      address_postal_code_check: null,
-      cvc_check: null,
-    },
-    country: "IN",
-    exp_month: 12,
-    exp_year: 2025,
-    funding: "credit",
-    generated_from: null,
-    last4: "0008",
-    networks: {
-      available: ["visa"],
-      preferred: null,
-    },
-    three_d_secure_usage: {
-      supported: true,
-    },
-    wallet: null,
-  },
-  created: 1693341981,
-  customer: null,
-  livemode: false,
-  type: "card",
-};
-const paymentIntent = {
-  id: "pi_1NkYsSAq4N7xgsNepBmu9Anz",
-  object: "payment_intent",
-  amount: 9000,
-  amount_capturable: 0,
-  amount_details: {
-    tip: {},
-  },
-  amount_received: 0,
-  application: null,
-  application_fee_amount: null,
-  automatic_payment_methods: null,
-  canceled_at: null,
-  cancellation_reason: null,
-  capture_method: "automatic",
-  client_secret: "pi_1NkYsSAq4N7xgsNepBmu9Anz_secret_ctlgt88JW9mTVFEFe5BKp7Zce",
-  confirmation_method: "manual",
-  created: 1693342268,
-  currency: "usd",
-  customer: "cus_OXeAwoQmIOCSOP",
-  description: "Buy Product",
-  invoice: null,
-  last_payment_error: null,
-  latest_charge: null,
-  livemode: false,
-  metadata: {
-    address_id: "b686fca3-c560-476f-8cac-d6583128fea0",
-    cart_id: "4d3e6aa9-807d-4775-bfdb-a2c8b90b060f",
-    user_id: "88101a25-51b0-46ac-8020-6d4b732dea15",
-  },
-  next_action: null,
-  on_behalf_of: null,
-  payment_method: "pm_1NkYnpAq4N7xgsNeyGBBjNtw",
-  payment_method_options: {
-    card: {
-      installments: null,
-      mandate_options: null,
-      network: null,
-      request_three_d_secure: "automatic",
-    },
-  },
-  payment_method_types: ["card"],
-  processing: null,
-  receipt_email: null,
-  review: null,
-  setup_future_usage: "off_session",
-  shipping: null,
-  source: null,
-  statement_descriptor: null,
-  statement_descriptor_suffix: null,
-  status: "requires_confirmation",
-  transfer_data: null,
-  transfer_group: null,
-};
-
 const Checkout = () => {
   const stripe = useStripe();
   const elements = useElements();
@@ -127,13 +29,14 @@ const Checkout = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addAddressModal, setAddAddressModal] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState(null);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState();
   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false);
+  const [paymentIntent, setPaymentIntent] = useState(null);
   const { addUserAddress, fetchAddresses, getAddressLoading } = useAddress();
   const { getCart, getCartLoading } = useCart();
   const { getPaymentMethods, createPaymentIntent } = usePayment();
   const [view, setView] = useState(VIEWS.ADDRESS);
-  const { card, billing_details } = paymentMethod;
+  // const { card, billing_details } = paymentMethod;
   const [cartInfo, setCartInfo] = useState({
     discount: "",
     total: "",
@@ -162,45 +65,45 @@ const Checkout = () => {
     setAddcardmodal(false);
   };
 
-  function handleServerResponse(response) {
-    if (response.error) {
-      /* Handle Error */
-    } else if (response.next_action) {
-      handleConfirmPayments(response);
-    } else {
-      alert("Payment Success");
-      /* Handle Success */
-      window.location.reload();
-    }
-  }
+  // function handleServerResponse(response) {
+  //   if (response.error) {
+  //     /* Handle Error */
+  //   } else if (response.next_action) {
+  //     handleConfirmPayments(response);
+  //   } else {
+  //     alert("Payment Success");
+  //     /* Handle Success */
+  //     window.location.reload();
+  //   }
+  // }
 
-  const handleConfirmPayments = async (e) => {
-    e.preventDefault();
-    stripe
-      .createToken("cvc_update", elements.getElement(CardCvcElement))
-      .then((result) => {
-        if (result.error) {
-          setCvcError(result.error.message);
-        } else {
-          axios
-            .post(`ecommerce/payment/confirm-payment`, {
-              paymentMethod: paymentMethod.id,
-              paymentIntent: paymentIntent.id,
-            })
-            .then((resp) => {
-              console.log(resp.data);
-              handleServerResponse(resp.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        /* Handle error*/
-      });
-  };
+  // const handleConfirmPayments = async (e) => {
+  //   e.preventDefault();
+  //   stripe
+  //     .createToken("cvc_update", elements.getElement(CardCvcElement))
+  //     .then((result) => {
+  //       if (result.error) {
+  //         setCvcError(result.error.message);
+  //       } else {
+  //         axios
+  //           .post(`ecommerce/payment/confirm-payment`, {
+  //             paymentMethod: paymentMethod.id,
+  //             paymentIntent: paymentIntent.id,
+  //           })
+  //           .then((resp) => {
+  //             console.log(resp.data);
+  //             handleServerResponse(resp.data);
+  //           })
+  //           .catch((err) => {
+  //             console.log(err);
+  //           });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       /* Handle error*/
+  //     });
+  // };
 
   const fetchCart = async () => {
     await getCart((data) => {
@@ -226,13 +129,17 @@ const Checkout = () => {
   const fetchPaymentMethods = async () => {
     getPaymentMethods((data) => {
       setPaymentMethods(data?.data?.data);
-      setSelectedPaymentMethod(data?.data?.data);
     });
   };
   const onCheckoutHandler = async () => {
     createPaymentIntent(
       { address_id: selectedAddress, paymentMethod: selectedPaymentMethod },
-      (data) => {}
+      (data) => {
+        console.log(data);
+        
+        setPaymentIntent(data?.data?.paymentIntent);
+        setConfirmPaymentModal(true);
+      }
     );
   };
 
@@ -295,8 +202,18 @@ const Checkout = () => {
             {paymentMethods?.map((card, index) => {
               return (
                 <div className={styles.card}>
-                  <div className={styles.customRadio}>
-                    <div className={styles.customRadioChecked}></div>
+                  <div
+                    onClick={() => {
+                      setSelectedPaymentMethod(card);
+                    }}
+                    className={styles.customRadio}
+                  >
+                    <div
+                      className={
+                        card?.id == selectedPaymentMethod?.id &&
+                        styles.customRadioChecked
+                      }
+                    ></div>
                   </div>
                   <div className={styles.cardName}>
                     {card?.card?.brand} {card?.card?.funding} card ending in{" "}
@@ -382,6 +299,8 @@ const Checkout = () => {
       <ConfirmPaymentModal
         onCloseModal={closeConfirmPaymentModal}
         isModal={confirmPaymentModal}
+        paymentMethod={selectedPaymentMethod}
+        paymentIntent={paymentIntent}
       />
       <AddCard
         fetchMethods={fetchPaymentMethods}

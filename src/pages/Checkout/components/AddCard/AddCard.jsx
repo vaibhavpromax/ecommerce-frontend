@@ -71,8 +71,10 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods }) => {
             },
             (data) => {
               console.log(data);
-              if (data?.next_action) {
-                setNextStep(data?.next_action);
+              if (data?.data?.next_action) {
+                setNextStep(data?.data?.next_action);
+                window.location.href =
+                  data?.data?.next_action?.use_stripe_sdk?.stripe_js;
               }
               onCloseModal();
               fetchMethods();

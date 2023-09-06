@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import style from "./Payment.module.scss";
 
 // import clsx from "clsx";
@@ -112,6 +112,7 @@ const paymentIntent = {
 export default function Payment() {
   const stripe = useStripe();
   const elements = useElements();
+  const cardRef = useRef();
 
   const [cvcError, setCvcError] = useState(null);
 
@@ -210,7 +211,14 @@ export default function Payment() {
 
             <div className={style.row}>
               <label>Enter Cvc/Cvv </label>
-              <div className={style.cvcInput}></div>
+              <div className={style.cvcInput}>
+                <CardCvcElement
+                  ref={cardRef}
+                  onChange={() => {
+                    setCvcError(null);
+                  }}
+                />
+              </div>
               <p className={style.cvcError}>{cvcError}</p>
             </div>
           </div>
