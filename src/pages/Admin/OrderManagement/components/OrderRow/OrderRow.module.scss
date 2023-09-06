@@ -16,10 +16,10 @@
     }
 
     .col1 {
-      .row1,
-      .row2 {
+      .row1 {
         display: flex;
       }
+
       .row1 {
         gap: 16px;
         .no {
@@ -122,7 +122,7 @@
         padding: 4.675px 16.965px 5.525px 16.115px;
         justify-content: center;
         align-items: center;
-        margin-left: 5%;
+        margin-left: 1%;
         img {
           width: 34.921px;
           height: 57.8px;
