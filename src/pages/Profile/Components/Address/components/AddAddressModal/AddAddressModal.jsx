@@ -38,7 +38,7 @@ const AddAddressModal = ({ fetchAddress, onAddModalClose, addressModal }) => {
           placeholder="Flat/Street/Block"
         />
         <TextBox
-          value={adddata.street_no}
+          value={adddata.address_name}
           setValue={(e) => setAdddata({ ...adddata, address_name: e })}
           className={styles.inputfield}
           placeholder="Home/Work/Office"
@@ -74,7 +74,7 @@ const AddAddressModal = ({ fetchAddress, onAddModalClose, addressModal }) => {
           placeholder="Name on address"
         />
         <TextBox
-          value={adddata.name_on_address}
+          value={adddata.address_phone_no}
           setValue={(e) => setAdddata({ ...adddata, address_phone_no: e })}
           className={styles.inputfield}
           placeholder="Contact number for this address"
