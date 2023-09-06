@@ -11,8 +11,6 @@ import Cart from "../../../pages/Cart/Cart";
 import Wishlist from "../../../pages/Wishlist/Wishlist";
 import UserRegister from "../../../pages/User/UserRegister/UserRegister";
 import Product from "../../../pages/Product/Product";
-import AddPayMethod from "../../../pages/AddPayMethod/AddPayMethod";
-import Payment from "../../../pages/Payment/Payment";
 import Checkout from "../../../pages/Checkout/Checkout";
 import Stripe from "../../../StripeWrapper";
 
@@ -137,24 +135,7 @@ const USER_ROUTES = [
     transparentNavbar: false,
     navbarVisible: false,
   },
-  {
-    private: false,
-    link: "/add-payment",
-    name: "payment",
-    component: <AddPayMethod />,
-    navbar: false,
-    transparentNavbar: false,
-    navbarVisible: false,
-  },
-  {
-    private: false,
-    link: "/confirm-payment",
-    name: "payment",
-    component: <Payment />,
-    navbar: false,
-    transparentNavbar: false,
-    navbarVisible: false,
-  },
+
   {
     private: false,
     link: "/register",

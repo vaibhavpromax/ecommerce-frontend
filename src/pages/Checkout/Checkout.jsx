@@ -9,7 +9,6 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import AddPayMethod from "../AddPayMethod/AddPayMethod";
 import AddCard from "./components/AddCard/AddCard";
 import useCart from "../../apis/useCart";
 import AddAddressModal from "./components/AddAddressModal/AddAddressModal";
@@ -65,46 +64,6 @@ const Checkout = () => {
     setAddcardmodal(false);
   };
 
-  // function handleServerResponse(response) {
-  //   if (response.error) {
-  //     /* Handle Error */
-  //   } else if (response.next_action) {
-  //     handleConfirmPayments(response);
-  //   } else {
-  //     alert("Payment Success");
-  //     /* Handle Success */
-  //     window.location.reload();
-  //   }
-  // }
-
-  // const handleConfirmPayments = async (e) => {
-  //   e.preventDefault();
-  //   stripe
-  //     .createToken("cvc_update", elements.getElement(CardCvcElement))
-  //     .then((result) => {
-  //       if (result.error) {
-  //         setCvcError(result.error.message);
-  //       } else {
-  //         axios
-  //           .post(`ecommerce/payment/confirm-payment`, {
-  //             paymentMethod: paymentMethod.id,
-  //             paymentIntent: paymentIntent.id,
-  //           })
-  //           .then((resp) => {
-  //             console.log(resp.data);
-  //             handleServerResponse(resp.data);
-  //           })
-  //           .catch((err) => {
-  //             console.log(err);
-  //           });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       /* Handle error*/
-  //     });
-  // };
-
   const fetchCart = async () => {
     await getCart((data) => {
       let cart_total = 0,
@@ -136,7 +95,7 @@ const Checkout = () => {
       { address_id: selectedAddress, paymentMethod: selectedPaymentMethod },
       (data) => {
         console.log(data);
-        
+
         setPaymentIntent(data?.data?.paymentIntent);
         setConfirmPaymentModal(true);
       }

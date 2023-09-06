@@ -20,7 +20,6 @@ const ConfirmPaymentModal = ({
   const { confirmPayment } = usePayment();
   const cardRef = useRef();
 
-  console.log(paymentIntent, paymentMethod);
   const handleSubmit = async (e) => {
     // e.preventDefault();
     stripe
@@ -35,7 +34,8 @@ const ConfirmPaymentModal = ({
               paymentIntent: paymentIntent.id,
             },
             (data) => {
-              handleServerResponse(data);
+              console.log(data?.data);
+              handleServerResponse(data?.data?.confirmIntent);
             }
           );
         }
@@ -48,10 +48,12 @@ const ConfirmPaymentModal = ({
 
   function handleServerResponse(response) {
     console.log(response);
-    if (response.error) {
+    if (response?.error) {
       /* Handle Error */
-    } else if (response.next_action) {
-      handleAction(response);
+    } else if (response?.next_action) {
+      console.log(response?.next_action?.redirect_to_url?.url);
+      window.location.href = response?.next_action?.redirect_to_url?.url;
+      // handleAction(response);
     } else {
       alert("Payment Success");
       /* Handle Success */
@@ -79,7 +81,11 @@ const ConfirmPaymentModal = ({
   }
 
   return (
-    <Modal isModal={isModal} onClose={onCloseModal}>
+    <Modal
+      className={styles.confirmModal}
+      isModal={isModal}
+      onClose={onCloseModal}
+    >
       <div className={styles.row}>
         <label>Cardholder Name</label>
         <p>{paymentMethod?.billing_details.name}</p>
@@ -88,8 +94,8 @@ const ConfirmPaymentModal = ({
         <label>Card Number</label>
         <p>{`**** **** **** ${paymentMethod?.card.last4}`}</p>
       </div>
-      <label>Enter Cvc/Cvv </label>
-      <div className={styles.cvcInput}>
+      <div className={styles.cvvRow}>
+        <label>Enter Cvc/Cvv </label>
         <CardCvcElement
           ref={cardRef}
           onChange={() => {
