@@ -4,10 +4,10 @@ import { useState } from "react";
 const useCustomer = () => {
   const [getCustomersLoading, setGetCustomersLoading] = useState(false);
 
-  const getCustomers = async (cb) => {
+  const getCustomers = async (pagedata, cb) => {
     setGetCustomersLoading(true);
     try {
-      const res = await axios.get(`/ecommerce/admin/get-customers`);
+      const res = await axios.get(`/ecommerce/admin/get-customers?page=${pagedata?.currentPage}&pageSize=${pagedata?.pageSize}`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);

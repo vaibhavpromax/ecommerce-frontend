@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./CustomerManagement.module.scss";
 import { ICONS } from "../../../icons";
 import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
@@ -16,15 +16,23 @@ const options = [
 
 const CustomerManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [customers, setCustomers] = useState([]);
+  const containerRef = useRef(null);
   const { getCustomers, getCustomersLoading } = useCustomer();
+  const pageSize = 10; // Adjust this to match your server's page size
+
   const fetchCustomers = async () => {
-    getCustomers((res) => setCustomers(res?.data));
-    console.log(customers);
+    getCustomers((res) => {
+      setCustomers((prev) => [...prev, res?.data?.item]);
+      setCurrentPage(res?.data?.currentPage);
+      setTotalPages(res?.data?.totalPages);
+    });
   };
   useEffect(() => {
     fetchCustomers();
-  }, []);
+  }, [currentPage, pageSize]);
 
   return (
     <div className={styles.customerManagement}>
@@ -69,10 +77,20 @@ const CustomerManagement = () => {
           <div className={styles.col7}>PHONE</div>
           <div className={styles.col8}>ACTIONS</div>
         </div>
-        <div className={styles.list}>
-          {customers?.map((customer, key) => {
-            return <CustomerRow customer={customer} key={key} />;
-          })}
+        <div ref={containerRef} className={styles.list}>
+          {getCustomersLoading ? (
+            <>Loading</>
+          ) : (
+            <>
+              {customers.length != 0 && (
+                <>
+                  {customers?.map((customer, key) => {
+                    return <CustomerRow customer={customer} key={key} />;
+                  })}
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
