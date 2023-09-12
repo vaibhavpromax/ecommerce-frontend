@@ -11,10 +11,8 @@
     display: flex;
     justify-content: center;
     gap: 16px;
-::before{
-  
-}
-
+    ::before {
+    }
 
     .icon {
       display: flex;
@@ -47,7 +45,5 @@
         line-height: 119.453%;
       }
     }
-
-
   }
 }

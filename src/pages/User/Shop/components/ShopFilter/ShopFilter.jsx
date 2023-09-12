@@ -44,27 +44,19 @@ const theme = createTheme({
   },
 });
 
-function slidertooltip(value) {
-  return <div className={styles.slidertooltip}>`${value}°C`</div>;
-}
-
 const ShopFilter = () => {
   const [value1, setValue1] = useState([20, 37]);
-
   const minDistance = 10;
-
   const handleSliderChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return;
     }
-
     if (activeThumb === 0) {
       setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
     } else {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
   };
-
   const tickHandler = () => {};
 
   return (

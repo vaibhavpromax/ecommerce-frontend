@@ -65,6 +65,7 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods }) => {
           card: elements.getElement(CardElement),
         })
         .then((resp) => {
+          console.log(resp);
           addPaymentMethod(
             {
               paymentMethod: resp.paymentMethod,
