@@ -11,20 +11,8 @@ const tabOptions = [
   { value: "single", label: "Single origin" },
 ];
 
-const ShopItems = () => {
+const ShopItems = ({ filterOptions, fetchProducts }) => {
   const [activeTab, setActiveTab] = useState(tabOptions[0].value);
-  const [products, setProducts] = useState(null);
-  const { getProducts, getProductsLoading } = useShop();
-
-  const fetchProducts = async () => {
-    getProducts({ product_arr: null }, (data) => {
-      setProducts(data.data);
-    });
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <div className={styles.shopitems}>
@@ -36,7 +24,7 @@ const ShopItems = () => {
         />
       </div>
       <div className={styles.list}>
-        {products?.map((prod) => {
+        {filterOptions?.map((prod) => {
           return <Card fetchProducts={fetchProducts} product={prod} />;
         })}
       </div>

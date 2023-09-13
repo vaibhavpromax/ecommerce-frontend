@@ -37,8 +37,6 @@ const Card = ({
     navigate(`/product/${product?.product_id}`);
   };
 
-  console.log(renderFromWishlist);
-
   const removeFromWishListHandler = () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
