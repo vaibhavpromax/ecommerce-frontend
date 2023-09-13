@@ -4,18 +4,25 @@ import TextBox from "../../../../../components/TextBox/TextBox";
 import Select from "../../../../../components/Select/Select";
 
 const productOptions = {
-  Beans: "Coffee Beans",
-  Powder: "Coffee Powder",
+  BEANS: "Coffee Beans",
+  POWDER: "Coffee Powder",
+  TEA: "Tea",
 };
 
+
+
 const beansType = {
-  Arabia: "Arabic",
-  African: "African",
+  ROUBUSTA: "Robusta",
+  ARABICA: "Arabica",
+  EXCELSA: "Excelsa",
+  LIBERICA: "Liberica",
 };
 
 const originType = {
-  MiddleEast: "Middle East",
-  Indian: "Indian",
+  AMERICA: "Central & South America",
+  AFRICA: "Africa",
+  MIDDLE: "Middle East",
+  ASIA: "South Asia",
 };
 
 const AddProductDescription = ({ productInfo, setProductInfo }) => {

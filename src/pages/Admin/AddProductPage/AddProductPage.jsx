@@ -7,6 +7,9 @@ import AddProductDescription from "./components/AddProductDescription/AddProduct
 import AddImage from "./components/AddImage/AddImage";
 import useProduct from "../../../apis/useProduct";
 
+
+
+
 const AddProductPage = () => {
   const { addProduct } = useProduct();
   const [productInfo, setProductInfo] = useState({
