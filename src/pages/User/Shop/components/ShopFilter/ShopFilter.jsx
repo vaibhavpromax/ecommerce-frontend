@@ -68,6 +68,23 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
     pricemax: value1[1],
   });
 
+  const insertInFilterValuesHandler = (fValues, newValue) => {
+    let flag = true;
+    const newArr = fValues.filter((val) => {
+      if (val == newValue) {
+        flag = false;
+        return;
+      } else {
+        return val;
+      }
+    });
+    if (flag) {
+      newArr.push(newValue);
+    }
+
+    return newArr;
+  };
+
   const minDistance = 10;
   const handleSliderChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -79,39 +96,38 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
       setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
     }
   };
-  console.log(filterValues);
 
   useEffect(() => {
-    const filteredProducts = items
-      ?.filter((it) => {
+    setFilteredProducts(items);
+  }, [items]);
+
+  const applyFilterHandler = () => {
+    const filteredProducts = items?.filter((it) => {
         if (filterValues.type.length > 0) {
-          // filteredProducts.push(it);
           return filterValues.type.includes(it.product_type);
         } else return true;
       })
       .filter((it) => {
         if (filterValues.origin.length > 0) {
-          return filterValues.type.includes(it.product_origin);
+          return filterValues.origin.includes(it.product_origin);
         } else return true;
       })
       .filter((it) => {
         if (filterValues.region.length > 0) {
-          return filterValues.type.includes(it.beans_type);
+          return filterValues.region.includes(it.beans_type);
         } else return true;
       })
       .filter((it) => {
-        if (filterValues.pricemax < 1000 || filterValues.pricemin > 0) {
+        if (value1[1] < 1000 || value1[0] > 0) {
           return (
-            parseFloat(it.sellingPrice) < filterValues.pricemax &&
-            parseFloat(it.sellingPrice) > filterValues.pricemin
+            parseInt(it.selling_price) < value1[1] &&
+            parseInt(it.selling_price) > value1[0]
           );
         } else return true;
       });
 
-    console.log(filteredProducts);
-
     setFilteredProducts(filteredProducts);
-  }, [filterValues, items]);
+  };
 
   return (
     <div className={styles.filter}>
@@ -126,11 +142,15 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
             <div className={styles.filterOption}>
               <Checkbox
                 // tick={true}
-                value="COFFEE"
+                value="POWDER"
                 onChange={(e) => {
                   setFilterValues({
                     ...filterValues,
-                    type: [...filterValues.type, e.target.value],
+                    type: insertInFilterValuesHandler(
+                      filterValues.type,
+                      e.target.value
+                    ),
+                    // type: [...filterValues.type, e.target.value],
                   });
                 }}
               />
@@ -143,7 +163,11 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
                 onChange={(e) => {
                   setFilterValues({
                     ...filterValues,
-                    type: [...filterValues.type, e.target.value],
+                    type: insertInFilterValuesHandler(
+                      filterValues.type,
+                      e.target.value
+                    ),
+                    // type: [...filterValues.type, e.target.value],
                   });
                 }}
               />
@@ -164,7 +188,11 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
                   onChange={(e) => {
                     setFilterValues({
                       ...filterValues,
-                      region: [...filterValues.region, e.target.value],
+                      region: insertInFilterValuesHandler(
+                        filterValues.region,
+                        e.target.value
+                      ),
+                      // region: [...filterValues.region, e.target.value],
                     });
                   }}
                 />
@@ -187,7 +215,11 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
                   onChange={(e) => {
                     setFilterValues({
                       ...filterValues,
-                      origin: [...filterValues.origin, e.target.value],
+                      origin: insertInFilterValuesHandler(
+                        filterValues.origin,
+                        e.target.value
+                      ),
+                      // origin: [...filterValues.origin, e.target.value],
                     });
                   }}
                 />
@@ -209,6 +241,7 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
               return ` hell ${num} $`;
             }}
             value={value1}
+            max={1000}
             onChange={handleSliderChange}
             valueLabelFormat={(n) => `${n}$`}
             valueLabelDisplay="on"
@@ -218,7 +251,7 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
           />
         </ThemeProvider>
       </div>
-      <Button>Apply Filter</Button>
+      <Button onClick={applyFilterHandler}>Apply Filter</Button>
     </div>
   );
 };
