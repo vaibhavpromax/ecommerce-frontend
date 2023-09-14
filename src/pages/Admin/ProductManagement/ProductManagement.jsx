@@ -17,6 +17,8 @@ const options = [
 const ProductManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
   const [products, setProducts] = useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
   const { getProducts, getProductsLoading } = useProduct();
   const navigate = useNavigate();
 
@@ -25,10 +27,21 @@ const ProductManagement = () => {
       setProducts(res?.data);
     });
   };
-  console.log(products);
+
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  const selectAllHandler = () => {
+    if (selectedIds) {
+      setSelectedIds([]);
+    } else {
+      const idArr = products?.map((product) => {
+        return product?.product_id;
+      });
+      setSelectedIds(idArr);
+    }
+  };
 
   return (
     <div className={styles.productManagement}>
@@ -67,7 +80,12 @@ const ProductManagement = () => {
       <div className={styles.productList}>
         <div className={styles.listHeader}>
           <div className={styles.col1}>
-            <Checkbox shadowed={true} />
+            <Checkbox
+              onChange={() => {
+                selectAllHandler();
+              }}
+              shadowed={true}
+            />
           </div>
           <div className={styles.col2}>PRODUCT ID</div>
           <div className={styles.col3}>NAME</div>

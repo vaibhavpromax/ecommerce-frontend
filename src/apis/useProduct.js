@@ -28,6 +28,17 @@ const useProduct = () => {
     }
   };
 
+  const deleteProduct= async (data, cb) => {
+    try {
+      const res = await axios.post(`/ecommerce/admin/delete-product`, data);
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      setAddProductLoading(false);
+    }
+  };
+
   return {
     getProducts,
     getProductsLoading,

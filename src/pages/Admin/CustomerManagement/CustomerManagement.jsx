@@ -24,7 +24,7 @@ const CustomerManagement = () => {
   const pageSize = 10; // Adjust this to match your server's page size
 
   const fetchCustomers = async () => {
-    getCustomers((res) => {
+    await getCustomers({ currentPage: 1, pageSize: 10 }, (res) => {
       setCustomers((prev) => [...prev, res?.data?.item]);
       setCurrentPage(res?.data?.currentPage);
       setTotalPages(res?.data?.totalPages);

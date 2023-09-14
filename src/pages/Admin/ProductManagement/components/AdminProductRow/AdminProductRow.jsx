@@ -5,12 +5,26 @@ import { ICONS } from "../../../../../icons";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
-const AdminProductRow = ({ product }) => {
+const AdminProductRow = ({ product, selectedIds, setSelectedIds }) => {
   const navigate = useNavigate();
+  const selectedIdHandler = (items, id) => {
+  
+    
+
+}
+
+
+
   return (
     <div className={styles.productRow}>
       <div className={styles.col1}>
-        <Checkbox shadowed={true} />
+        <Checkbox 
+          onChange={() => {
+
+            setSelectedIds([...selectedIds, product?.product_id]);
+          }}
+          shadowed={true}
+        />
       </div>
       <div className={styles.col2}>#{product?.product_id.split("-")[0]}</div>
       <div
