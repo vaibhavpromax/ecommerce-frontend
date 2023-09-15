@@ -29,18 +29,18 @@ const CustomerManagement = () => {
   const pageSize = 10; // Adjust this to match your server's page size
 
   const fetchCustomers = async () => {
-    await getCustomers({ currentPage: 1, pageSize: 10 }, (res) => {
-      setCustomers((prev) => [...prev, res?.data?.item]);
-      setCurrentPage(res?.data?.currentPage);
-      setTotalPages(res?.data?.totalPages);
+    await getCustomers((res) => {
+      setCustomers(res?.data);
+      // setCurrentPage(res?.data?.currentPage);
+      // setTotalPages(res?.data?.totalPages);
     });
   };
   useEffect(() => {
     fetchCustomers();
-  }, [currentPage, pageSize]);
+  }, []);
 
   const deleteCustomersHandler = async () => {
-    await deleteCustomers({id_arr:selectedIds}, (res) => {
+    await deleteCustomers({ id_arr: selectedIds }, (res) => {
       fetchCustomers();
     });
   };

@@ -4,14 +4,13 @@ import { useState } from "react";
 const useCustomer = () => {
   const [getCustomersLoading, setGetCustomersLoading] = useState(false);
   const [deleteCustomerLoading, setDeleteCustomerLoading] = useState(false);
-const [getSingleCustomerLoading, setGetSingleCustomerLoading] = useState(false)
+  const [getSingleCustomerLoading, setGetSingleCustomerLoading] =
+    useState(false);
 
-  const getCustomers = async (pagedata, cb) => {
+  const getCustomers = async (cb) => {
     setGetCustomersLoading(true);
     try {
-      const res = await axios.get(
-        `/ecommerce/admin/get-customers?page=${pagedata?.currentPage}&pageSize=${pagedata?.pageSize}`
-      );
+      const res = await axios.get(`/ecommerce/admin/get-customers`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);
@@ -19,7 +18,6 @@ const [getSingleCustomerLoading, setGetSingleCustomerLoading] = useState(false)
       setGetCustomersLoading(false);
     }
   };
-
 
   const getSingleCustomerInfo = async (id, cb) => {
     setGetSingleCustomerLoading(true);
@@ -34,8 +32,6 @@ const [getSingleCustomerLoading, setGetSingleCustomerLoading] = useState(false)
       setGetSingleCustomerLoading(false);
     }
   };
-
-
 
   const deleteCustomers = async (data, cb) => {
     setDeleteCustomerLoading(true);
@@ -55,7 +51,7 @@ const [getSingleCustomerLoading, setGetSingleCustomerLoading] = useState(false)
     deleteCustomers,
     deleteCustomerLoading,
     getSingleCustomerInfo,
-    getSingleCustomerLoading
+    getSingleCustomerLoading,
     // addProduct,
     // addProductLoading,
   };

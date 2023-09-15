@@ -53,7 +53,8 @@ const AdminProductRow = ({
       <div className={styles.col2}>#{product?.product_id.split("-")[0]}</div>
       <div
         onClick={() => {
-          navigate("/order/23423");
+          // navigate("/order/23423");
+          window.location.href = `https://dev.ungraindanslaboite.com/product/${product?.product_id}`;
         }}
         style={{
           cursor: "pointer",

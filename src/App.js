@@ -10,10 +10,10 @@ import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 function App() {
   return (
     <div className={styles.app}>
+      
       <BrowserRouter>
         <Routes>
           <Route element={<RegisteredEmails />} path="/emails"></Route>
-          <Route element={<AdminLogin />} path="/"></Route>
           <Route
             path="/*"
             element={

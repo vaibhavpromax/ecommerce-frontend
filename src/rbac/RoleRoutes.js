@@ -11,32 +11,31 @@ import Sidebar from "../components/Sidebar/Sidebar";
 //components
 
 const RoleRoutes = () => {
-  //   const { admin } = useAuth();
-  const { user, session } = useAuth();
-  const admin = { accessToken: "123" };
+  const { admin } = useAuth();
+  // const admin = { accessToken: "123" };
   const location = useLocation();
   return (
     <div className={styles.routePageContainer}>
       <div className={styles.blur}>
         <>
-          <Sidebar />
+          <Sidebar routes={ROLE_ROUTES["admin"]} />
           <div className={styles.routeContainer}>
             <Routes>
               {ROLE_ROUTES["admin"].map((route) => {
-                return (
-                  route.private && (
-                    <Route
-                      path={route.link}
-                      key={route.name}
-                      element={
-                        admin?.accessToken ? (
-                          route.component
-                        ) : (
-                          <Navigate to="/login" />
-                        )
-                      }
-                    />
-                  )
+                return route.private ? (
+                  <Route
+                    path={route.link}
+                    key={route.name}
+                    element={
+                      admin?.token ? route.component : <Navigate to="/" />
+                    }
+                  />
+                ) : (
+                  <Route
+                    path={route.link}
+                    key={route.name}
+                    element={route.component}
+                  />
                 );
               })}
               <Route path="*" element={<NotFound />}></Route>

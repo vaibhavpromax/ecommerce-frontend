@@ -48,7 +48,7 @@ const CustomerRow = ({
       </div>
       <div className={styles.col2}>{customer?.first_name}</div>
       <div className={styles.col3}>{customer?.last_name}</div>
-      <div className={styles.col4}>#{customer?.user_id.split("-")[0]}</div>
+      <div className={styles.col4}>#{customer?.user_id?.split("-")[0]}</div>
       <div className={styles.col5}>
         {customer?.last_ordered
           ? formatDate(customer?.last_ordered)
@@ -57,7 +57,6 @@ const CustomerRow = ({
       <div className={styles.col6}>{customer?.email}</div>
       <div className={styles.col7}>{customer?.phone_no}</div>
       <div className={styles.col8}>
-        {ICONS.pen}
         <span onClick={deleteCustomerHandler}>{ICONS.redTrash}</span>
       </div>
     </div>

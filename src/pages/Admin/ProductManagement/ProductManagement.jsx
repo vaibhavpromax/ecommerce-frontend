@@ -69,6 +69,14 @@ const ProductManagement = () => {
         </div>
 
         <div className={styles.buttons}>
+          {selectedIds.length > 0 && (
+            <Button
+              onClick={deleteProductsHandler}
+              className={styles.deletebtn}
+            >
+              {ICONS.trash}
+            </Button>
+          )}
           <Button
             onClick={() => {
               navigate("/add-product");
@@ -77,7 +85,7 @@ const ProductManagement = () => {
           >
             {ICONS.plus} Add new Product{" "}
           </Button>
-          </div>
+        </div>
       </div>
       <div className={styles.productList}>
         <div className={styles.listHeader}>

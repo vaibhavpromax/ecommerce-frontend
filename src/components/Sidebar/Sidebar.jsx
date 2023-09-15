@@ -4,10 +4,16 @@ import { ICONS } from "../../icons";
 import { adminOptions } from "./const";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ routes }) => {
   const [isSelected, setIsSelected] = useState(adminOptions[0]);
   const navigate = useNavigate();
   const location = useLocation();
+  let allRoutes = [];
+  routes.forEach((route) => {
+    allRoutes.push(route.link);
+    allRoutes.push("order");
+    allRoutes.push("customer");
+  });
 
   useEffect(() => {
     adminOptions.map((opt) => {
@@ -17,9 +23,17 @@ const Sidebar = () => {
       }
     });
   }, []);
-
   return (
-    <div className={styles.sidebar}>
+    <div
+      style={{
+        display:
+          !allRoutes.includes(location.pathname.split("/")[1]) ||
+          location.pathname == "/"
+            ? "none"
+            : "",
+      }}
+      className={styles.sidebar}
+    >
       <div className={styles.logo}>{ICONS.logoIconWhite}</div>
 
       <div className={styles.bottom}>

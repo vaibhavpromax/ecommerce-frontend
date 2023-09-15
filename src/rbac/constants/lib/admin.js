@@ -1,4 +1,5 @@
 import AddProductPage from "../../../pages/Admin/AddProductPage/AddProductPage";
+import AdminLogin from "../../../pages/Admin/AdminLogin/AdminLogin";
 import AdminPage from "../../../pages/Admin/AdminPage/AdminPage";
 import CouponManagement from "../../../pages/Admin/CouponManagement/CouponManagement";
 import CustomerManagement from "../../../pages/Admin/CustomerManagement/CustomerManagement";
@@ -55,6 +56,12 @@ const ADMIN_ROUTES = [
     link: "/promotions",
     name: "coupons page",
     component: <CouponManagement />,
+  },
+  {
+    private: false,
+    link: "/",
+    name: "admin login",
+    component: <AdminLogin />,
   },
 ];
 

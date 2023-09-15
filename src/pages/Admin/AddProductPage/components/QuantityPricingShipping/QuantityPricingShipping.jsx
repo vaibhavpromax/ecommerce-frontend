@@ -79,16 +79,25 @@ const QuantityPricingShipping = ({ productInfo, setProductInfo }) => {
           />
           <TextBox
             value={productInfo.discount_value}
-            setValue={(e) =>
-              setProductInfo({ ...productInfo, discount_value: e })
-            }
+            setValue={(e) => {
+              const selling_price =
+                parseFloat(productInfo.cost_price) -
+                (e * parseFloat(productInfo.cost_price)) / 100;
+              console.log(selling_price);
+
+              setProductInfo({
+                ...productInfo,
+                discount_value: e,
+                selling_price: selling_price,
+              });
+            }}
             label="Discount"
           />
           <TextBox
             value={productInfo.selling_price}
-            setValue={(e) =>
-              setProductInfo({ ...productInfo, selling_price: e })
-            }
+            // setValue={(e) =>
+            //   setProductInfo({ ...productInfo, selling_price: e })
+            // }
             label="Selling price"
           />
         </div>

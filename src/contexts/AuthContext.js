@@ -9,28 +9,30 @@ export const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem("admin")));
 
-  const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   const init = async () => {
-    let token;
-    if (admin) token = admin?.token;
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    // let token;
+    // if (admin) token = admin?.token;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("admin"))?.token
+    }`;
     setAuthenticated(true);
-    setLoading(false);
   };
 
   useEffect(() => {
     init();
-  }, []);
+  }, [admin]);
 
   // useEffect(() => {
   //   fetchSession();
   // }, []);
 
   return authenticated ? (
-    <AuthContext.Provider value={{ admin }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ admin, setAdmin }}>
+      {children}
+    </AuthContext.Provider>
   ) : (
     `Loading`
   );

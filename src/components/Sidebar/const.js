@@ -1,17 +1,17 @@
 import { ICONS } from "../../icons";
 
 export const adminOptions = [
-  {
-    text: "Dashboard",
-    val: "da",
-    icon: ICONS.home,
-    navigateTo: "/orders",
-  },
+  // {
+  //   text: "Dashboard",
+  //   val: "da",
+  //   icon: ICONS.home,
+  //   navigateTo: "/orders",
+  // },
   {
     text: "Sales",
     val: "sa",
     icon: ICONS.briefCase,
-    navigateTo: "/sales",
+    navigateTo: "/orders",
   },
   {
     text: "Product",

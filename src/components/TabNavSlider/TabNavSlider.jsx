@@ -41,6 +41,7 @@ const TabNavSlider = ({
             key={button.value}
           >
             {button.label}
+            {/*
             {button.pillValue && (
               <div
                 className={styles.pill}
@@ -65,6 +66,7 @@ const TabNavSlider = ({
                 {button.pillValue}
               </div>
             )}
+             */}
           </TabNavBtn>
         ))}
         <div

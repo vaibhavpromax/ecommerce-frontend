@@ -8,6 +8,7 @@ import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import useAdminAuthentication from "../../../apis/useAdminAuthentication";
+import { useAuth } from "../../../contexts/AuthContext";
 // import useUserAuthentication from "../../../apis/userAuthentication";
 
 const AdminLogin = () => {
@@ -17,22 +18,24 @@ const AdminLogin = () => {
   });
   const { loginAdmin, loginLoading } = useAdminAuthentication();
   const navigate = useNavigate();
+  const { setAdmin } = useAuth();
 
   const loginHandler = () => {
     const payload = { email: regData.username, password: regData.password };
     console.log(payload);
     loginAdmin(payload, (data) => {
+      setAdmin(data?.data);
       localStorage.setItem("admin", JSON.stringify(data.data));
       navigate("/orders");
     });
   };
 
-    useEffect(() => {
-      const admin = localStorage.getItem("admin");
-      if (admin) {
-        navigate("/orders");
-      }
-    }, []);
+  useEffect(() => { 
+    const admin = localStorage.getItem("admin");
+    if (admin) {
+      navigate("/orders");
+    }
+  }, []);
 
   return (
     <div className={styles.login}>

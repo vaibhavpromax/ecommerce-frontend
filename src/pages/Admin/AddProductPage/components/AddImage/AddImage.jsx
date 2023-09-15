@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./AddImage.module.scss";
 import { ICONS } from "../../../../../icons";
 import useImage from "../../../../../apis/useImage";
+import Skeleton from "../../../../../components/Skeleton/Skeleton";
 
 const AddImage = ({ productInfo, setProductInfo }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -53,48 +54,59 @@ const AddImage = ({ productInfo, setProductInfo }) => {
   return (
     <div className={styles.addImageWrapper}>
       <div className={styles.left}>Images</div>
-      <div className={styles.right}>
-        <div className={styles.p}>
-          {primaryImage ? (
-            <img width={222} height={222} src={primaryImage} alt="primary" />
-          ) : (
-            <label htmlFor="primaryImage" className={styles.primaryImage}>
-              {ICONS.addImage}
-              <input
-                type="file"
-                id="primaryImage"
-                onChange={(e) => {
-                  handleUpload(e, true);
-                }}
-                style={{ display: "none" }}
-              />
-            </label>
-          )}
+      {uploadImageLoading ? (
+        <div className={styles.right}>
+          <Skeleton className={styles.imageLoader} />
         </div>
-        <div className={styles.secondaryImages}>
-          {images?.map((img, key) => {
-            return (
-              <>
-                {img.url ? (
-                  <img width={135} height={123} src={img.url} alt="secondary" />
-                ) : (
-                  <label htmlFor="secImage" className={styles.secondaryImage}>
-                    {ICONS.addImage}
-                    <input
-                      type="file"
-                      id="secImage"
-                      onChange={(e) => {
-                        handleUpload(e, false, key);
-                      }}
-                      style={{ display: "none" }}
+      ) : (
+        <div className={styles.right}>
+          <div className={styles.p}>
+            {primaryImage ? (
+              <img width={222} height={222} src={primaryImage} alt="primary" />
+            ) : (
+              <label htmlFor="primaryImage" className={styles.primaryImage}>
+                {ICONS.addImage}
+                <input
+                  type="file"
+                  id="primaryImage"
+                  onChange={(e) => {
+                    handleUpload(e, true);
+                  }}
+                  style={{ display: "none" }}
+                />
+              </label>
+            )}
+          </div>
+          <div className={styles.secondaryImages}>
+            {images?.map((img, key) => {
+              return (
+                <>
+                  {img.url ? (
+                    <img
+                      width={135}
+                      height={123}
+                      src={img.url}
+                      alt="secondary"
                     />
-                  </label>
-                )}
-              </>
-            );
-          })}
+                  ) : (
+                    <label htmlFor="secImage" className={styles.secondaryImage}>
+                      {ICONS.addImage}
+                      <input
+                        type="file"
+                        id="secImage"
+                        onChange={(e) => {
+                          handleUpload(e, false, key);
+                        }}
+                        style={{ display: "none" }}
+                      />
+                    </label>
+                  )}
+                </>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

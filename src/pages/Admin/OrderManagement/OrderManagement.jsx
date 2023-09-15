@@ -58,10 +58,12 @@ const OrderManagement = () => {
           value={tabOption}
           setValue={setTabOption}
         />
+        {/* 
         <Button className={styles.btn}>{ICONS.plus} Create new </Button>
         <Button className={styles.btn} theme="WHITE">
-          {ICONS.download} Export all
+        {ICONS.download} Export all
         </Button>
+      */}
       </div>
       <div className={styles.orderList}>
         {orders?.map((order, index) => {

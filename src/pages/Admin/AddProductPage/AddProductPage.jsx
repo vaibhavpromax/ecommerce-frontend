@@ -7,11 +7,8 @@ import AddProductDescription from "./components/AddProductDescription/AddProduct
 import AddImage from "./components/AddImage/AddImage";
 import useProduct from "../../../apis/useProduct";
 
-
-
-
 const AddProductPage = () => {
-  const { addProduct } = useProduct();
+  const { addProduct, addProductLoading } = useProduct();
   const [productInfo, setProductInfo] = useState({
     name: "",
     description: "",
@@ -40,7 +37,6 @@ const AddProductPage = () => {
     });
   };
 
-  console.log(productInfo);
   return (
     <div className={styles.addProductPage}>
       <div className={styles.top}>
@@ -49,7 +45,7 @@ const AddProductPage = () => {
           <span className={styles.left}>
             {" "}
             {`        `}
-            {">>"} Product #1256
+            {">>"} Add Product
           </span>
         </div>
         <div className={styles.right}>
@@ -70,7 +66,11 @@ const AddProductPage = () => {
             <div className={styles.date}>14 July, 2023 at 23:04</div>
             */}
         </div>
-        <Button onClick={addProductHandler} className={styles.saveBtn}>
+        <Button
+          loading={addProductLoading}
+          onClick={addProductHandler}
+          className={styles.saveBtn}
+        >
           Save changes
         </Button>
       </div>
