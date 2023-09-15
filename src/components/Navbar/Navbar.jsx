@@ -19,6 +19,7 @@ const Navbar = ({ routes }) => {
   let allRoutes = [];
   routes.forEach((route) => {
     allRoutes.push(route.link);
+    allRoutes.push("product");
     if (!route.navbarVisible) navbarRoutes.push(route.link);
     if (route.transparentNavbar) transparentRoutes.push(route.link);
   });
@@ -37,7 +38,7 @@ const Navbar = ({ routes }) => {
         backgroundColor: navbarColor,
         display:
           navbarRoutes.includes(location.pathname) ||
-          !allRoutes.includes(location.pathname)
+          !allRoutes.includes(location.pathname.split("/")[1])
             ? "none"
             : "flex",
       }}
