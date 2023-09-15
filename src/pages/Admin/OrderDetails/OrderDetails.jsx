@@ -6,13 +6,25 @@ import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
 import useOrder from "../../../apis/useOrder";
 import { useParams } from "react-router-dom";
 
+const STATUSES = [
+  { label: "Order Placed", value: "PLACED", date: " ", rank: 1 },
+  { label: "Processing", value: "PROCESSING", date: "", rank: 2 },
+  { label: "Shipped", value: "SHIPPED", date: "", rank: 3 },
+  // { label: "Order Cancelled", value: "CANCELLED", date: "", rank: 3 },
+  { label: "Delivered", value: "DELIVERED", date: "", rank: 4 },
+];
+
 const OrderDetails = () => {
+  const [currentStep, setCurrentStep] = useState(0);
   const { getSingleOrderDetails } = useOrder();
   const { id } = useParams();
   const [order, setOrder] = useState({});
   const fetchOrderDetails = async () => {
     await getSingleOrderDetails(id, (res) => {
       setOrder(res?.data);
+      STATUSES.map((s, i) => {
+        if (s.value == res?.data?.order_status) setCurrentStep(i);
+      });
     });
   };
 
@@ -96,11 +108,41 @@ const OrderDetails = () => {
             <div className={styles.btBottomHeader}>Order history:</div>
 
             <div className={styles.progressbarContainer}>
-              <div className={styles.progressbar}>
-                <div className={styles.step}>Order Placed</div>
-                <div className={styles.step}>Processing</div>
-                <div className={styles.step}>Shipping</div>
-                <div className={styles.step}>Delivered</div>
+              <div className={styles.progressBar}>
+                {STATUSES.map((s, i) => (
+                  <div
+                    className={`${styles.stepWrapper} ${
+                      currentStep >= i ? styles.visitedStep : ""
+                    }`}
+                  >
+                    <div className={styles.stepCircle}>
+                      <span>{currentStep >= i && ICONS.tick}</span>
+                    </div>
+                    {i !== 0 && (
+                      <div
+                        className={`${styles.stepLine}
+                   ${currentStep >= i ? styles.filled : ""}
+                      `}
+                      ></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className={styles.singleLabelContainer}>
+                {STATUSES.map((s, i) => {
+                  return (
+                    <div
+                      className={`${styles.labelText} ${
+                        currentStep > i ? styles.visited : ""
+                      } ${currentStep === i ? styles.current : ""}`}
+                    >
+                      <div className={styles.wrapper}>
+                        {s.label}
+                        <div className={styles.date}>19 July </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -122,9 +164,7 @@ const OrderDetails = () => {
                   {order?.User?.first_name + order?.User?.last_name}
                 </div>
                 <div className={styles.secContent}>{order?.User?.email}</div>
-                <div className={styles.secContent}>
-                  IP address : 98.155.40.227
-                </div>
+
                 <div className={styles.secContent}>Total orders: 11</div>
               </div>
             </div>
@@ -160,33 +200,7 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
-          <div className={styles.hrRow}></div>
-          <div className={styles.section}>
-            <div className={styles.sectionheader}>
-              Shipping info {ICONS.pen}
-            </div>
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Address:</div>
-              <div className={styles.sectionDescRight}>
-                {order?.Address?.street_no +
-                  " " +
-                  order?.Address?.street_name +
-                  " " +
-                  order?.Address?.city +
-                  " " +
-                  order?.Address?.country +
-                  " " +
-                  order?.Address?.postal_code}
-              </div>
-            </div>
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Contact number:</div>
-              <div className={styles.sectionDescRight}>
-                {order?.User?.phone_no}
-              </div>
-            </div>
-            <div className={styles.yellow}>{ICONS.mapPin} View on map</div>
-          </div>
+
           <div className={styles.hrRow}></div>
           <div className={styles.section}>
             <div className={styles.sectionheader}>Payment info {ICONS.pen}</div>

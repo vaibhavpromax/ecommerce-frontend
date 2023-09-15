@@ -4,24 +4,48 @@ import Checkbox from "../../../../../components/Checkbox/Checkbox";
 import { ICONS } from "../../../../../icons";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import useProduct from "../../../../../apis/useProduct";
 
-const AdminProductRow = ({ product, selectedIds, setSelectedIds }) => {
+const AdminProductRow = ({
+  product,
+  selectedIds,
+  setSelectedIds,
+  fetchProducts,
+}) => {
   const navigate = useNavigate();
-  const selectedIdHandler = (items, id) => {
-  
-    
+  const { deleteProduct } = useProduct();
+  const insertInFilterValuesHandler = (newValue) => {
+    let flag = true;
+    const newArr = selectedIds.filter((val) => {
+      if (val == newValue) {
+        flag = false;
+        return;
+      } else {
+        return val;
+      }
+    });
+    if (flag) {
+      newArr.push(newValue);
+    }
+    return newArr;
+  };
 
-}
-
-
+  const deleteProductHandler = async () => {
+    await deleteProduct({ id_arr: [product?.product_id] }, () => {
+      fetchProducts();
+    });
+  };
 
   return (
     <div className={styles.productRow}>
       <div className={styles.col1}>
-        <Checkbox 
+        <Checkbox
+          checked={
+            selectedIds.length > 0 && selectedIds.includes(product?.product_id)
+          }
           onChange={() => {
-
-            setSelectedIds([...selectedIds, product?.product_id]);
+            setSelectedIds(insertInFilterValuesHandler(product?.product_id));
+            // setSelectedIds([...selectedIds, product?.product_id]);
           }}
           shadowed={true}
         />
@@ -49,7 +73,7 @@ const AdminProductRow = ({ product, selectedIds, setSelectedIds }) => {
       <div className={styles.col8}>{product?.quantity_purchased}</div>
       <div className={styles.col9}>
         {ICONS.pen}
-        {ICONS.redTrash}
+        <span onClick={deleteProductHandler}>{ICONS.redTrash}</span>
       </div>
     </div>
   );

@@ -39,11 +39,13 @@ import { ReactComponent as Promotions } from "../assets/promotions.svg";
 import { ReactComponent as Customers } from "../assets/customersStick.svg";
 import { ReactComponent as Briefcase } from "../assets/briefcase.svg";
 import { ReactComponent as RedTrash } from "../assets/red-trash.svg";
+import { ReactComponent as Cancel } from "../assets/cancel.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
   eyeOpen: <EyeOpen />,
   eyeClose: <EyeClosed />,
+  cancel: <Cancel />,
   logo: <Logo />,
   user: <User />,
   rightArrow: <RightArrow />,

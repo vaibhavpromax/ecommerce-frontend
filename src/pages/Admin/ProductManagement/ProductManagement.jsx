@@ -18,8 +18,7 @@ const ProductManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
   const [products, setProducts] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-  const { getProducts, getProductsLoading } = useProduct();
+  const { getProducts, getProductsLoading, deleteProduct } = useProduct();
   const navigate = useNavigate();
 
   const fetchProducts = async () => {
@@ -32,8 +31,15 @@ const ProductManagement = () => {
     fetchProducts();
   }, []);
 
+  const deleteProductsHandler = async () => {
+    await deleteProduct({ id_arr: selectedIds }, (res) => {
+      console.log(res);
+      fetchProducts();
+    });
+  };
+
   const selectAllHandler = () => {
-    if (selectedIds) {
+    if (selectedIds.length > 0) {
       setSelectedIds([]);
     } else {
       const idArr = products?.map((product) => {
@@ -42,7 +48,6 @@ const ProductManagement = () => {
       setSelectedIds(idArr);
     }
   };
-
   return (
     <div className={styles.productManagement}>
       <div className={styles.top}>
@@ -72,15 +77,13 @@ const ProductManagement = () => {
           >
             {ICONS.plus} Add new Product{" "}
           </Button>
-          <Button className={styles.btn} theme="WHITE">
-            {ICONS.download} Export all
-          </Button>
-        </div>
+          </div>
       </div>
       <div className={styles.productList}>
         <div className={styles.listHeader}>
           <div className={styles.col1}>
             <Checkbox
+              checked={selectedIds.length == products.length}
               onChange={() => {
                 selectAllHandler();
               }}
@@ -102,7 +105,14 @@ const ProductManagement = () => {
           ) : (
             <>
               {products?.map((product, key) => {
-                return <AdminProductRow product={product} />;
+                return (
+                  <AdminProductRow
+                    fetchProducts={fetchProducts}
+                    selectedIds={selectedIds}
+                    setSelectedIds={setSelectedIds}
+                    product={product}
+                  />
+                );
               })}
             </>
           )}

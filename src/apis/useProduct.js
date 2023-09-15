@@ -4,6 +4,7 @@ import { useState } from "react";
 const useProduct = () => {
   const [getProductsLoading, setGetProductsLoading] = useState(false);
   const [addProductLoading, setAddProductLoading] = useState(true);
+  const [deleteProductLoading, setDeleteProductLoading] = useState(false);
 
   const getProducts = async (cb) => {
     setGetProductsLoading(true);
@@ -28,14 +29,15 @@ const useProduct = () => {
     }
   };
 
-  const deleteProduct= async (data, cb) => {
+  const deleteProduct = async (data, cb) => {
+    setDeleteProductLoading(true);
     try {
       const res = await axios.post(`/ecommerce/admin/delete-product`, data);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (error) {
       throw new Error(error);
     } finally {
-      setAddProductLoading(false);
+      setDeleteProductLoading(false);
     }
   };
 
@@ -44,6 +46,8 @@ const useProduct = () => {
     getProductsLoading,
     addProduct,
     addProductLoading,
+    deleteProduct,
+    deleteProductLoading,
   };
 };
 

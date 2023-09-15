@@ -4,7 +4,6 @@ import { ICONS } from "../../../icons";
 import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
 import Checkbox from "../../../components/Checkbox/Checkbox";
 import TextBox from "../../../components/TextBox/TextBox";
-import Button from "../../../components/Button/Button";
 import CustomerRow from "./components/CustomerRow/CustomerRow";
 import useCustomer from "../../../apis/useCustomer";
 import { CSVLink } from "react-csv";
@@ -18,9 +17,15 @@ const CustomerManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedIds, setSelectedIds] = useState([]);
   const [customers, setCustomers] = useState([]);
   const containerRef = useRef(null);
-  const { getCustomers, getCustomersLoading } = useCustomer();
+  const {
+    getCustomers,
+    getCustomersLoading,
+    deleteCustomers,
+    deleteCustomerLoading,
+  } = useCustomer();
   const pageSize = 10; // Adjust this to match your server's page size
 
   const fetchCustomers = async () => {
@@ -33,6 +38,23 @@ const CustomerManagement = () => {
   useEffect(() => {
     fetchCustomers();
   }, [currentPage, pageSize]);
+
+  const deleteCustomersHandler = async () => {
+    await deleteCustomers({id_arr:selectedIds}, (res) => {
+      fetchCustomers();
+    });
+  };
+
+  const selectAllHandler = () => {
+    if (selectedIds.length > 0) {
+      setSelectedIds([]);
+    } else {
+      const idArr = customers?.map((customer) => {
+        return customer?.user_id;
+      });
+      setSelectedIds(idArr);
+    }
+  };
 
   return (
     <div className={styles.customerManagement}>
@@ -67,7 +89,13 @@ const CustomerManagement = () => {
       <div className={styles.customerList}>
         <div className={styles.listHeader}>
           <div className={styles.col1}>
-            <Checkbox shadowed={true} />
+            <Checkbox
+              checked={selectedIds.length == customers.length}
+              onChange={() => {
+                selectAllHandler();
+              }}
+              shadowed={true}
+            />
           </div>
           <div className={styles.col2}>FIRST NAME</div>
           <div className={styles.col3}>LAST NAME</div>
@@ -85,7 +113,15 @@ const CustomerManagement = () => {
               {customers.length != 0 && (
                 <>
                   {customers?.map((customer, key) => {
-                    return <CustomerRow customer={customer} key={key} />;
+                    return (
+                      <CustomerRow
+                        fetchCustomers={fetchCustomers}
+                        selectedIds={selectedIds}
+                        setSelectedIds={setSelectedIds}
+                        customer={customer}
+                        key={key}
+                      />
+                    );
                   })}
                 </>
               )}
