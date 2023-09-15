@@ -6,6 +6,7 @@ import useCart from "../../apis/useCart";
 import { useAuth } from "../../contexts/AuthContext";
 import useShop from "../../apis/useShop";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "../../components/Skeleton/Skeleton";
 
 const Cart = () => {
   const { user } = useAuth();
@@ -93,9 +94,10 @@ const Cart = () => {
     });
   };
   // console.log(localCart);
+  console.log(user);
 
   useEffect(() => {
-    if (user) {
+    if (user && localStorage.getItem("cart")) {
       JSON.parse(localStorage.getItem("cart"))?.map(async (item) => {
         await addToCart(
           { product_id: item.id, quantity: item.quantity },
@@ -142,17 +144,25 @@ const Cart = () => {
               )}
             </>
           ) : (
-            <>Loading</>
+            <>
+              {new Array(4).fill(0).map((_, index) => (
+                <Skeleton key={index} className={styles.loader} />
+              ))}
+            </>
           )}
         </div>
       </div>
 
       <div className={styles.right}>
-        <div className={styles.amount}>
-          Sub total ({cartInfo?.quantity}{" "}
-          {cartInfo?.quantity > 1 ? "items" : "item"}) :
-          <span>${cartInfo?.total} </span>
-        </div>
+        {!getCartLoading || !getProductsLoading ? (
+          <div className={styles.amount}>
+            Sub total ({cartInfo?.quantity}{" "}
+            {cartInfo?.quantity > 1 ? "items" : "item"}) :
+            <span>${cartInfo?.total} </span>
+          </div>
+        ) : (
+          <Skeleton className={styles.loader} />
+        )}
 
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod

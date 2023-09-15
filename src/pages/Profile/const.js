@@ -26,12 +26,12 @@ export const profileOptions = [
     component: <History />,
   },
 
-  {
-    text: "Manage passwords",
-    val: "pass",
-    icon: ICONS.key,
-    component: <Passwords />,
-  },
+  // {
+  //   text: "Manage passwords",
+  //   val: "pass",
+  //   icon: ICONS.key,
+  //   component: <Passwords />,
+  // },
 
   {
     text: "Payment methods",

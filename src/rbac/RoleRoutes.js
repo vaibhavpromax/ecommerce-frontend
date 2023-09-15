@@ -22,26 +22,8 @@ const RoleRoutes = () => {
           <Navbar routes={ROLE_ROUTES["user"]} />
           <div className={styles.routeContainer}>
             <Routes>
-              {ROLE_ROUTES["admin"].map((route) => {
-                return (
-                  route.private && (
-                    <Route
-                      path={route.link}
-                      key={route.name}
-                      element={
-                        admin?.accessToken ? (
-                          route.component
-                        ) : (
-                          <Navigate to="/admin/login" />
-                        )
-                      }
-                    />
-                  )
-                );
-              })}
               {ROLE_ROUTES["user"].map((route) => {
                 return route.private ? (
-                  
                   <Route
                     path={route.link}
                     key={route.name}

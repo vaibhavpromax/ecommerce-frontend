@@ -22,5 +22,11 @@
     row-gap: 20px;
     // column-gap: 10px;
     flex-wrap: wrap;
+    .loader {
+      width: 256px;
+      margin: 15px;
+      height: 286px;
+      flex-shrink: 0;
+    }
   }
 }

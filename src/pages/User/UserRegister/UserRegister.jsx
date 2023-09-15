@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import loginleft from "../../../assets/loginleft.png";
 import styles from "./UserRegister.module.scss";
 import TextBox from "../../../components/TextBox/TextBox";
@@ -37,6 +37,13 @@ const UserRegister = () => {
       navigate("/shop");
     });
   };
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigate("/profile");
+    }
+  }, []);
 
   return (
     <div className={styles.register}>

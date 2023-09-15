@@ -16,7 +16,9 @@ const Navbar = ({ routes }) => {
   const navigate = useNavigate();
   let transparentRoutes = [];
   let navbarRoutes = [];
+  let allRoutes = [];
   routes.forEach((route) => {
+    allRoutes.push(route.link);
     if (!route.navbarVisible) navbarRoutes.push(route.link);
     if (route.transparentNavbar) transparentRoutes.push(route.link);
   });
@@ -33,7 +35,11 @@ const Navbar = ({ routes }) => {
     <div
       style={{
         backgroundColor: navbarColor,
-        display: navbarRoutes.includes(location.pathname) ? "none" : "flex",
+        display:
+          navbarRoutes.includes(location.pathname) ||
+          !allRoutes.includes(location.pathname)
+            ? "none"
+            : "flex",
       }}
       className={styles.navbar}
     >

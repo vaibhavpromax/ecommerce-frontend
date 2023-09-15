@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./History.module.scss";
 import HistoryCard from "./components/HistoryCard/HistoryCard";
 import Select from "../../../../components/Select/Select";
+import Skeleton from "../../../../components/Skeleton/Skeleton";
+import useProfileSettings from "../../../../apis/useSettings";
 
 const month_options = {
   3: "Past 3 months",
@@ -10,6 +12,16 @@ const month_options = {
 
 const History = () => {
   const [select, setSelect] = useState(3);
+  const [orders, setOrders] = useState([]);
+  const { fetchOrderDetails, fetchordersLoading } = useProfileSettings();
+  const fetchOrders = async () => {
+    await fetchOrderDetails((data) => setOrders(data?.data));
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+  console.log(orders);
   return (
     <div className={styles.history}>
       <div className={styles.header}>Order history</div>
@@ -26,7 +38,21 @@ const History = () => {
       </div>
 
       <div className={styles.histories}>
-        <HistoryCard />
+        {fetchordersLoading ? (
+          <Skeleton className={styles.loader} />
+        ) : (
+          <>
+            {orders.length == 0 ? (
+              <>No Orders Placed yet</>
+            ) : (
+              <>
+                {orders?.map((order, index) => {
+                  return <HistoryCard order={order} key={index} />;
+                })}
+              </>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

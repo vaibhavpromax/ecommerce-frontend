@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Wishlist.module.scss";
 import Card from "../../components/Card/Card";
+import Skeleton from "../../components/Skeleton/Skeleton";
 import useWishlist from "../../apis/useWishlist";
 import { useAuth } from "../../contexts/AuthContext";
 import useShop from "../../apis/useShop";
@@ -65,7 +66,11 @@ const Wishlist = () => {
             )}
           </>
         ) : (
-          <>Loading</>
+          <>
+            {new Array(4).fill(0).map((_, index) => (
+              <Skeleton key={index} className={styles.loader} />
+            ))}
+          </>
         )}
       </div>
     </div>

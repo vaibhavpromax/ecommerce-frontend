@@ -14,15 +14,18 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const init = async () => {
-    const token = user?.token;
-    console.log(authenticated, token);
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    // const token = ;
+    // console.log(authenticated, token);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${
+      JSON.parse(localStorage.getItem("user"))?.token
+    }`;
     setAuthenticated(true);
     // setLoading(false);
   };
 
   useEffect(() => {
     init();
+    console.log(user);
   }, [user]);
 
   return authenticated ? (

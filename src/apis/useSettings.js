@@ -5,6 +5,7 @@ const useProfileSettings = () => {
   const [getUserLoading, setGetUserLoading] = useState(true);
   const [getNotificationLoading, setGetNotificationLoading] = useState(true);
   const [changePasswordLoading, setChangePasswordLoading] = useState(true);
+  const [fetchordersLoading, setFetchordersLoading] = useState(false);
 
   const fetchUser = async (cb) => {
     setGetUserLoading(true);
@@ -42,6 +43,18 @@ const useProfileSettings = () => {
     }
   };
 
+  const fetchOrderDetails = async (cb) => {
+    setFetchordersLoading(true);
+    try {
+      const res = await axios.get(`/ecommerce/order/get-orders`);
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setFetchordersLoading(false);
+    }
+  };
+
   return {
     fetchUser,
     fetchNotification,
@@ -49,6 +62,8 @@ const useProfileSettings = () => {
     getUserLoading,
     changePassword,
     changePasswordLoading,
+    fetchOrderDetails,
+    fetchordersLoading,
   };
 };
 

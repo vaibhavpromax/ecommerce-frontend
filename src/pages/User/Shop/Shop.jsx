@@ -24,6 +24,7 @@ const Shop = () => {
     <div className={styles.shop}>
       <ShopFilter items={products} setFilteredProducts={setFilteredProducts} />
       <ShopItems
+      loading={getProductsLoading}
         filterOptions={filteredProducts}
         fetchProducts={fetchProducts}
       />

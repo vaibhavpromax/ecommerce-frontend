@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import loginleft from "../../../assets/loginleft.png";
 import styles from "./UserLogin.module.scss";
 import TextBox from "../../../components/TextBox/TextBox";
@@ -8,19 +8,21 @@ import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import useUserAuthentication from "../../../apis/userAuthentication";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const UserLogin = () => {
   const [regData, setRegData] = useState({
     username: "",
     password: "",
   });
+  const { setUser } = useAuth();
   const { loginUser, loginLoading } = useUserAuthentication();
   const navigate = useNavigate();
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     const payload = { email: regData.username, password: regData.password };
-    console.log(payload);
-    loginUser(payload, (data) => {
+    await loginUser(payload, (data) => {
+      setUser(data?.data);
       localStorage.setItem("user", JSON.stringify(data.data));
       navigate("/shop");
     });

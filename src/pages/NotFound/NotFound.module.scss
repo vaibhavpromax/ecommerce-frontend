@@ -1,4 +1,6 @@
 .NotFoundContainer {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   font-family: "Jost", sans-serif;
@@ -9,6 +11,7 @@
   .upper {
     display: flex;
     // height: 57vh;
+    margin-top: 10%;
     .upperleft {
       flex: 1;
       display: flex;
@@ -26,7 +29,6 @@
 
       span:nth-child(2) {
         margin: 25px 0 0 0;
-
         font-style: normal;
         font-weight: 400;
         font-size: 22px;
@@ -37,6 +39,7 @@
       span:nth-child(3) {
         margin: 25px 0 0 0;
         width: 455px;
+        cursor: pointer;
         height: 46px;
         background: #433e40;
         border-radius: 10px;

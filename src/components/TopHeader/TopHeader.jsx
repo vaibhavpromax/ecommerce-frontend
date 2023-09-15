@@ -28,8 +28,22 @@ const Navbar = () => {
         >
           Shop
         </div>
-        <div className={styles.btn}>Se connecter</div>
-        <Button className={styles.login}>S’enregistrer</Button>
+        <div
+          onClick={() => {
+            navigate("/login");
+          }}
+          className={styles.btn}
+        >
+          Se connecter
+        </div>
+        <Button
+          onClick={() => {
+            navigate("/register");
+          }}
+          className={styles.login}
+        >
+          S’enregistrer
+        </Button>
       </div>
     </div>
   );

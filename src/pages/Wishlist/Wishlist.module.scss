@@ -22,5 +22,11 @@
     flex-wrap: wrap;
     overflow-y: scroll;
     row-gap: 20px;
+
+    .loader {
+      width: 256px;
+      margin: 15px;
+      height: 286px;
+    }
   }
 }
