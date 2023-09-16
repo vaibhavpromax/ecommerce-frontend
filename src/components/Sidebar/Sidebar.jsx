@@ -10,10 +10,12 @@ const Sidebar = ({ routes }) => {
   const location = useLocation();
   let allRoutes = [];
   routes.forEach((route) => {
-    allRoutes.push(route.link);
-    allRoutes.push("order");
-    allRoutes.push("customer");
+    if (route.link.split("/")[1] != "")
+      allRoutes.push(route.link.split("/")[1]);
   });
+  allRoutes.push("order");
+  allRoutes.push("customer");
+  // allRoutes.push(" ");
 
   useEffect(() => {
     adminOptions.map((opt) => {
@@ -23,14 +25,17 @@ const Sidebar = ({ routes }) => {
       }
     });
   }, []);
+  console.log(allRoutes);
+  console.log(location.pathname.split("/")[1]);
+  console.log(location.pathname);
+  console.log(allRoutes.includes(location.pathname.split("/")[1]));
+  console.log(location.pathname == " ");
   return (
     <div
       style={{
-        display:
-          !allRoutes.includes(location.pathname.split("/")[1]) ||
-          location.pathname == "/"
-            ? "none"
-            : "",
+        display: allRoutes.includes(location.pathname.split("/")[1])
+          ? ""
+          : "none",
       }}
       className={styles.sidebar}
     >
