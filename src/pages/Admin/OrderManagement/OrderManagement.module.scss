@@ -63,7 +63,8 @@
   }
 
   .orderList {
-    height: 75vh;
+    // height: 78vh;
+    height: calc(100vh - 160px);
     overflow-y: scroll;
     display: flex;
     flex-direction: column;

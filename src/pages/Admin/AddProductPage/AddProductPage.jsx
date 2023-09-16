@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AddProductPage.module.scss";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import QuantityPricingShipping from "./components/QuantityPricingShipping/QuantityPricingShipping";
@@ -9,6 +10,7 @@ import useProduct from "../../../apis/useProduct";
 
 const AddProductPage = () => {
   const { addProduct, addProductLoading } = useProduct();
+  const navigate = useNavigate();
   const [productInfo, setProductInfo] = useState({
     name: "",
     description: "",
@@ -33,7 +35,7 @@ const AddProductPage = () => {
 
   const addProductHandler = async () => {
     addProduct(productInfo, (res) => {
-      console.log(res?.data?.data);
+      navigate("/product");
     });
   };
 
@@ -50,12 +52,14 @@ const AddProductPage = () => {
         </div>
         <div className={styles.right}>
           {ICONS.bell}
+       {/* 
           <div className={styles.profile}>
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              alt=""
-            />
+          <img
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+          alt=""
+          />
           </div>
+        */}
         </div>
       </div>
       <div className={styles.topBar}>

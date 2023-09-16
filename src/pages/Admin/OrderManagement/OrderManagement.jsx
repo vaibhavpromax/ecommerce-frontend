@@ -21,6 +21,7 @@ const options = [
 
 const OrderManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
+  const [searchValue, setSearchValue] = useState("");
   const [orders, setOrders] = useState(null);
   const { getAllOrders } = useOrder();
 
@@ -39,17 +40,24 @@ const OrderManagement = () => {
         <div className={styles.left}>Orders</div>
         <div className={styles.right}>
           {ICONS.bell}
+          {/* 
           <div className={styles.profile}>
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              alt=""
-            />
+          <img
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+          alt=""
+          />
           </div>
+        */}
         </div>
       </div>
       <div className={styles.topBar}>
         <div className={styles.searchbox}>
-          <TextBox placeholder="Search here.." width="267px" />
+          <TextBox
+            value={searchValue}
+            setValue={(e) => setSearchValue(e)}
+            placeholder="Search here.."
+            width="267px"
+          />
           {ICONS.magnify}
         </div>
         <TabNavSlider
@@ -66,9 +74,15 @@ const OrderManagement = () => {
       */}
       </div>
       <div className={styles.orderList}>
-        {orders?.map((order, index) => {
-          return <OrderRow order={order} key={index} />;
-        })}
+        {orders
+          ?.filter((order) => {
+            return order?.order_id
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
+          })
+          ?.map((order, index) => {
+            return <OrderRow order={order} key={index} />;
+          })}
       </div>
     </div>
   );

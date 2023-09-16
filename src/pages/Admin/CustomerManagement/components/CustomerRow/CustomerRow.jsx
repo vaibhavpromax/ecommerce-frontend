@@ -4,6 +4,7 @@ import Checkbox from "../../../../../components/Checkbox/Checkbox";
 import { ICONS } from "../../../../../icons";
 import { formatDate } from "../../../../../utils/dateFormatter";
 import useCustomer from "../../../../../apis/useCustomer";
+import { Link, useNavigate } from "react-router-dom";
 
 const CustomerRow = ({
   customer,
@@ -12,6 +13,7 @@ const CustomerRow = ({
   fetchCustomers,
 }) => {
   const { deleteCustomers } = useCustomer();
+  const navigate = useNavigate();
   const deleteCustomerHandler = async () => {
     await deleteCustomers({ id_arr: [customer?.user_id] }, () => {
       fetchCustomers();
@@ -48,7 +50,21 @@ const CustomerRow = ({
       </div>
       <div className={styles.col2}>{customer?.first_name}</div>
       <div className={styles.col3}>{customer?.last_name}</div>
-      <div className={styles.col4}>#{customer?.user_id?.split("-")[0]}</div>
+      <Link
+        // onClick={() => {
+        //   navigate(`customer/${customer?.user_id}`);
+        //   // window.location.href = `https://dev.ungraindanslaboite.com/product/${product?.product_id}`;
+        // }}
+        to={`customer/${customer?.user_id}`}
+        style={{
+          cursor: "pointer",
+          color: "#B06934",
+          textDecorationLine: "underline",
+        }}
+        className={styles.col4}
+      >
+        #{customer?.user_id?.split("-")[0]}
+      </Link>
       <div className={styles.col5}>
         {customer?.last_ordered
           ? formatDate(customer?.last_ordered)

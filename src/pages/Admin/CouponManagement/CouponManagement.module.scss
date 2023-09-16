@@ -108,6 +108,7 @@
     }
     .list {
       height: 65vh;
+      height: calc(100vh - 240px);
       overflow-y: scroll;
     }
   }

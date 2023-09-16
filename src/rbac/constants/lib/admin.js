@@ -29,7 +29,7 @@ const ADMIN_ROUTES = [
   },
   {
     private: true,
-    link: "/customer",
+    link: "/customers",
     name: "customer page",
     component: <CustomerManagement />,
   },

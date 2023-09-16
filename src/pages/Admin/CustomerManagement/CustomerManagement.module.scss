@@ -107,7 +107,7 @@
         width: 10%;
       }
       .col7 {
-        margin-left: 80px;
+        margin-left: 120px;
         width: 10%;
       }
       .col8 {
@@ -116,7 +116,9 @@
       }
     }
     .list {
-      height: 65vh;
+      // height: 65vh;
+      height: calc(100vh - 240px);
+
       overflow-y: scroll;
     }
   }

@@ -24,7 +24,7 @@ export const adminOptions = [
     text: "Customers",
     val: "cus",
     icon: ICONS.cusotmers,
-    navigateTo: "/customer",
+    navigateTo: "/customers",
   },
 
   {

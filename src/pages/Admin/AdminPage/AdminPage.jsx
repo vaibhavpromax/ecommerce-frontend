@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Password from "../../../components/Password/Password";
 import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
+import useAdmin from "../../../apis/useAdmin";
 
 const AdminPage = () => {
   const [view, setView] = useState("details");
@@ -12,30 +13,33 @@ const AdminPage = () => {
     new_pass: "",
     confirm_new_pass: "",
   });
-  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
-
-  // const { fetchUser, getUserLoading, changePassword, changePasswordLoading } =
-  //   useProfileSettings();
+  const {
+    changeAdminPassword,
+    changePasswordLoading,
+    getAdminInfo,
+    getAdminInfoLoading,
+  } = useAdmin();
 
   const changePasswordHandler = async () => {
-    // changePassword(
-    //   { current_pass: pas.current_pass, new_pass: pas.new_pass },
-    //   () => {
-    //     localStorage.removeItem("user");
-    //     navigate("/login");
-    //   }
-    // );
+    changeAdminPassword(
+      { current_pass: pas.current_pass, new_pass: pas.new_pass },
+      () => {
+        localStorage.removeItem("admin");
+        navigate("/");
+      }
+    );
   };
 
-  // const getUser = async () => {
-  //   await fetchUser((data) => {
-  //     setUser(data?.data);
-  //   });
-  // };
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  const getAdmin = async () => {
+    await getAdminInfo((data) => {
+      setAdmin(data?.data);
+    });
+  };
+  useEffect(() => {
+    getAdmin();
+  }, []);
 
   return (
     <div className={styles.details}>
@@ -43,21 +47,15 @@ const AdminPage = () => {
         <>
           <div className={styles.header}>Account Settings </div>
           <div className={styles.bottom}>
-            <div className={styles.profilepic}></div>
-
             {!false ? (
               <div className={styles.info}>
                 <div className={styles.line}>
                   <h4>Name</h4>
-                  <h5>{user?.name}</h5>
+                  <h5>{admin?.name}</h5>
                 </div>
                 <div className={styles.line}>
                   <h4>Email</h4>
-                  <h5>{user?.email}</h5>
-                </div>
-                <div className={styles.line}>
-                  <h4>Contact No.</h4>
-                  <h5>{user?.phone_no}</h5>
+                  <h5>{admin?.email}</h5>
                 </div>
               </div>
             ) : (
@@ -65,7 +63,6 @@ const AdminPage = () => {
                 <h4>Loading</h4>
               </>
             )}
-
             <div onClick={() => setView("pass")} className={styles.chng}>
               Change password
             </div>

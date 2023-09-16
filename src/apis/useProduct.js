@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const useProduct = () => {
   const [getProductsLoading, setGetProductsLoading] = useState(false);
-  const [addProductLoading, setAddProductLoading] = useState(true);
+  const [addProductLoading, setAddProductLoading] = useState(false);
   const [deleteProductLoading, setDeleteProductLoading] = useState(false);
 
   const getProducts = async (cb) => {

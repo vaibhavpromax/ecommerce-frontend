@@ -17,6 +17,7 @@ const CustomerManagement = () => {
   const [tabOption, setTabOption] = useState(options[0].value);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
   const [customers, setCustomers] = useState([]);
   const containerRef = useRef(null);
@@ -63,17 +64,25 @@ const CustomerManagement = () => {
         <div className={styles.left}>Customers</div>
         <div className={styles.right}>
           {ICONS.bell}
+
+          {/* 
           <div className={styles.profile}>
-            <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              alt=""
-            />
+          <img
+          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+          alt=""
+          />
           </div>
+        */}
         </div>
       </div>
       <div className={styles.topBar}>
         <div className={styles.searchbox}>
-          <TextBox placeholder="Search here.." width="267px" />
+          <TextBox
+            value={searchValue}
+            setValue={(e) => setSearchValue(e)}
+            placeholder="Search here.."
+            width="267px"
+          />
           {ICONS.magnify}
         </div>
 
@@ -112,17 +121,28 @@ const CustomerManagement = () => {
             <>
               {customers.length != 0 && (
                 <>
-                  {customers?.map((customer, key) => {
-                    return (
-                      <CustomerRow
-                        fetchCustomers={fetchCustomers}
-                        selectedIds={selectedIds}
-                        setSelectedIds={setSelectedIds}
-                        customer={customer}
-                        key={key}
-                      />
-                    );
-                  })}
+                  {customers
+                    ?.filter((customer) => {
+                      return (
+                        customer?.first_name
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase()) ||
+                        customer?.last_name
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                      );
+                    })
+                    ?.map((customer, key) => {
+                      return (
+                        <CustomerRow
+                          fetchCustomers={fetchCustomers}
+                          selectedIds={selectedIds}
+                          setSelectedIds={setSelectedIds}
+                          customer={customer}
+                          key={key}
+                        />
+                      );
+                    })}
                 </>
               )}
             </>
