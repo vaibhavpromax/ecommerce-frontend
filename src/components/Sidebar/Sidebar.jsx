@@ -15,7 +15,6 @@ const Sidebar = ({ routes }) => {
   });
   allRoutes.push("order");
   allRoutes.push("customer");
-  // allRoutes.push(" ");
 
   useEffect(() => {
     adminOptions.map((opt) => {
@@ -25,11 +24,7 @@ const Sidebar = ({ routes }) => {
       }
     });
   }, []);
-  console.log(allRoutes);
-  console.log(location.pathname.split("/")[1]);
-  console.log(location.pathname);
-  console.log(allRoutes.includes(location.pathname.split("/")[1]));
-  console.log(location.pathname == " ");
+
   return (
     <div
       style={{
