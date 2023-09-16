@@ -11,36 +11,37 @@ const NAVBAR_COLORS = {
 };
 
 const Navbar = ({ routes }) => {
-  const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
+  // const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
   const location = useLocation();
   const navigate = useNavigate();
-  let transparentRoutes = [];
-  let navbarRoutes = [];
   let allRoutes = [];
   routes.forEach((route) => {
-    allRoutes.push(route.link);
-    allRoutes.push("product");
-    if (!route.navbarVisible) navbarRoutes.push(route.link);
-    if (route.transparentNavbar) transparentRoutes.push(route.link);
+    if (route.link == "/login" || route.link == "/register") return;
+    else allRoutes.push(route.link);
+    // if (!route.navbarVisible) navbarRoutes.push(route.link);
+    // if (route.transparentNavbar) transparentRoutes.push(route.link);
   });
+  allRoutes.push("product");
 
-  useEffect(() => {
-    if (transparentRoutes.includes(location.pathname)) {
-      setNavbarColor(NAVBAR_COLORS.transparent);
-    } else {
-      setNavbarColor(NAVBAR_COLORS.white);
-    }
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   if (transparentRoutes.includes(location.pathname)) {
+  //     setNavbarColor(NAVBAR_COLORS.transparent);
+  //   } else {
+  //     setNavbarColor(NAVBAR_COLORS.white);
+  //   }
+  // }, [location.pathname]);
+
+  console.log(allRoutes);
 
   return (
     <div
       style={{
-        backgroundColor: navbarColor,
+        // backgroundColor: navbarColor,
         display:
-          navbarRoutes.includes(location.pathname) ||
-          !allRoutes.includes(location.pathname.split("/")[1])
-            ? "none"
-            : "flex",
+          allRoutes.includes(location.pathname) ||
+          allRoutes.includes(location.pathname.split("/")[1])
+            ? "flex"
+            : "none",
       }}
       className={styles.navbar}
     >
