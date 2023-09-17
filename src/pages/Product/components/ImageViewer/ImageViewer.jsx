@@ -3,6 +3,7 @@ import styles from "./ImageViewer.module.scss";
 import { ICONS } from "../../../../icons";
 import useWishlist from "../../../../apis/useWishlist";
 import { useAuth } from "../../../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const ImageViewer = ({
   product,
@@ -11,7 +12,7 @@ const ImageViewer = ({
   setIsWishlisted,
 }) => {
   const images = product?.Images;
-  const [activeImage, setActiveImage] = useState(images[0].image_url);
+  const [activeImage, setActiveImage] = useState(images[0]?.image_url);
   const { user } = useAuth();
 
   const { addToWishlist, removeFromWishlist } = useWishlist();
@@ -25,6 +26,12 @@ const ImageViewer = ({
           }
         );
         setIsWishlisted(false);
+        toast.success("Removed from wishlist", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
         localStorage.setItem("wishlist", JSON.stringify(updatedList));
         fetchProduct();
       });
@@ -34,6 +41,12 @@ const ImageViewer = ({
           return item != product?.product_id;
         }
       );
+      toast.success("Removed from wishlist", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
       fetchProduct();
@@ -44,6 +57,12 @@ const ImageViewer = ({
     if (user) {
       addToWishlist(product.product_id, () => {
         // set wishlist in local storage as well for checking on rendering
+        toast.success("Added to wishlist", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
         if (JSON.parse(localStorage.getItem("wishlist")) == null) {
           localStorage.setItem(
             "wishlist",
@@ -76,6 +95,12 @@ const ImageViewer = ({
         );
         setIsWishlisted(true);
       }
+      toast.success("Added to wishlist", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
     }
   };
 
@@ -96,7 +121,7 @@ const ImageViewer = ({
         {images.map((img, index) => {
           return (
             <div
-              onClick={() => setActiveImage(img)}
+              onClick={() => setActiveImage(img?.image_url)}
               className={styles.imgwrapper}
             >
               <img key={index} src={img?.image_url} alt="botom" />
