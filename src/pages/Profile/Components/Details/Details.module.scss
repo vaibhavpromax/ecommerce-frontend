@@ -18,7 +18,11 @@
       flex-shrink: 0;
       border-radius: 86px;
       border: 2.295px solid #fff;
-      background-color: #615c5e;
+    }
+    .camera {
+      position: relative;
+      right: 30px;
+      cursor: pointer;
     }
     .info {
       margin-top: 44px;

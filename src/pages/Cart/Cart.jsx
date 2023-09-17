@@ -115,7 +115,8 @@ const Cart = () => {
   }, []);
 
   const onCheckoutHandler = () => {
-    navigate("/checkout");
+    if (user) navigate("/checkout");
+    else navigate("/login");
   };
 
   return (
@@ -168,7 +169,15 @@ const Cart = () => {
           Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod
           tempor incididunt ut ero labore
         </p>
-        <Button onClick={onCheckoutHandler} className={styles.chckbtn}>
+        <Button
+          onClick={() => {
+            if (cartitems.length == 0) return;
+            onCheckoutHandler();
+          }}
+          className={`${styles.chckbtn} ${
+            cartitems.length == 0 && styles.disabled
+          } `}
+        >
           Checkout
         </Button>
       </div>

@@ -10,11 +10,12 @@ import TextBox from "../../../../components/TextBox/TextBox";
 import Button from "../../../../components/Button/Button";
 import usePayment from "../../../../apis/usePayment";
 
-const AddCard = ({ isModal, onCloseModal, fetchMethods }) => {
+const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
   const stripe = useStripe();
   const elements = useElements();
   const addCard = useRef();
-  const { addPaymentMethod } = usePayment();
+  const { addPaymentMethod, addPaymentLoading, payWithoutAttaching } =
+    usePayment();
 
   const [nextStep, setNextStep] = useState(null);
   const [cardInfo, setCardInfo] = useState({
@@ -122,6 +123,49 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods }) => {
     });
   }, []);
 
+  async function handlePaymentWithoutAttaching() {
+    const address = cardInfo.address;
+    const billingDetails = {
+      name: cardInfo.name,
+      address: {
+        country: address.country,
+        state: address.state,
+        city: address.city,
+        line1: address.line,
+      },
+    };
+
+    try {
+      stripe
+        .createPaymentMethod({
+          type: "card",
+          billing_details: billingDetails,
+          card: elements.getElement(CardElement),
+        })
+        .then((resp) => {
+          console.log(resp);
+          payWithoutAttaching(
+            {
+              address_id: selectedAddress,
+              paymentMethod: resp.paymentMethod,
+            },
+            (data) => {
+              console.log(data);
+              if (data?.data?.next_action) {
+                setNextStep(data?.data?.next_action);
+                window.location.href =
+                  data?.data?.next_action?.use_stripe_sdk?.stripe_js;
+              }
+              // onCloseModal();
+              // fetchMethods();
+            }
+          );
+        });
+    } catch (err) {
+      /* Handle Error*/
+    }
+  }
+
   return (
     <Modal
       isModal={isModal}
@@ -190,7 +234,13 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods }) => {
         </div>
       </div>
 
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>Save card</Button>
+      <div
+        onClick={handlePaymentWithoutAttaching}
+        className={styles.payWithoutsaving}
+      >
+        Pay without saving
+      </div>
       {nextStep && <a href={nextStep?.use_stripe_sdk?.stripe_js}>Next</a>}
     </Modal>
   );

@@ -5,6 +5,7 @@ import { ICONS } from "../../../../icons";
 import Button from "../../../../components/Button/Button";
 import useProfileSettings from "../../../../apis/useSettings";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const Details = () => {
   const [view, setView] = useState("details");
@@ -13,11 +14,18 @@ const Details = () => {
     new_pass: "",
     confirm_new_pass: "",
   });
-  const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const { user, setUser } = useAuth();
+
   const navigate = useNavigate();
 
-  const { fetchUser, getUserLoading, changePassword, changePasswordLoading } =
-    useProfileSettings();
+  const {
+    fetchUser,
+    getUserLoading,
+    changePassword,
+    changePasswordLoading,
+    updateUserProfilePic,
+  } = useProfileSettings();
 
   const changePasswordHandler = async () => {
     changePassword(
@@ -31,9 +39,31 @@ const Details = () => {
 
   const getUser = async () => {
     await fetchUser((data) => {
-      setUser(data?.data);
+      setUserInfo(data?.data);
+      const prev = JSON.parse(localStorage.getItem("user"));
+      const newItem = {
+        token: prev.token,
+        user: { ...prev.user, profile_pic_url: data?.data?.profile_pic_url },
+      };
+      localStorage.setItem("user", JSON.stringify(newItem));
+      setUser(newItem);
     });
   };
+  const handleUpload = (e) => {
+    // Implement your upload logic here
+    // if (userImage) {
+    // Use APIs like FormData to upload the file
+    console.log("first");
+    const formdata = new FormData();
+    formdata.append("image", e.target.files[0]);
+    console.log(formdata);
+    updateUserProfilePic(formdata, (res) => {
+      getUser();
+    });
+    // }
+  };
+  console.log(JSON.parse(localStorage.getItem("user")));
+
   useEffect(() => {
     getUser();
   }, []);
@@ -42,31 +72,38 @@ const Details = () => {
     <div className={styles.details}>
       {view === "details" ? (
         <>
-          <div className={styles.header}>Account Settings {ICONS.pen}</div>
+          <div className={styles.header}>Account Settings </div>
           <div className={styles.bottom}>
-            <div className={styles.profilepic}></div>
+            <img
+              src={userInfo?.profile_pic_url}
+              className={styles.profilepic}
+              alt=""
+            />
+            <label htmlFor="userImage" className={styles.camera}>
+              {ICONS.camera}
+              <input
+                type="file"
+                id="userImage"
+                onChange={(e) => {
+                  handleUpload(e);
+                }}
+                style={{ display: "none" }}
+              />
+            </label>
 
             {!getUserLoading ? (
               <div className={styles.info}>
                 <div className={styles.line}>
                   <h4>Name</h4>
-                  <h5>{user?.name}</h5>
+                  <h5>{userInfo?.name}</h5>
                 </div>
                 <div className={styles.line}>
                   <h4>Email</h4>
-                  <h5>{user?.email}</h5>
+                  <h5>{userInfo?.email}</h5>
                 </div>
                 <div className={styles.line}>
                   <h4>Contact No.</h4>
-                  <h5>{user?.phone_no}</h5>
-                </div>
-                <div className={styles.line}>
-                  <h4>Contact No.</h4>
-                  <h5>{user?.phone_no}</h5>
-                </div>{" "}
-                <div className={styles.line}>
-                  <h4>Contact No.</h4>
-                  <h5>{user?.phone_no}</h5>
+                  <h5>{userInfo?.phone_no}</h5>
                 </div>
               </div>
             ) : (

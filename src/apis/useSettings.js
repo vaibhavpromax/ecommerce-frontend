@@ -6,6 +6,7 @@ const useProfileSettings = () => {
   const [getNotificationLoading, setGetNotificationLoading] = useState(true);
   const [changePasswordLoading, setChangePasswordLoading] = useState(true);
   const [fetchordersLoading, setFetchordersLoading] = useState(false);
+  const [updatePicLoading, setUpdatePicLoading] = useState(false);
 
   const fetchUser = async (cb) => {
     setGetUserLoading(true);
@@ -55,6 +56,20 @@ const useProfileSettings = () => {
     }
   };
 
+  const updateUserProfilePic = async (payload, cb) => {
+    setUpdatePicLoading(true);
+    try {
+      const res = await axios.post(`/ecommerce/user/upload-user-pic`, payload, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setUpdatePicLoading(false);
+    }
+  };
+
   return {
     fetchUser,
     fetchNotification,
@@ -64,6 +79,8 @@ const useProfileSettings = () => {
     changePasswordLoading,
     fetchOrderDetails,
     fetchordersLoading,
+    updatePicLoading,
+    updateUserProfilePic,
   };
 };
 

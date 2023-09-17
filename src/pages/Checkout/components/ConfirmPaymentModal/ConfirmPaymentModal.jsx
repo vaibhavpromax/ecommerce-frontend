@@ -95,9 +95,9 @@ const ConfirmPaymentModal = ({
         <p>{`**** **** **** ${paymentMethod?.card.last4}`}</p>
       </div>
       <div className={styles.cvvRow}>
-        <label>Enter Cvc/Cvv </label>
         <CardCvcElement
           ref={cardRef}
+          className={styles.cvvbox}
           onChange={() => {
             setCvcError(null);
           }}

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  // gap: 30px;
   padding: 25px;
   width: 600px;
   h4 {
@@ -19,6 +19,7 @@
     flex-direction: column;
     gap: 20px;
     width: 80%;
+    margin-top: 30px;
 
     .textbox {
       input {
@@ -58,5 +59,18 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-top: 30px;
+  }
+  .payWithoutsaving {
+    margin-top: 15px;
+    color: #433e40;
+    text-align: center;
+    font-family: Jost;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    cursor: pointer;
   }
 }

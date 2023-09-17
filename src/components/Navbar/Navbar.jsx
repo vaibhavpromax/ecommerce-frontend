@@ -4,6 +4,7 @@ import styles from "./Navbar.module.scss";
 import { ICONS } from "../../icons";
 import Button from "../Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const NAVBAR_COLORS = {
   transparent: "transparent",
@@ -13,6 +14,7 @@ const NAVBAR_COLORS = {
 const Navbar = ({ routes }) => {
   // const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
   const location = useLocation();
+  const { user } = useAuth();
   const navigate = useNavigate();
   let allRoutes = [];
   routes.forEach((route) => {
@@ -75,19 +77,18 @@ const Navbar = ({ routes }) => {
           {" "}
           {ICONS.cartOutline}Cart
         </div>
-        <div
-          onClick={() => {
-            navigate("/profile");
-          }}
-          className={styles.profile}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-            alt=""
-          />
-          <h5>Profile</h5>
-          {ICONS.dropdownIcon}
-        </div>
+        {user && (
+          <div
+            onClick={() => {
+              navigate("/profile");
+            }}
+            className={styles.profile}
+          >
+            <img src={user?.user?.profile_pic_url} alt="" />
+            <h5>Profile</h5>
+            {ICONS.dropdownIcon}
+          </div>
+        )}
       </div>
     </div>
   );

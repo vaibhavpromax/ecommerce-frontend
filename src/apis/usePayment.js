@@ -6,6 +6,8 @@ const usePayment = () => {
   const [getPaymentLoading, setGetPaymentLoading] = useState(false);
   const [confirmPaymentLoading, setConfirmPaymentLoading] = useState(false);
   const [createIntentLoading, setCreateIntentLoading] = useState(false);
+  const [payWithoutAttachingLoading, setPayWithoutAttachingLoading] =
+    useState(false);
 
   const addPaymentMethod = async (data, cb) => {
     setAddPaymentLoading(true);
@@ -55,11 +57,28 @@ const usePayment = () => {
     }
   };
 
+  const payWithoutAttaching = async (data, cb) => {
+    setConfirmPaymentLoading(true);
+    try {
+      const res = await axios.post(
+        `ecommerce/payment/pay-without-attach`,
+        data
+      );
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setConfirmPaymentLoading(false);
+    }
+  };
+
   return {
     addPaymentMethod,
     getPaymentMethods,
     confirmPayment,
     createPaymentIntent,
+    payWithoutAttaching,
+    payWithoutAttachingLoading,
     createIntentLoading,
     addPaymentLoading,
     getPaymentLoading,

@@ -28,7 +28,7 @@ const Checkout = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addAddressModal, setAddAddressModal] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState(null);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState(null);
   const { addUserAddress, fetchAddresses, getAddressLoading } = useAddress();
@@ -148,7 +148,12 @@ const Checkout = () => {
             })}
           </div>
           <div className={styles.savebtn}>
-            <Button onClick={() => setView(VIEWS.PAY)}>Select and next</Button>
+            <Button
+              className={selectedAddress == null && styles.disabled}
+              onClick={() => setView(VIEWS.PAY)}
+            >
+              Select and next
+            </Button>
           </div>
         </div>
       )}
@@ -210,7 +215,12 @@ const Checkout = () => {
             Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod
             tempor incididunt ut ero labore
           </p>
-          <Button onClick={onCheckoutHandler} className={styles.chckbtn}>
+          <Button
+            onClick={onCheckoutHandler}
+            className={`${selectedPaymentMethod == null && styles.disabled} ${
+              styles.chckbtn
+            }`}
+          >
             Checkout
           </Button>
         </div>
@@ -257,11 +267,13 @@ const Checkout = () => {
       />
       <ConfirmPaymentModal
         onCloseModal={closeConfirmPaymentModal}
-        isModal={confirmPaymentModal}
+        // isModal={confirmPaymentModal}
+        isModal={true}
         paymentMethod={selectedPaymentMethod}
         paymentIntent={paymentIntent}
       />
       <AddCard
+        selectedAddress={selectedAddress}
         fetchMethods={fetchPaymentMethods}
         isModal={addcardmodal}
         onCloseModal={closeAddCardModal}

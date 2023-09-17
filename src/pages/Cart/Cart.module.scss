@@ -70,6 +70,10 @@
       line-height: 119.453%;
     }
 
+    .disabled {
+      cursor: not-allowed;
+      background-color: #636363;
+    }
     .chckbtn {
       margin-top: 34px;
       width: 100%;

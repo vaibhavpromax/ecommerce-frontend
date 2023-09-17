@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import styles from "./Profile.module.scss";
 import { profileOptions } from "./const";
 import { ICONS } from "../../icons";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Profile = () => {
   const [isSelected, setIsSelected] = useState(profileOptions[0]);
+  const { user } = useAuth();
   return (
     <div className={styles.profile}>
       <div className={styles.left}>
         <div className={styles.info}>
-          <img
-            src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFkfGVufDB8fDB8fHww&w=1000&q=80"
-            alt=""
-          />
+          <img src={user?.user?.profile_pic_url} alt="" />
 
           <div className={styles.name}>
             <h3>Welcome</h3>
