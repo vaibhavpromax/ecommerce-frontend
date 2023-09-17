@@ -4,6 +4,7 @@ import HistoryCard from "./components/HistoryCard/HistoryCard";
 import Select from "../../../../components/Select/Select";
 import Skeleton from "../../../../components/Skeleton/Skeleton";
 import useProfileSettings from "../../../../apis/useSettings";
+import { Toaster } from "react-hot-toast";
 
 const month_options = {
   3: "Past 3 months",
@@ -24,6 +25,7 @@ const History = () => {
   console.log(orders);
   return (
     <div className={styles.history}>
+      <Toaster />
       <div className={styles.header}>Order history</div>
       <div className={styles.select}>
         <Select

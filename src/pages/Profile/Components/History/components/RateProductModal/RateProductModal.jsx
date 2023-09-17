@@ -4,6 +4,7 @@ import Modal from "../../../../../../components/Modal/Modal";
 import StarRatings from "react-star-ratings";
 import Button from "../../../../../../components/Button/Button";
 import useReview from "../../../../../../apis/useReview";
+import toast from "react-hot-toast";
 
 const RateProductModal = ({
   ratingModal,
@@ -23,6 +24,12 @@ const RateProductModal = ({
         order_id: order_id,
       },
       () => {
+        toast.success("Review added", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
         closeRatingModal();
       }
     );
