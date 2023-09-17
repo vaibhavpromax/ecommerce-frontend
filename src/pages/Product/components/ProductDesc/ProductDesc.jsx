@@ -9,6 +9,7 @@ import StarRatings from "react-star-ratings";
 import useProduct from "../../../../apis/useProduct";
 import useCart from "../../../../apis/useCart";
 import { useAuth } from "../../../../contexts/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const quantityOptions = {
   1: "1",
@@ -54,6 +55,12 @@ const ProductDesc = () => {
     // if user is logged in
     if (user) {
       addToCart({ product_id: product.product_id, quantity: quantity }, () => {
+        toast.success("Added to cart", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
         setAddedToCart(true);
       });
     } else {
@@ -77,11 +84,18 @@ const ProductDesc = () => {
         );
       }
       setAddedToCart(true);
+      toast.success("Added to cart", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
     }
   };
 
   return (
     <div className={styles.productDesc}>
+      <Toaster />
       {!getProductLoading ? (
         <>
           <div className={styles.left}>

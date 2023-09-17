@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProductReview.module.scss";
 import { demoReviews } from "./demodata";
 import StarRatings from "react-star-ratings";
 import moment from "moment";
 import { ICONS } from "../../../../icons";
+import useReview from "../../../../apis/useReview";
+import { useParams } from "react-router-dom";
 
 const ProductReview = () => {
   const newReviews = [demoReviews[0], demoReviews[1], demoReviews[2]];
+  const { getReviews, getReviewsLoading } = useReview();
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const { id } = useParams();
 
-  const numberOfPages = Math.ceil(demoReviews?.length / 3);
+  const fetchReviews = async () => {
+    await getReviews(id, (data) => {
+      setReviews(data?.data);
+      setNumberOfPages(data?.data.length / 3);
+    });
+  };
 
   const arrayOfPages = [];
   for (let i = 1; i <= numberOfPages; i++) {
     arrayOfPages.push(i);
   }
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
 
   return (
     <div className={styles.productRevWrapper}>
@@ -28,12 +43,12 @@ const ProductReview = () => {
         </div>
         <div className={styles.line}></div>
         <div className={styles.reviews}>
-          {newReviews?.map((review, index) => {
+          {reviews?.map((review, index) => {
             return (
               <div className={styles.review}>
                 <div className={styles.userinfo}>
-                  <img src={review.profile_pic} alt="user" />
-                  {review.user}
+                  <img src={review.User?.profile_pic_url} alt="user" />
+                  {review.User?.first_name + " " + review.User?.last_name}
                 </div>
                 <div className={styles.rating}>
                   <StarRatings
@@ -44,24 +59,26 @@ const ProductReview = () => {
                     name="rating"
                   />
                 </div>
-                <div className={styles.desc}>{review?.desc}</div>
+                <div className={styles.desc}>{review?.description}</div>
                 <div className={styles.date}>
-                  Posted on : {moment(review?.postedOn).format("DD MMM, YYYY")}
+                  Posted on : {moment(review?.createdAt).format("DD MMM, YYYY")}
                 </div>
                 <div className={styles.line}></div>
               </div>
             );
           })}
         </div>
+        {/* 
         <div className={styles.pagesrow}>
-          {arrayOfPages?.map((item, index) => {
-            return (
-              <div key={index} className={styles.pagebox}>
-                {item}
-              </div>
+        {arrayOfPages?.map((item, index) => {
+          return (
+            <div key={index} className={styles.pagebox}>
+            {item}
+            </div>
             );
           })}
-        </div>
+          </div>
+        */}
       </div>
     </div>
   );
