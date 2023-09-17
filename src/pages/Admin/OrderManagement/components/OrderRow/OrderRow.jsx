@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./OrderRow.module.scss";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import { ICONS } from "../../../../../icons";
 import { formatDate } from "../../../../../utils/dateFormatter";
 
@@ -25,7 +26,7 @@ const OrderRow = ({ order }) => {
           </div>
           <div className={styles.row2}>
             <div className={styles.orderdate}>
-              {formatDate(order?.createdAt)}
+              {moment(order?.createdAt).format("DD MMM, YYYY")}
             </div>
             <div className={styles.shippingno}>Shipping No: 1234567889 </div>
           </div>
@@ -34,7 +35,9 @@ const OrderRow = ({ order }) => {
           <div className={styles.row1}>
             {order?.order_status} {ICONS.tick}
           </div>
-          <div className={styles.row2}>{formatDate(order?.createdAt)}</div>
+          <div className={styles.row2}>
+            {moment(order?.createdAt).format("DD MMM, YYYY")}
+          </div>
         </div>
         <div className={styles.col3}>
           <div className={styles.row1}> {ICONS.user} Customer details</div>

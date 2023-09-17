@@ -144,7 +144,7 @@ const OrderDetails = () => {
                       <div className={styles.wrapper}>
                         {s.label}
                         <div className={styles.date}>
-                          {moment(new Date(order?.order_placed_date)).format(
+                          {moment(order?.order_placed_date).format(
                             "DD MMM, YYYY"
                           )}
                         </div>

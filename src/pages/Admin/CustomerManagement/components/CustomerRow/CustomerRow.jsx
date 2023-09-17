@@ -68,7 +68,7 @@ const CustomerRow = ({
       </Link>
       <div className={styles.col5}>
         {customer?.last_ordered
-          ? moment(new Date(customer?.last_ordered).format("DD MMM, YYYY"))
+          ? moment(customer?.last_ordered).format("DD MMM, YYYY")
           : "Not Ordered"}
       </div>
       <div className={styles.col6}>{customer?.email}</div>
