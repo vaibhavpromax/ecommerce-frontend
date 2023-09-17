@@ -52,7 +52,7 @@ const ProductReview = () => {
                     </div>
                     <div className={styles.rating}>
                       <StarRatings
-                        rating={review?.rating}
+                        rating={parseFloat(review?.rating)}
                         starRatedColor="#B06934"
                         numberOfStars={5}
                         starDimension="24px"
