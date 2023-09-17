@@ -55,7 +55,7 @@ const HistoryCard = ({ order }) => {
               <div className={styles.item}>
                 <div className={styles.s1}>
                   <img
-                    width="244px"
+                    width="220px"
                     src={item?.Product?.Images[0]?.image_url}
                     alt="Product "
                   />

@@ -19,6 +19,9 @@
     margin-top: 27px;
     height: 460px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     .loader {
       height: 200px;
       width: 80%;
