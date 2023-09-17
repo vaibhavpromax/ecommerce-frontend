@@ -7,6 +7,7 @@ import Button from "../../../components/Button/Button";
 import Checkbox from "../../../components/Checkbox/Checkbox";
 import AdminProductRow from "./components/AdminProductRow/AdminProductRow";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import useProduct from "../../../apis/useProduct";
 
 const options = [
@@ -34,6 +35,12 @@ const ProductManagement = () => {
 
   const deleteProductsHandler = async () => {
     await deleteProduct({ id_arr: selectedIds }, (res) => {
+      toast.success("Products Deleted", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
       console.log(res);
       fetchProducts();
     });
@@ -51,6 +58,7 @@ const ProductManagement = () => {
   };
   return (
     <div className={styles.productManagement}>
+      <Toaster />
       <div className={styles.top}>
         <div className={styles.left}>Products</div>
         <div className={styles.right}>

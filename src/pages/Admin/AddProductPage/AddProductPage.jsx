@@ -7,6 +7,7 @@ import QuantityPricingShipping from "./components/QuantityPricingShipping/Quanti
 import AddProductDescription from "./components/AddProductDescription/AddProductDescription";
 import AddImage from "./components/AddImage/AddImage";
 import useProduct from "../../../apis/useProduct";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddProductPage = () => {
   const { addProduct, addProductLoading } = useProduct();
@@ -35,12 +36,21 @@ const AddProductPage = () => {
 
   const addProductHandler = async () => {
     addProduct(productInfo, (res) => {
-      navigate("/product");
+      toast.success("New Product Added", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
+      setTimeout(() => {
+        navigate("/product");
+      }, 2000);
     });
   };
 
   return (
     <div className={styles.addProductPage}>
+      <Toaster />
       <div className={styles.top}>
         <div className={` ${styles.yellow}`}>
           Product{" "}
@@ -52,7 +62,7 @@ const AddProductPage = () => {
         </div>
         <div className={styles.right}>
           {ICONS.bell}
-       {/* 
+          {/* 
           <div className={styles.profile}>
           <img
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"

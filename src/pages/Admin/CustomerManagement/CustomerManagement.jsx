@@ -7,6 +7,8 @@ import TextBox from "../../../components/TextBox/TextBox";
 import CustomerRow from "./components/CustomerRow/CustomerRow";
 import useCustomer from "../../../apis/useCustomer";
 import { CSVLink } from "react-csv";
+import Button from "../../../components/Button/Button";
+import toast, { Toaster } from "react-hot-toast";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -42,6 +44,12 @@ const CustomerManagement = () => {
 
   const deleteCustomersHandler = async () => {
     await deleteCustomers({ id_arr: selectedIds }, (res) => {
+      toast.success("Customers Removed", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
       fetchCustomers();
     });
   };
@@ -59,7 +67,7 @@ const CustomerManagement = () => {
 
   return (
     <div className={styles.customerManagement}>
-      {" "}
+      <Toaster />{" "}
       <div className={styles.top}>
         <div className={styles.left}>Customers</div>
         <div className={styles.right}>
@@ -85,15 +93,24 @@ const CustomerManagement = () => {
           />
           {ICONS.magnify}
         </div>
-
-        <CSVLink
-          style={{ textDecoration: "none" }}
-          data={customers}
-          className={styles.btn}
-          theme="WHITE"
-        >
-          {ICONS.download} Export all
-        </CSVLink>
+        <div className={styles.right}>
+          {selectedIds.length > 0 && (
+            <Button
+              onClick={deleteCustomersHandler}
+              className={styles.deletebtn}
+            >
+              {ICONS.trash}
+            </Button>
+          )}
+          <CSVLink
+            style={{ textDecoration: "none" }}
+            data={customers}
+            className={styles.btn}
+            theme="WHITE"
+          >
+            {ICONS.download} Export all
+          </CSVLink>
+        </div>
       </div>
       <div className={styles.customerList}>
         <div className={styles.listHeader}>
