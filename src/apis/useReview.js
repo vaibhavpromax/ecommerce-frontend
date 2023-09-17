@@ -7,7 +7,7 @@ const useReview = () => {
   const getReviews = async (id, cb) => {
     setGetReviewsLoading(true);
     try {
-      const res = await axios.get(`/ecommerce/review/get-product/${id}`);
+      const res = await axios.get(`/ecommerce/review/get-review/${id}`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);
