@@ -30,7 +30,7 @@ const HistoryCard = ({ order }) => {
         </div>
         <div className={styles.c3}>
           <h4>Ship to</h4>
-          <h5>${order?.Addresses[0]?.name_on_address}</h5>
+          <h5>${order?.Address[0]?.name_on_address}</h5>
         </div>
         <div className={styles.c4}>
           <h4>Order ID</h4>
