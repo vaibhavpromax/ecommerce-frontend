@@ -5,6 +5,7 @@ import { ICONS } from "../../../icons";
 import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
 import useOrder from "../../../apis/useOrder";
 import { useParams } from "react-router-dom";
+import { formatDate } from "../../../utils/dateFormatter";
 
 const STATUSES = [
   { label: "Order Placed", value: "PLACED", date: " ", rank: 1 },
@@ -43,7 +44,7 @@ const OrderDetails = () => {
         <div className={styles.right}>
           <Button>{ICONS.pen} Edit order</Button>
           {ICONS.bell}
-      {/* 
+          {/* 
           <div className={styles.profile}>
           <img
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
@@ -99,7 +100,9 @@ const OrderDetails = () => {
                       style={{ fontSize: "18px", fontWeight: "600" }}
                       className={styles.orderRightRowRight}
                     >
-                      ${order?.total_price + order?.shipping_price}
+                      $
+                      {parseFloat(order?.total_price) +
+                        parseFloat(order?.shipping_price)}
                     </div>
                   </div>
                 </div>
@@ -140,7 +143,9 @@ const OrderDetails = () => {
                     >
                       <div className={styles.wrapper}>
                         {s.label}
-                        <div className={styles.date}>19 July </div>
+                        <div className={styles.date}>
+                          {formatDate(order?.order_placed_date)}{" "}
+                        </div>
                       </div>
                     </div>
                   );
@@ -195,11 +200,14 @@ const OrderDetails = () => {
                   order?.Address?.postal_code}
               </div>
             </div>
+            //{" "}
             <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Tracking number:</div>
+              // <div className={styles.sectionDescLeft}>Tracking number:</div>
+              //{" "}
               <div className={`${styles.yellow}  ${styles.sectionDescRight}`}>
-                #12783456
+                // #12783456 //{" "}
               </div>
+              //{" "}
             </div>
           </div>
 

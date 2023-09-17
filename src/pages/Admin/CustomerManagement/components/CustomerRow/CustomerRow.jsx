@@ -67,7 +67,7 @@ const CustomerRow = ({
       </Link>
       <div className={styles.col5}>
         {customer?.last_ordered
-          ? moment(customer?.last_ordered)
+          ? formatDate(customer?.last_ordered)
           : "Not Ordered"}{" "}
       </div>
       <div className={styles.col6}>{customer?.email}</div>
