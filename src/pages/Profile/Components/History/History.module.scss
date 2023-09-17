@@ -17,6 +17,8 @@
   }
   .histories {
     margin-top: 27px;
+    height: 460px;
+    overflow-y: scroll;
     .loader {
       height: 200px;
       width: 80%;
