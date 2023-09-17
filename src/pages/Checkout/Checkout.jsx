@@ -14,6 +14,8 @@ import useCart from "../../apis/useCart";
 import AddAddressModal from "./components/AddAddressModal/AddAddressModal";
 import usePayment from "../../apis/usePayment";
 import ConfirmPaymentModal from "./components/ConfirmPaymentModal/ConfirmPaymentModal";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const VIEWS = {
   ADDRESS: "ADDRESS",
@@ -110,6 +112,7 @@ const Checkout = () => {
 
   return (
     <div className={styles.checkout}>
+      <Toaster/>
       {view === VIEWS.ADDRESS && (
         <div className={styles.left}>
           <div className={styles.leftheader}>
@@ -267,8 +270,7 @@ const Checkout = () => {
       />
       <ConfirmPaymentModal
         onCloseModal={closeConfirmPaymentModal}
-        // isModal={confirmPaymentModal}
-        isModal={true}
+        isModal={confirmPaymentModal}
         paymentMethod={selectedPaymentMethod}
         paymentIntent={paymentIntent}
       />

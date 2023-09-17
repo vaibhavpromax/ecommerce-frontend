@@ -5,6 +5,7 @@ import Skeleton from "../../components/Skeleton/Skeleton";
 import useWishlist from "../../apis/useWishlist";
 import { useAuth } from "../../contexts/AuthContext";
 import useShop from "../../apis/useShop";
+import { Toaster } from "react-hot-toast";
 
 const Wishlist = () => {
   const { getWishlist, getWishlistLoading } = useWishlist();
@@ -42,6 +43,7 @@ const Wishlist = () => {
   console.log(wishlist);
   return (
     <div className={styles.wishlist}>
+      <Toaster />
       <h5>Your wishlist</h5>
 
       <div className={styles.wishlistitems}>

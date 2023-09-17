@@ -8,6 +8,8 @@ import {
 } from "@stripe/react-stripe-js";
 import usePayment from "../../../../apis/usePayment";
 import Button from "../../../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const ConfirmPaymentModal = ({
   isModal,
   onCloseModal,
@@ -19,6 +21,7 @@ const ConfirmPaymentModal = ({
   const [cvcError, setCvcError] = useState(null);
   const { confirmPayment } = usePayment();
   const cardRef = useRef();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     // e.preventDefault();
@@ -55,7 +58,16 @@ const ConfirmPaymentModal = ({
       window.location.href = response?.next_action?.redirect_to_url?.url;
       // handleAction(response);
     } else {
-      alert("Payment Success");
+      // alert("Payment Success");
+      toast.success("Order Made", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
+      setTimeout(() => {
+        navigate("/shop");
+      }, 2000);
       /* Handle Success */
       // window.location.reload();
     }

@@ -9,6 +9,8 @@ import axios from "axios";
 import TextBox from "../../../../components/TextBox/TextBox";
 import Button from "../../../../components/Button/Button";
 import usePayment from "../../../../apis/usePayment";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
   const stripe = useStripe();
@@ -16,6 +18,7 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
   const addCard = useRef();
   const { addPaymentMethod, addPaymentLoading, payWithoutAttaching } =
     usePayment();
+  const navigate = useNavigate();
 
   const [nextStep, setNextStep] = useState(null);
   const [cardInfo, setCardInfo] = useState({
@@ -156,8 +159,16 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
                 window.location.href =
                   data?.data?.next_action?.use_stripe_sdk?.stripe_js;
               }
-              // onCloseModal();
-              // fetchMethods();
+              toast.success("Order Made", {
+                style: {
+                  backgroundColor: "#F7F6F5",
+                  fontFamily: "Jost",
+                },
+              });
+              onCloseModal();
+              setTimeout(() => {
+                navigate("/shop");
+              }, 2000);
             }
           );
         });

@@ -8,6 +8,7 @@ import useWishlist from "../../apis/useWishlist";
 import useCart from "../../apis/useCart";
 import Counter from "../Counter/Counter";
 import { useAuth } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const Card = ({
   width = "280px",
@@ -40,6 +41,12 @@ const Card = ({
   const removeFromWishListHandler = () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
+        toast.success("Removed from wishlist", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
         const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
           (item) => {
             return item != product?.product_id;
@@ -63,6 +70,12 @@ const Card = ({
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
       fetchProducts();
+      toast.success("Removed from wishlist", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
     }
   };
 
@@ -70,13 +83,19 @@ const Card = ({
     if (user) {
       addToWishlist(product.product_id, () => {
         // set wishlist in local storage as well for checking on rendering
+        setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
         if (JSON.parse(localStorage.getItem("wishlist")) == null) {
           localStorage.setItem(
             "wishlist",
             JSON.stringify([product?.product_id])
           );
-          setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
           setIsWishlisted(true);
+          toast.success("Added to wishlist", {
+            style: {
+              backgroundColor: "#F7F6F5",
+              fontFamily: "Jost",
+            },
+          });
         } else {
           setLocalWish([
             ...JSON.parse(localStorage.getItem("wishlist")),
@@ -112,6 +131,12 @@ const Card = ({
         );
         setIsWishlisted(true);
       }
+      toast.success("Added to wishlist", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
     }
   };
 
@@ -120,22 +145,30 @@ const Card = ({
     if (user) {
       addToCart(
         { product_id: product.product_id, quantity: counterValue },
-        () => {}
+        () => {
+          toast.success("Added to cart", {
+            style: {
+              backgroundColor: "#F7F6F5",
+              fontFamily: "Jost",
+            },
+          });
+        }
       );
     } else {
       // if user is not logged in
       if (JSON.parse(localStorage.getItem("cart")) === null) {
-        console.log("absent", JSON.parse(localStorage.getItem("cart")));
-
         // if no cart in local storage make an item
         localStorage.setItem(
           "cart",
           JSON.stringify([{ id: product?.product_id, quantity: counterValue }])
         );
-
-        // console.log([{ id: product?.product_id, quantity: counterValue }]);
-
         setLocalCart([{ id: product?.product_id, quantity: counterValue }]);
+        toast.success("Added to cart", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
       } else {
         console.log("present ", JSON.parse(localStorage.getItem("cart")));
         localStorage.setItem(

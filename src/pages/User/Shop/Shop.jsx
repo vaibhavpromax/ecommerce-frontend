@@ -3,6 +3,7 @@ import styles from "./Shop.module.scss";
 import ShopFilter from "./components/ShopFilter/ShopFilter";
 import ShopItems from "./components/ShopItems/ShopItems";
 import useShop from "../../../apis/useShop";
+import { Toaster } from "react-hot-toast";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,7 @@ const Shop = () => {
 
   return (
     <div className={styles.shop}>
+      <Toaster />
       <ShopFilter
         setSearchValue={setSearchValue}
         searchValue={searchValue}
