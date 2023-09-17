@@ -7,6 +7,7 @@ import useShop from "../../../apis/useShop";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const { getProducts, getProductsLoading } = useShop();
+  const [searchValue, setSearchValue] = useState("");
 
   const fetchProducts = async () => {
     getProducts({ product_arr: null }, (data) => {
@@ -22,9 +23,15 @@ const Shop = () => {
 
   return (
     <div className={styles.shop}>
-      <ShopFilter items={products} setFilteredProducts={setFilteredProducts} />
+      <ShopFilter
+        setSearchValue={setSearchValue}
+        searchValue={searchValue}
+        items={products}
+        setFilteredProducts={setFilteredProducts}
+      />
       <ShopItems
-      loading={getProductsLoading}
+        searchValue={searchValue}
+        loading={getProductsLoading}
         filterOptions={filteredProducts}
         fetchProducts={fetchProducts}
       />

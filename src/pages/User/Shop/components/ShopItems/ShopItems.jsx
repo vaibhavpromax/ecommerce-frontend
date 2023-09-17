@@ -12,7 +12,7 @@ const tabOptions = [
   { value: "single", label: "Single origin" },
 ];
 
-const ShopItems = ({ filterOptions, fetchProducts, loading }) => {
+const ShopItems = ({ filterOptions, fetchProducts, loading, searchValue }) => {
   const [activeTab, setActiveTab] = useState(tabOptions[0].value);
   return (
     <div className={styles.shopitems}>
@@ -25,9 +25,15 @@ const ShopItems = ({ filterOptions, fetchProducts, loading }) => {
       </div>
       <div className={styles.list}>
         {!loading ? (
-          filterOptions?.map((prod) => {
-            return <Card fetchProducts={fetchProducts} product={prod} />;
-          })
+          filterOptions
+            ?.filter((item) => {
+              return item?.name
+                .toLowerCase()
+                .includes(searchValue.toLowerCase());
+            })
+            ?.map((prod) => {
+              return <Card fetchProducts={fetchProducts} product={prod} />;
+            })
         ) : (
           <>
             {new Array(8).fill(0).map((_, index) => (

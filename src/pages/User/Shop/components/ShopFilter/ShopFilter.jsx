@@ -58,7 +58,12 @@ const originOptions = [
   { value: "MIDDLE", label: "Middle East" },
 ];
 
-const ShopFilter = ({ items, setFilteredProducts }) => {
+const ShopFilter = ({
+  items,
+  setFilteredProducts,
+  searchValue,
+  setSearchValue,
+}) => {
   const [value1, setValue1] = useState([0, 1000]);
   const [filterValues, setFilterValues] = useState({
     region: [],
@@ -102,7 +107,8 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
   }, [items]);
 
   const applyFilterHandler = () => {
-    const filteredProducts = items?.filter((it) => {
+    const filteredProducts = items
+      ?.filter((it) => {
         if (filterValues.type.length > 0) {
           return filterValues.type.includes(it.product_type);
         } else return true;
@@ -132,7 +138,13 @@ const ShopFilter = ({ items, setFilteredProducts }) => {
   return (
     <div className={styles.filter}>
       <div className={styles.top}>
-        <input placeholder="Search here..." />
+        <input
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          placeholder="Search here..."
+        />
         {ICONS.magnify}
       </div>
       {!false && (
