@@ -10,7 +10,7 @@ import moment from "moment";
 
 const HistoryCard = ({ order }) => {
   const [ratingModal, setRatingModal] = useState(false);
-  const [product_id, setProduct_id] = useState("");
+  const [productId, setProductId] = useState("");
   const closeRatingModal = () => {
     setRatingModal(false);
   };
@@ -97,7 +97,7 @@ const HistoryCard = ({ order }) => {
                     <Button>{ICONS.recycle}Order Again</Button>
                     <Button
                       onClick={() => {
-                        setProduct_id(order?.Product?.product_id);
+                        setProductId(item?.Product?.product_id);
                         setRatingModal(true);
                       }}
                       theme="WHITE"
@@ -117,7 +117,7 @@ const HistoryCard = ({ order }) => {
         </div>
       </div>
       <RateProductModal
-        product_id={product_id}
+        product_id={productId}
         order_id={order?.order_id}
         closeRatingModal={closeRatingModal}
         ratingModal={ratingModal}
