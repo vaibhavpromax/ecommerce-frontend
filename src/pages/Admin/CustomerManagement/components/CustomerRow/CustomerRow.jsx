@@ -5,6 +5,7 @@ import { ICONS } from "../../../../../icons";
 import { formatDate } from "../../../../../utils/dateFormatter";
 import useCustomer from "../../../../../apis/useCustomer";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const CustomerRow = ({
   customer,
@@ -67,8 +68,8 @@ const CustomerRow = ({
       </Link>
       <div className={styles.col5}>
         {customer?.last_ordered
-          ? formatDate(customer?.last_ordered)
-          : "Not Ordered"}{" "}
+          ? moment(new Date(customer?.last_ordered).format("DD MMM, YYYY"))
+          : "Not Ordered"}
       </div>
       <div className={styles.col6}>{customer?.email}</div>
       <div className={styles.col7}>{customer?.phone_no}</div>
