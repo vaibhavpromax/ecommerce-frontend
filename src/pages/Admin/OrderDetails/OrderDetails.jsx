@@ -5,7 +5,7 @@ import { ICONS } from "../../../icons";
 import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
 import useOrder from "../../../apis/useOrder";
 import { useParams } from "react-router-dom";
-import { formatDate } from "../../../utils/dateFormatter";
+import moment from "moment";
 
 const STATUSES = [
   { label: "Order Placed", value: "PLACED", date: " ", rank: 1 },
@@ -144,7 +144,9 @@ const OrderDetails = () => {
                       <div className={styles.wrapper}>
                         {s.label}
                         <div className={styles.date}>
-                          {formatDate(order?.order_placed_date)}{" "}
+                          {moment(new Date(order?.order_placed_date)).format(
+                            "DD MMM, YYYY"
+                          )}
                         </div>
                       </div>
                     </div>
