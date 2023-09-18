@@ -230,6 +230,18 @@
             width: 700px;
             align-items: flex-end;
             justify-content: space-between;
+            .calendar {
+              position: absolute;
+              bottom: 10px;
+              right: 10px;
+              font-family: "Arial", sans-serif;
+              // background-color: #feeede;
+              // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              border-radius: 5px;
+              max-width: 300px;
+              margin: 0 auto;
+              padding: 20px;
+            }
             .labelText {
               color: var(--font-mid, #615c5e);
               font-family: Jost;
@@ -237,6 +249,21 @@
               font-style: normal;
               font-weight: 500;
               line-height: normal;
+
+              .wrapper {
+                .date {
+                  .calendarPlaceholder {
+                    cursor: pointer;
+                    border-radius: 8px;
+                    border: 1px solid #c4c4c4;
+                    background: #ffffff2b;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 5px 10px;
+                  }
+                }
+              }
             }
             .visited {
             }

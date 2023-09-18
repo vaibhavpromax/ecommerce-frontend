@@ -127,7 +127,11 @@
     .list {
       // height: 65vh;
       height: calc(100vh - 240px);
-
+      .loader {
+        height: 60px;
+        margin: 10px auto;
+        width: 95%;
+      }
       overflow-y: scroll;
     }
   }

@@ -9,6 +9,7 @@ import AdminProductRow from "./components/AdminProductRow/AdminProductRow";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import useProduct from "../../../apis/useProduct";
+import Skeleton from "../../../components/Skeleton/Skeleton";
 
 const options = [
   { label: `All orders`, value: "all", pillValue: 345, pillColor: "#1E6B96" },
@@ -125,7 +126,11 @@ const ProductManagement = () => {
         </div>
         <div className={styles.list}>
           {getProductsLoading ? (
-            <h3>Loading</h3>
+            <>
+              {new Array(7).fill(0).map((_, index) => (
+                <Skeleton key={index} className={styles.loader} />
+              ))}
+            </>
           ) : (
             <>
               {products

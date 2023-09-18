@@ -3,6 +3,7 @@ import styles from "./CustomerManagement.module.scss";
 import { ICONS } from "../../../icons";
 import { TabNavSlider } from "../../../components/TabNavSlider/TabNavSlider";
 import Checkbox from "../../../components/Checkbox/Checkbox";
+import Skeleton from "../../../components/Skeleton/Skeleton";
 import TextBox from "../../../components/TextBox/TextBox";
 import CustomerRow from "./components/CustomerRow/CustomerRow";
 import useCustomer from "../../../apis/useCustomer";
@@ -133,7 +134,11 @@ const CustomerManagement = () => {
         </div>
         <div ref={containerRef} className={styles.list}>
           {getCustomersLoading ? (
-            <>Loading</>
+            <>
+              {new Array(7).fill(0).map((_, index) => (
+                <Skeleton key={index} className={styles.loader} />
+              ))}
+            </>
           ) : (
             <>
               {customers.length != 0 && (

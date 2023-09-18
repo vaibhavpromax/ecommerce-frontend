@@ -70,5 +70,10 @@
     flex-direction: column;
     background-color: white;
     gap: 5px;
+    .loader {
+      height: 60px;
+      margin: 5px auto;
+      width: 95%;
+    }
   }
 }

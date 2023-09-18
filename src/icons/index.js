@@ -15,6 +15,7 @@ import { ReactComponent as NamedLogo } from "../assets/namedLogo.svg";
 import { ReactComponent as HeartOutline } from "../assets/heartOutline.svg";
 import { ReactComponent as CartOutline } from "../assets/cartOutline.svg";
 import { ReactComponent as DropdownIcon } from "../assets/menu-down.svg";
+import { ReactComponent as Calendar } from "../assets/calendar.svg";
 import { ReactComponent as Trash } from "../assets/trash.svg";
 import { ReactComponent as Tick } from "../assets/tick.svg";
 import { ReactComponent as Settings } from "../assets/settings.svg";
@@ -56,6 +57,7 @@ export const ICONS = {
   credit: <CreditCard />,
   pen: <Pen />,
   bell: <Bell />,
+  calendar: <Calendar />,
   namedLogo: <NamedLogo />,
   heartOutline: <HeartOutline />,
   cartOutline: <CartOutline />,
