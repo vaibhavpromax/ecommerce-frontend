@@ -345,8 +345,8 @@ const OrderDetails = () => {
   };
 
   useEffect(() => {
-    // fetchOrderDetails();
-    makeStatusArray(order);
+    fetchOrderDetails();
+    // makeStatusArray(order);
   }, []);
   console.log(order);
   console.log(updateDate);
