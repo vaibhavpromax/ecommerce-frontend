@@ -24,12 +24,14 @@ const Wishlist = () => {
   };
 
   const fetchProducts = async () => {
-    await getProducts(
-      { product_arr: JSON.parse(localStorage.getItem("wishlist")) },
-      (data) => {
-        setWishlist(data?.data);
-      }
-    );
+    if (JSON.parse(localStorage.getItem("wishlist"))) {
+      await getProducts(
+        { product_arr: JSON.parse(localStorage.getItem("wishlist")) },
+        (data) => {
+          setWishlist(data?.data);
+        }
+      );
+    }
   };
 
   useEffect(() => {

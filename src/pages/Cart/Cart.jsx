@@ -70,9 +70,9 @@ const Cart = () => {
       quantity = quantity + item?.quantity;
       return item.id;
     });
-    // console.log(passCart);
+    console.log(passCart);
     getProducts({ product_arr: passCart }, (data) => {
-      setCartitems({ CartItems: data?.data });
+      setCartitems(data?.data);
       data?.data?.map((item) => {
         const quantity = JSON.parse(localStorage.getItem("cart"))?.filter(
           (it) => {
