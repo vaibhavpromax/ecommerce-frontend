@@ -171,11 +171,11 @@ const Cart = () => {
         </p>
         <Button
           onClick={() => {
-            if (cartitems.length == 0) return;
+            if (cartitems?.length == 0) return;
             onCheckoutHandler();
           }}
           className={`${styles.chckbtn} ${
-            cartitems.length == 0 && styles.disabled
+            cartitems?.length == 0 && styles.disabled
           } `}
         >
           Checkout
