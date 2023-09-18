@@ -53,7 +53,7 @@ const CustomerRow = ({
       <div className={styles.col3}>{customer?.last_name}</div>
       <div
         onClick={() => {
-          window.location.href = `https://dev.ungraindanslaboite.com/customer/${customer?.user_id}`;
+          window.location.href = `https://admin.ungraindanslaboite.com/customer/${customer?.user_id}`;
         }}
         style={{
           cursor: "pointer",
