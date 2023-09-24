@@ -4,6 +4,7 @@ import AdminPage from "../../../pages/Admin/AdminPage/AdminPage";
 import CouponManagement from "../../../pages/Admin/CouponManagement/CouponManagement";
 import CustomerManagement from "../../../pages/Admin/CustomerManagement/CustomerManagement";
 import CustomerPage from "../../../pages/Admin/CustomerPage/CustomerPage";
+import EditProductPage from "../../../pages/Admin/EditProductPage/EditProductPage";
 import OrderDetails from "../../../pages/Admin/OrderDetails/OrderDetails";
 import OrderManagement from "../../../pages/Admin/OrderManagement/OrderManagement";
 import ProductManagement from "../../../pages/Admin/ProductManagement/ProductManagement";
@@ -44,6 +45,12 @@ const ADMIN_ROUTES = [
     link: "/add-product",
     name: "add product",
     component: <AddProductPage />,
+  },
+  {
+    private: true,
+    link: "/edit-product/:id",
+    name: "edit product",
+    component: <EditProductPage />,
   },
   {
     private: true,

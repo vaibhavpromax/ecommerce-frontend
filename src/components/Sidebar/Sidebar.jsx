@@ -15,6 +15,7 @@ const Sidebar = ({ routes }) => {
   });
   allRoutes.push("order");
   allRoutes.push("customer");
+  allRoutes.push("edit-product");
 
   useEffect(() => {
     adminOptions.map((opt) => {

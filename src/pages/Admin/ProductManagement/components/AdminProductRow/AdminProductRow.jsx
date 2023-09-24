@@ -73,7 +73,13 @@ const AdminProductRow = ({
       <div className={styles.col7}>{product?.cost_price} $</div>
       <div className={styles.col8}>{product?.quantity_purchased}</div>
       <div className={styles.col9}>
-        {ICONS.pen}
+        <span
+          onClick={() => {
+            navigate(`/edit-product/${product?.product_id}`);
+          }}
+        >
+          {ICONS.pen}
+        </span>
         <span onClick={deleteProductHandler}>{ICONS.redTrash}</span>
       </div>
     </div>

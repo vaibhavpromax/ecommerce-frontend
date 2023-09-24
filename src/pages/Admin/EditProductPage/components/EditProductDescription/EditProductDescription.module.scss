@@ -1,0 +1,66 @@
+.addDescriptionWrapper {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding: 22px;
+  .left {
+    width: 200px;
+    color: var(--font-mid, #615c5e);
+    font-family: Jost;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 112.953%; /* 22.591px */
+  }
+  .addDesc {
+    width: 71%;
+    padding: 20px 40px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .textarea {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .textareaLabel {
+        color: var(--mid, #6b677b);
+        font-family: Jost;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+      textarea {
+        width: 98%;
+        border: none;
+        border-radius: 5px;
+        border: 1px solid #a9a5a2;
+        height: 151px;
+        resize: none;
+        padding: 10px;
+        // padding: 16px 797px 114px 14px;
+        align-items: center;
+        flex-shrink: 0;
+      }
+    }
+
+    .selectRow {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .selectElement {
+        .selectLabel {
+          color: var(--mid, #6b677b);
+          font-family: Jost;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
