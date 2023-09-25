@@ -33,6 +33,7 @@ import { ReactComponent as LogoIconWhite } from "../assets/logoIconWhite.svg";
 import { ReactComponent as ArrowRight } from "../assets/arrowRight.svg";
 import { ReactComponent as ArrowLeft } from "../assets/arrowLeft.svg";
 import { ReactComponent as Camera } from "../assets/camera.svg";
+import { ReactComponent as CircleClose } from "../assets/circleClose.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
@@ -40,6 +41,7 @@ export const ICONS = {
   eyeClose: <EyeClosed />,
   logo: <Logo />,
   user: <User />,
+  circleClose: <CircleClose />,
   camera: <Camera />,
   rightArrow: <RightArrow />,
   key: <Key />,

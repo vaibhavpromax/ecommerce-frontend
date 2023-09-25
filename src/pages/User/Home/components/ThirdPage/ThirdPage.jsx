@@ -12,6 +12,7 @@ const ThirdPage = () => {
 
           <div className={styles.innerdiv}>
             <div className={styles.top}>
+              <div style={{ width: "400px" }}></div>
               <div className={styles.left}>{/* <CoffeeTray /> */}</div>
               <div className={styles.right}>
                 <h3>Que contiendra votre box ?</h3>

@@ -14,8 +14,8 @@ import useCart from "../../apis/useCart";
 import AddAddressModal from "./components/AddAddressModal/AddAddressModal";
 import usePayment from "../../apis/usePayment";
 import ConfirmPaymentModal from "./components/ConfirmPaymentModal/ConfirmPaymentModal";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
+import OrderConfirmModal from "../../components/OrderConfirmModal/OrderConfirmModal";
 
 const VIEWS = {
   ADDRESS: "ADDRESS",
@@ -29,6 +29,7 @@ const Checkout = () => {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addAddressModal, setAddAddressModal] = useState(false);
+  const [orderConfirmModal, setOrderConfirmModal] = useState(true);
   const [paymentMethods, setPaymentMethods] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false);
@@ -48,6 +49,8 @@ const Checkout = () => {
   const closeAddressModal = () => {
     setAddAddressModal(false);
   };
+
+  const closeOrderConfirmModal = () => [setOrderConfirmModal(false)];
 
   const closeConfirmPaymentModal = () => {
     setConfirmPaymentModal(false);
@@ -112,7 +115,7 @@ const Checkout = () => {
 
   return (
     <div className={styles.checkout}>
-      <Toaster/>
+      <Toaster />
       {view === VIEWS.ADDRESS && (
         <div className={styles.left}>
           <div className={styles.leftheader}>
@@ -273,12 +276,19 @@ const Checkout = () => {
         isModal={confirmPaymentModal}
         paymentMethod={selectedPaymentMethod}
         paymentIntent={paymentIntent}
+        setOrderConfirmModal={setOrderConfirmModal}
+        
       />
       <AddCard
         selectedAddress={selectedAddress}
         fetchMethods={fetchPaymentMethods}
         isModal={addcardmodal}
         onCloseModal={closeAddCardModal}
+        setOrderConfirmModal= {setOrderConfirmModal}
+      />
+      <OrderConfirmModal
+        onModalClose={closeOrderConfirmModal}
+        isModal={orderConfirmModal}
       />
     </div>
   );

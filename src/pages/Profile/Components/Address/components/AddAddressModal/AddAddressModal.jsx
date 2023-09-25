@@ -77,7 +77,7 @@ const AddAddressModal = ({ fetchAddress, onAddModalClose, addressModal }) => {
           value={adddata.address_phone_no}
           setValue={(e) => setAdddata({ ...adddata, address_phone_no: e })}
           className={styles.inputfield}
-          placeholder="Contact number for this address"
+          placeholder="Phone number for this address"
         />
       </div>
 

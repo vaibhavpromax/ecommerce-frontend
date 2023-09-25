@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   background-color: #ece8e5;
-  
 
   .one {
     display: flex;
@@ -101,6 +100,7 @@
   .two {
     display: flex;
     height: 40vh;
+    padding: 0 50px;
     margin-top: 10%;
     display: flex;
     justify-content: space-around;

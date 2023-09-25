@@ -101,10 +101,12 @@ const Details = () => {
                   <h4>Email</h4>
                   <h5>{userInfo?.email}</h5>
                 </div>
-                <div className={styles.line}>
+                {/*
+                  <div className={styles.line}>
                   <h4>Contact No.</h4>
                   <h5>{userInfo?.phone_no}</h5>
                 </div>
+              */}
               </div>
             ) : (
               <>

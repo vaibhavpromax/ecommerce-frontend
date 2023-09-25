@@ -12,7 +12,13 @@ import usePayment from "../../../../apis/usePayment";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
+const AddCard = ({
+  isModal,
+  onCloseModal,
+  fetchMethods,
+  selectedAddress,
+  setOrderConfirmModal,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const addCard = useRef();
@@ -25,40 +31,13 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
     name: "",
     expiry: "",
     number: "",
-    address: {
-      line: "",
-      postalCode: "",
-    },
+    address: "",
   });
-
-  const [locations, setLocations] = useState({
-    countries: "",
-    states: "",
-    cities: "",
-  });
-  const [selectedLocation, setSelectedLocation] = useState({
-    country: {},
-    city: {},
-    state: {},
-  });
-
-  function parseForSelect(arr) {
-    return arr.map((item) => ({
-      label: item.name,
-      value: item.isoCode ? item.isoCode : item.name,
-    }));
-  }
 
   async function handleSubmit() {
-    const address = cardInfo.address;
     const billingDetails = {
       name: cardInfo.name,
-      address: {
-        country: address.country,
-        state: address.state,
-        city: address.city,
-        line1: address.line,
-      },
+      address: cardInfo.address,
     };
 
     try {
@@ -91,51 +70,45 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
     }
   }
 
-  function handleSelectCountry(country) {
-    const states = State.getStatesOfCountry(country.value);
-    setSelectedLocation((prev) => {
-      return { ...prev, country };
-    });
+  // function handleSelectCountry(country) {
+  //   const states = State.getStatesOfCountry(country.value);
+  //   setSelectedLocation((prev) => {
+  //     return { ...prev, country };
+  //   });
 
-    setLocations((prev) => ({ ...prev, states: parseForSelect(states) }));
-  }
+  //   setLocations((prev) => ({ ...prev, states: parseForSelect(states) }));
+  // }
 
-  function handleSelectState(state) {
-    const cities = City.getCitiesOfState(
-      selectedLocation.country.value,
-      state.value
-    );
-    setSelectedLocation((prev) => {
-      return { ...prev, state };
-    });
+  // function handleSelectState(state) {
+  //   const cities = City.getCitiesOfState(
+  //     selectedLocation.country.value,
+  //     state.value
+  //   );
+  //   setSelectedLocation((prev) => {
+  //     return { ...prev, state };
+  //   });
 
-    setLocations((prev) => ({ ...prev, cities: parseForSelect(cities) }));
-  }
+  //   setLocations((prev) => ({ ...prev, cities: parseForSelect(cities) }));
+  // }
 
-  function handleSelectCity(city) {
-    setSelectedLocation((prev) => {
-      return { ...prev, city };
-    });
-  }
+  // function handleSelectCity(city) {
+  //   setSelectedLocation((prev) => {
+  //     return { ...prev, city };
+  //   });
+  // }
 
-  useEffect(() => {
-    const allCountry = Country.getAllCountries();
+  // useEffect(() => {
+  //   const allCountry = Country.getAllCountries();
 
-    setLocations((prev) => {
-      return { ...prev, countries: parseForSelect(allCountry) };
-    });
-  }, []);
+  //   setLocations((prev) => {
+  //     return { ...prev, countries: parseForSelect(allCountry) };
+  //   });
+  // }, []);
 
   async function handlePaymentWithoutAttaching() {
-    const address = cardInfo.address;
     const billingDetails = {
       name: cardInfo.name,
-      address: {
-        country: address.country,
-        state: address.state,
-        city: address.city,
-        line1: address.line,
-      },
+      address: cardInfo.address,
     };
 
     try {
@@ -159,16 +132,17 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
                 window.location.href =
                   data?.data?.next_action?.use_stripe_sdk?.stripe_js;
               }
-              toast.success("Order Made", {
-                style: {
-                  backgroundColor: "#F7F6F5",
-                  fontFamily: "Jost",
-                },
-              });
+              // toast.success("Order Made", {
+              //   style: {
+              //     backgroundColor: "#F7F6F5",
+              //     fontFamily: "Jost",
+              //   },
+              // });
               onCloseModal();
-              setTimeout(() => {
-                navigate("/shop");
-              }, 2000);
+              setOrderConfirmModal(true)
+              // setTimeout(() => {
+              //   navigate("/shop");
+              // }, 2000);
             }
           );
         });
@@ -197,13 +171,13 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
           setValue={(e) => {
             setCardInfo({
               ...cardInfo,
-              address: { ...cardInfo.address, line: e },
+              address: e,
             });
           }}
           className={styles.textbox}
           placeholder="Enter full address"
         />
-
+        {/*
         <div className={styles.bottomsection}>
           <Select
             isClearable={true}
@@ -243,6 +217,7 @@ const AddCard = ({ isModal, onCloseModal, fetchMethods, selectedAddress }) => {
             placeholder="ZIP code"
           />
         </div>
+       */}
       </div>
 
       <Button onClick={handleSubmit}>Save card</Button>

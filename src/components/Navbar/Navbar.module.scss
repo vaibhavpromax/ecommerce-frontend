@@ -1,4 +1,4 @@
-  @import "../../variables.scss";
+@import "../../variables.scss";
 .navbar {
   // width: 100%;
   position: relative;
@@ -31,19 +31,22 @@
     }
     .profile {
       cursor: pointer;
-      padding: 2px;
+      padding: 5px;
       display: flex;
       align-items: center;
+      gap: 8px;
       border-radius: 16px;
       border: 2px solid #e8e4e1;
       background: #e8e4e1;
       img {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        flex-shrink: 0;
+        margin-right: 5px;
       }
       h5 {
+        display: flex;
+        align-items: center;
         color: #4e423a;
         font-size: 14px;
         font-family: Jost;

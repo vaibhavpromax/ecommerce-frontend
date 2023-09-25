@@ -14,6 +14,7 @@ const ConfirmPaymentModal = ({
   isModal,
   onCloseModal,
   paymentMethod,
+  setOrderConfirmModal,
   paymentIntent,
 }) => {
   const stripe = useStripe();
@@ -59,15 +60,17 @@ const ConfirmPaymentModal = ({
       // handleAction(response);
     } else {
       // alert("Payment Success");
-      toast.success("Order Made", {
-        style: {
-          backgroundColor: "#F7F6F5",
-          fontFamily: "Jost",
-        },
-      });
-      setTimeout(() => {
-        navigate("/shop");
-      }, 2000);
+      // toast.success("Order Made", {
+      //   style: {
+      //     backgroundColor: "#F7F6F5",
+      //     fontFamily: "Jost",
+      //   },
+      // });
+      // setTimeout(() => {
+      //   navigate("/shop");
+      // }, 2000);
+      onCloseModal();
+      setOrderConfirmModal(true);
       /* Handle Success */
       // window.location.reload();
     }

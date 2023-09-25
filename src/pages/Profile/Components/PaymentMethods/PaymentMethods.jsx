@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from "react";
+import styles from "./PaymentMethods.module.scss";
 const PaymentMethods = () => {
   return (
-    <div>PaymentMethods</div>
-  )
-}
+    <div className={styles.paymentMethods}>
+      <div className={styles.header}>Payment Methods</div>
+    </div>
+  );
+};
 
-export default PaymentMethods
+export default PaymentMethods;

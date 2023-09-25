@@ -7,14 +7,22 @@ import { ReactComponent as TeaPacket } from "../../../../../../assets/TeaPacket.
 import Tracker from "./Tracker";
 import RateProductModal from "../RateProductModal/RateProductModal";
 import moment from "moment";
+import useCart from "../../../../../../apis/useCart";
 
 const HistoryCard = ({ order }) => {
   const [ratingModal, setRatingModal] = useState(false);
   const [productId, setProductId] = useState("");
+  const { addToCart, addToCartLoading } = useCart();
   const closeRatingModal = () => {
     setRatingModal(false);
   };
   const navigate = useNavigate();
+
+  const orderAgainHandler = async (product) => {
+    addToCart({ product_id: product.product_id, quantity: 1 }, () => {
+      navigate("/cart");
+    });
+  };
   return (
     <div className={styles.historyCard}>
       <div className={styles.upper}>
@@ -94,7 +102,13 @@ const HistoryCard = ({ order }) => {
                   </div>
 
                   <div className={styles.btnrow}>
-                    <Button>{ICONS.recycle}Order Again</Button>
+                    <Button
+                      onClick={() => {
+                        orderAgainHandler(item?.Product);
+                      }}
+                    >
+                      {ICONS.recycle}Order Again
+                    </Button>
                     <Button
                       onClick={() => {
                         setProductId(item?.Product?.product_id);
