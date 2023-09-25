@@ -3,6 +3,8 @@ import styles from "./EditImage.module.scss";
 import { ICONS } from "../../../../../icons";
 import useImage from "../../../../../apis/useImage";
 import Skeleton from "../../../../../components/Skeleton/Skeleton";
+import toast from "react-hot-toast";
+import { extractKeyfromurl } from "../../../../../utils/extractKeyfromurl";
 
 const EditImage = ({
   productInfo,
@@ -13,7 +15,11 @@ const EditImage = ({
   const [selectedFile, setSelectedFile] = useState(null);
   const [primaryImage, setPrimaryImage] = useState(null);
   const [hoverPrimary, setHoverPrimary] = useState(false);
-  const [imageHover, setImageHover] = useState(false);
+  const [imageHover, setImageHover] = useState({
+    0: false,
+    1: false,
+    2: false,
+  });
   const [images, setImages] = useState([
     {
       image_url: null,
@@ -25,7 +31,8 @@ const EditImage = ({
       image_url: null,
     },
   ]);
-  const { uploadImage, uploadImageLoading } = useImage();
+  const { uploadImage, uploadImageLoading, deleteImage, editImage } =
+    useImage();
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
@@ -57,6 +64,17 @@ const EditImage = ({
     // }
   };
 
+  const deleteImageHandler = async (url) => {
+    deleteImage(extractKeyfromurl(url), () => {
+      toast.success("Image deleted successfully", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
+    });
+  };
+
   useEffect(() => {
     let arr = productInfo.Images;
     const secImages = [];
@@ -79,6 +97,8 @@ const EditImage = ({
     setImages(secImages);
   }, [productInfo]);
 
+  console.log(primaryImage, hoverPrimary);
+
   return (
     <div className={styles.addImageWrapper}>
       <div className={styles.left}>Images</div>
@@ -89,23 +109,31 @@ const EditImage = ({
       ) : (
         <div className={styles.right}>
           <div className={styles.p}>
-            {primaryImage ? (
+            {primaryImage.image_url ? (
               <div
                 onMouseEnter={() => setHoverPrimary(true)}
                 onMouseLeave={() => setHoverPrimary(false)}
                 className={styles.priHover}
               >
-                <img
-                  width={222}
-                  height={222}
-                  src={primaryImage.image_url}
-                  alt="primary"
-                />
-                {hoverPrimary && (
-                  <>
-                    {" "}
-                    {ICONS.trash} {ICONS.addImage}{" "}
-                  </>
+                {!hoverPrimary ? (
+                  <img
+                    width={222}
+                    height={222}
+                    src={primaryImage?.image_url}
+                    alt="primary"
+                  />
+                ) : (
+                  <div className={styles.primaryHover}>
+                    <span
+                      onClick={() => {
+                        deleteImageHandler(primaryImage?.image_url);
+                      }}
+                      className={styles.deleteimg}
+                    >
+                      {ICONS.redTrash}
+                    </span>
+                    <span className={styles.editimg}>{ICONS.addImage} </span>
+                  </div>
                 )}
               </div>
             ) : (
@@ -123,45 +151,111 @@ const EditImage = ({
             )}
           </div>
           <div className={styles.secondaryImages}>
-            {images?.map((img, key) => {
-              return (
-                <>
-                  {img.image_url ? (
-                    <div
-                      onMouseEnter={(e) => setImageHover(true)}
-                      onMouseLeave={() => setImageHover(false)}
-                      className={styles.secHover}
-                    >
-                      <img
-                        width={135}
-                        height={123}
-                        src={img.image_url}
-                        alt="secondary"
-                      />
+            {images[0].image_url ? (
+              <div
+                onMouseEnter={(e) => setImageHover({ ...imageHover, 0: true })}
+                onMouseLeave={(e) => setImageHover({ ...imageHover, 0: false })}
+                className={styles.secHover}
+              >
+                {!imageHover[0] ? (
+                  <img
+                    width={135}
+                    height={123}
+                    src={images[0].image_url}
+                    alt="secondary"
+                  />
+                ) : (
+                  <div className={styles.hover}>
+                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
+                    <span className={styles.editimg}>{ICONS.addImage} </span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <label htmlFor="secImage" className={styles.secondaryImage}>
+                {ICONS.addImage}
+                <input
+                  type="file"
+                  id="secImage"
+                  onChange={(e) => {
+                    handleUpload(e, false, 0);
+                  }}
+                  style={{ display: "none" }}
+                />
+              </label>
+            )}
 
-                      {imageHover && (
-                        <>
-                          {" "}
-                          {ICONS.trash} {ICONS.addImage}{" "}
-                        </>
-                      )}
-                    </div>
-                  ) : (
-                    <label htmlFor="secImage" className={styles.secondaryImage}>
-                      {ICONS.addImage}
-                      <input
-                        type="file"
-                        id="secImage"
-                        onChange={(e) => {
-                          handleUpload(e, false, key);
-                        }}
-                        style={{ display: "none" }}
-                      />
-                    </label>
-                  )}
-                </>
-              );
-            })}
+            {images[1].image_url ? (
+              <div
+                onMouseEnter={(e) => setImageHover({ ...imageHover, 1: true })}
+                onMouseLeave={(e) => setImageHover({ ...imageHover, 1: false })}
+                className={styles.secHover}
+              >
+                {!imageHover[1] ? (
+                  <img
+                    width={135}
+                    height={123}
+                    src={images[1].image_url}
+                    alt="secondary"
+                  />
+                ) : (
+                  <div className={styles.hover}>
+                    {" "}
+                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
+                    <span className={styles.editimg}>
+                      {ICONS.addImage}{" "}
+                    </span>{" "}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <label htmlFor="secImage" className={styles.secondaryImage}>
+                {ICONS.addImage}
+                <input
+                  type="file"
+                  id="secImage"
+                  onChange={(e) => {
+                    handleUpload(e, false, 1);
+                  }}
+                  style={{ display: "none" }}
+                />
+              </label>
+            )}
+            {images[2].image_url ? (
+              <div
+                onMouseEnter={(e) => setImageHover({ ...imageHover, 2: true })}
+                onMouseLeave={(e) => setImageHover({ ...imageHover, 2: false })}
+                className={styles.secHover}
+              >
+                {!imageHover[2] ? (
+                  <img
+                    width={135}
+                    height={123}
+                    src={images[2].image_url}
+                    alt="secondary"
+                  />
+                ) : (
+                  <div className={styles.hover}>
+                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
+                    <span className={styles.editimg}>
+                      {ICONS.addImage}{" "}
+                    </span>{" "}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <label htmlFor="secImage" className={styles.secondaryImage}>
+                {ICONS.addImage}
+                <input
+                  type="file"
+                  id="secImage"
+                  onChange={(e) => {
+                    handleUpload(e, false, 2);
+                  }}
+                  style={{ display: "none" }}
+                />
+              </label>
+            )}
           </div>
         </div>
       )}

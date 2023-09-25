@@ -21,6 +21,7 @@ const useUnderConstruction = () => {
 
   return {
     addMail,
+    loading,
   };
 };
 

@@ -1,0 +1,133 @@
+@import "../../../../../variables.scss";
+
+.homemiddle {
+  // height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ece8e5;
+
+  .one {
+    display: flex;
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    top: 120px;
+    right: -100px;
+    .left {
+      width: 70%;
+      padding: 0 5% 0 5%;
+
+      h3 {
+        font-family: Gelasio;
+        font-size: 42px;
+        font-weight: 500;
+        line-height: 65px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: $primary-brown;
+      }
+
+      .para1 {
+        font-family: "Jost", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 22px;
+        color: $primary-brown;
+        margin-bottom: 4%;
+        b {
+          font-weight: bold;
+        }
+      }
+
+      .span1 {
+        font-family: "Jost", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 25px;
+        line-height: 100%;
+        margin-bottom: 4%;
+        color: $primary-brown;
+      }
+
+      .para2 {
+        font-family: "Jost", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 100%;
+        color: $primary-brown;
+        margin-top: 1%;
+        margin-bottom: 4%;
+      }
+
+      .para3 {
+        font-family: "Jost", sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 29px;
+        line-height: 112.95%;
+        color: $primary-brown;
+        width: 50%;
+        margin: 12% 0 0 25%;
+      }
+
+      .para4 {
+        font-family: "Jost", sans-serif;
+        font-style: italic;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 112.95%;
+        color: $primary-brown;
+        width: 25%;
+        margin: 2% 0 0 25%;
+      }
+    }
+
+    .right {
+      position: relative;
+      bottom: 10%;
+      left: 1%;
+      background-image: url("../../../../../assets/coffeBrand.svg");
+      background-position: cover;
+      background-size: 100% 100%;
+      width: 80%;
+      height: 65vh;
+    }
+  }
+
+  .two {
+    display: flex;
+    height: 40vh;
+    padding: 0 50px;
+    margin-top: 10%;
+    display: flex;
+    justify-content: space-around;
+
+    .colmtwo {
+      position: relative;
+      width: 20%;
+      margin: 1% 5%;
+      .img {
+        width: 80.12px;
+        height: 90.94px;
+      }
+      h5 {
+        font-family: "Gelasio";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 116.95%;
+        color: $tertiary-brown;
+      }
+      p {
+        font-family: "Jost", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 119.45%;
+      }
+    }
+  }
+}

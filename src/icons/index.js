@@ -41,6 +41,8 @@ import { ReactComponent as Customers } from "../assets/customersStick.svg";
 import { ReactComponent as Briefcase } from "../assets/briefcase.svg";
 import { ReactComponent as RedTrash } from "../assets/red-trash.svg";
 import { ReactComponent as Cancel } from "../assets/cancel.svg";
+import { ReactComponent as Camera } from "../assets/camera.svg";
+import { ReactComponent as CircleClose } from "../assets/circleClose.svg";
 
 export const ICONS = {
   dropDownArrow: <DropDownArrow />,
@@ -49,6 +51,8 @@ export const ICONS = {
   cancel: <Cancel />,
   logo: <Logo />,
   user: <User />,
+  circleClose: <CircleClose />,
+  camera: <Camera />,
   rightArrow: <RightArrow />,
   key: <Key />,
   inbox: <Inbox />,

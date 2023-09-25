@@ -1,0 +1,32 @@
+.wishlist {
+  display: flex;
+  padding: 0px 100px;
+  // width: 100%;
+  height: 100%;
+  flex-direction: column;
+  background-color: white;
+  h5 {
+    color: #3f373a;
+    font-size: 28px;
+    font-family: Jost;
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 64px;
+    line-height: 112.953%;
+  }
+  .wishlistitems {
+    margin-top: 40px;
+    height: 65vh;
+    gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    row-gap: 20px;
+
+    .loader {
+      width: 256px;
+      margin: 15px;
+      height: 286px;
+    }
+  }
+}

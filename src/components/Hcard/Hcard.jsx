@@ -7,12 +7,14 @@ import { ICONS } from "../../icons";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../apis/useCart";
 import Counter from "../Counter/Counter";
+import { useAuth } from "../../contexts/AuthContext";
 
 const HCard = ({
   width = "100%",
   height = "160px",
   product,
   cart_quantity,
+  fetchShop,
   fetchCart,
 }) => {
   const cardStyle = {
@@ -20,25 +22,79 @@ const HCard = ({
     height,
   };
   const [counterValue, setCounterValue] = useState(cart_quantity);
+  const [localCart, setLocalCart] = useState(
+    JSON.parse(localStorage.getItem("cart"))
+  );
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { addToCart, addToCartLoading } = useCart();
+
   const removeFromCart = () => {
-    addToCart({ product_id: product?.product_id, quantity: 0 }, () => {
-      fetchCart();
-    });
+    if (user) {
+      addToCart({ product_id: product?.product_id, quantity: 0 }, () => {
+        fetchCart();
+      });
+    } else {
+      const newArray = JSON.parse(localStorage.getItem("cart")).filter((it) => {
+        return it.id != product?.product_id;
+      });
+      console.log(newArray);
+      localStorage.setItem("cart", JSON.stringify(newArray));
+      fetchShop();
+      setLocalCart(newArray);
+    }
   };
 
-  useEffect(() => {
-    if (counterValue != cart_quantity) {
-      console.log("update cart");
+  const handleCartQuantityUpdate = (count) => {
+    if (user) {
       addToCart(
-        { product_id: product?.product_id, quantity: counterValue },
+        { product_id: product?.product_id, quantity: count},
         () => {
           fetchCart();
         }
       );
+    } else {
+      JSON.parse(localStorage.getItem("cart"))?.map((item) => {
+        if (item.id == product?.product_id) {
+          if (count == 0) {
+            const newArray = JSON.parse(localStorage.getItem("cart")).filter(
+              (it) => it.id != item
+            );
+            localStorage.setItem("cart", JSON.stringify(newArray));
+            setLocalCart(newArray);
+            //remove product from local storage
+          } else {
+            // set the quantity to the desired
+            console.log(count);
+            const newArray = JSON.parse(localStorage.getItem("cart")).map(
+              (it) => {
+                if (it.id == product?.product_id) {
+                  return { quantity: count, id: product?.product_id };
+                } else {
+                  return it;
+                }
+              }
+            );
+            console.log(newArray);
+            localStorage.setItem("cart", JSON.stringify(newArray));
+            setLocalCart(newArray);
+          }
+        }
+      });
     }
-  }, [counterValue]);
+  };
+
+  useEffect(() => {
+    if (!user) {
+      JSON.parse(localStorage.getItem("cart"))?.map((item) => {
+        if (item.id == product?.product_id) {
+          setCounterValue(item.quantity);
+        }
+      });
+    }
+  }, []);
+
+  // console.log(product);
 
   return (
     <div className={styles.hcard} style={cardStyle}>
@@ -58,6 +114,7 @@ const HCard = ({
       </div>
       <div className={styles.p2}>
         <Counter
+          onChange={handleCartQuantityUpdate}
           counterValue={counterValue}
           setCounterValue={setCounterValue}
         />

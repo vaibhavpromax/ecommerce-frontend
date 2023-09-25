@@ -42,31 +42,12 @@
     justify-content: space-between;
     padding: 24px 20px;
     .topLeft {
-      .id {
-        color: var(--font-dark, #3f373a);
-        font-family: Jost;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 112.953%; /* 24.85px */
-      }
-      .view {
-        color: var(--highlight, #b06934);
-        font-family: Jost;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        cursor: pointer;
-        line-height: 112.953%; /* 20.332px */
-      }
-      .date {
-        color: var(--font-mid, #615c5e);
-        font-family: Jost;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
+      color: var(--font-dark, #3f373a);
+      font-family: Jost;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 24.85px */
     }
     .saveBtn {
       color: #fff;

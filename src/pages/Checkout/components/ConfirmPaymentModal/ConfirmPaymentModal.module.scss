@@ -1,0 +1,85 @@
+.confirmModal {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  .row {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    label {
+      color: var(--font-mid, #615c5e);
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 112.953%;
+    }
+    p {
+      margin-top: 14px;
+      color: #3f373a;
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 22.591px */
+    }
+  }
+  .cardNumber {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    label {
+      margin: auto;
+      color: var(--font-mid, #615c5e);
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 112.953%; /* 22.591px */
+    }
+    p {
+      margin-top: 14px;
+      color: #3f373a;
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 22.591px */
+    }
+  }
+  .cvvRow {
+    margin: 10px;
+    label {
+      color: #000;
+      font-family: Jost;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 22.591px */
+    }
+    .cvvbox {
+      border-radius: 10px;
+      border: 1px solid #c4c4c4;
+      color: black;
+      width: 100px;
+      height: 20px;
+      padding: 10px;
+      // padding: 17px 74px 16px 24px;
+      // background: rgba(255, 255, 255, 0.3);
+    }
+  }
+  button {
+    color: #fff;
+    text-align: center;
+    font-family: Jost;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 160px;
+  }
+}

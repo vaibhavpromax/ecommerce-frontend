@@ -92,7 +92,24 @@ const EditProductPage = () => {
         <div className={styles.right}>{ICONS.bell}</div>
       </div>
       <div className={styles.topBar}>
-        <div className={styles.topLeft}></div>
+        <div className={styles.topLeft}>
+          Product #{productInfo?.product_id.split("-")[0]}
+          <span
+            onClick={() => {
+              // navigate("/order/23423");
+              window.location.href = `https://dev.ungraindanslaboite.com/product/${productInfo?.product_id}`;
+            }}
+            style={{
+              cursor: "pointer",
+              color: "#B06934",
+              fontSize: "18px",
+              marginLeft: "10px",
+              textDecorationLine: "underline",
+            }}
+          >
+            view product
+          </span>
+        </div>
         <Button
           loading={editProductLoading}
           onClick={editProductHandler}

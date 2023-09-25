@@ -1,0 +1,47 @@
+.rateProductModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 450px;
+  height: 350px;
+  h4 {
+    color: var(--font-dark, #3f373a);
+    font-family: Open Sans;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .rating {
+    display: flex;
+    width: 276px;
+    height: 63px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 36px;
+    background: rgba(243, 240, 239, 0.63);
+  }
+  .textarea {
+    color: var(--font-mid, #615c5e);
+    font-family: Jost;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 20px;
+    border-radius: 10px;
+    resize: none;
+    border: 1px solid #c4c4c4;
+    background: rgba(255, 255, 255, 0.66);
+    line-height: 112.953%; /* 18.073px */
+  }
+  button {
+    color: #fff;
+    font-family: Jost;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 112.953%; /* 18.073px */
+  }
+}

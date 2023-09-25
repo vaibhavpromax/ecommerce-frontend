@@ -11,29 +11,37 @@ const NAVBAR_COLORS = {
 };
 
 const Navbar = ({ routes }) => {
-  const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
+  // const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
   const location = useLocation();
   const navigate = useNavigate();
-  let transparentRoutes = [];
-  let navbarRoutes = [];
+  let allRoutes = [];
   routes.forEach((route) => {
-    if (!route.navbarVisible) navbarRoutes.push(route.link);
-    if (route.transparentNavbar) transparentRoutes.push(route.link);
+    if (route.link == "/login" || route.link == "/register") return;
+    else allRoutes.push(route.link);
+    // if (!route.navbarVisible) navbarRoutes.push(route.link);
+    // if (route.transparentNavbar) transparentRoutes.push(route.link);
   });
+  allRoutes.push("product");
 
-  useEffect(() => {
-    if (transparentRoutes.includes(location.pathname)) {
-      setNavbarColor(NAVBAR_COLORS.transparent);
-    } else {
-      setNavbarColor(NAVBAR_COLORS.white);
-    }
-  }, [location.pathname]);
+  // useEffect(() => {
+  //   if (transparentRoutes.includes(location.pathname)) {
+  //     setNavbarColor(NAVBAR_COLORS.transparent);
+  //   } else {
+  //     setNavbarColor(NAVBAR_COLORS.white);
+  //   }
+  // }, [location.pathname]);
+
+  console.log(allRoutes);
 
   return (
     <div
       style={{
-        backgroundColor: navbarColor,
-        display: navbarRoutes.includes(location.pathname) ? "none" : "flex",
+        // backgroundColor: navbarColor,
+        display:
+          allRoutes.includes(location.pathname) ||
+          allRoutes.includes(location.pathname.split("/")[1])
+            ? "flex"
+            : "none",
       }}
       className={styles.navbar}
     >
@@ -67,19 +75,22 @@ const Navbar = ({ routes }) => {
           {" "}
           {ICONS.cartOutline}Cart
         </div>
-        <div
-          onClick={() => {
-            navigate("/profile");
-          }}
-          className={styles.profile}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-            alt=""
-          />
-          <h5>Profile</h5>
-          {ICONS.dropdownIcon}
-        </div>
+        {localStorage.getItem("user") && (
+          <div
+            onClick={() => {
+              navigate("/profile");
+            }}
+            className={styles.profile}
+          >
+            <img
+              src={
+                JSON.parse(localStorage.getItem("user"))?.user?.profile_pic_url
+              }
+              alt=""
+            />
+            <h5>Profile {ICONS.dropdownIcon}</h5>
+          </div>
+        )}
       </div>
     </div>
   );

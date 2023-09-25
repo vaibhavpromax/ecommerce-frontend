@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   border-radius: 6px;
-  margin-left: 10px;
+  // margin-left: 10px;
   .upper {
-    width: 280px;
+    width: 250px;
     // width: 100%;
     cursor: pointer;
     height: 60%;
@@ -45,7 +45,8 @@
   }
 
   .lower {
-    padding-left: 5px;
+    width: 250px;
+    // padding-left: 5px;
     h2 {
       color: #3f373a;
       font-family: Jost;
@@ -89,7 +90,7 @@
 
       .atcbtn {
         margin-right: 17px;
-        width: 159px;
+        width: 130px;
         height: 40px;
         text-align: center;
         font-family: Jost;

@@ -16,9 +16,9 @@ function App() {
           <Route
             path="/*"
             element={
-              <AuthProvider>
-                <RoleRoutes />
-              </AuthProvider>
+                <AuthProvider>
+                  <RoleRoutes />
+                </AuthProvider>
             }
           ></Route>
         </Routes>

@@ -1,0 +1,277 @@
+.checkout {
+  display: flex;
+  // padding: 30px;
+  gap: 24px;
+  height: 100%;
+  .left {
+    border-radius: 10px;
+    background: #fff;
+    padding: 36px;
+    margin: 32px;
+    flex: 3.5;
+    .leftheader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      button {
+        font-family: Jost;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      h4 {
+        color: #3f373a;
+        font-size: 28px;
+        font-family: Jost;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 112.953%;
+      }
+    }
+    .addressList {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 16px;
+      row-gap: 18px;
+      margin-top: 18px;
+      height: 55vh;
+      overflow-y: scroll;
+      .addressCard {
+        background: #f7f6f5;
+        cursor: pointer;
+        padding: 20px;
+        height: 220px;
+        width: 38%;
+        border-radius: 10px;
+
+        .addressName {
+          color: #615c5e;
+          font-family: Jost;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          margin-bottom: 19px;
+        }
+        color: #615c5e;
+        font-family: Jost;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%; /* 25.6px */
+      }
+      .selected {
+        border: 2px solid #c4b9af;
+        background: #f4f1ee;
+      }
+    }
+    .savebtn {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+      .disabled {
+        cursor: not-allowed;
+        background-color: #636363;
+      }
+      button {
+        border-radius: 10px;
+        background: #917d6a;
+        width: 206px;
+        color: #fff;
+        text-align: center;
+        font-family: Jost;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        height: 56px;
+        flex-shrink: 0;
+      }
+    }
+
+    .paymentList {
+      margin-top: 40px;
+
+      .card {
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #917d6a;
+        background: #f7f6f5;
+        display: flex;
+        gap: 31px;
+        padding: 20px;
+
+        .customRadio {
+          height: 14px;
+          width: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          border: 2px solid #b06934;
+          padding: 2px;
+          .customRadioChecked {
+            background: #b06934;
+            height: 11px;
+            width: 11px;
+            border-radius: 50%;
+          }
+        }
+        .cardName {
+          color: #000;
+          font-family: Jost;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 112.953%; /* 22.591px */
+          .cvv {
+            display: flex;
+            gap: 10px;
+            color: #000;
+            font-family: Jost;
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 20px;
+            .cvvField {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 86px;
+              height: 30px;
+              border-radius: 2px;
+              border: 1px solid #d7d3cf;
+              // background: #fff;
+            }
+          }
+        }
+      }
+    }
+    .addMethod {
+      margin-top: 40px;
+      h4 {
+        color: #3f373a;
+        font-family: Jost;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 112.953%; /* 27.109px */
+      }
+      .method {
+        padding: 20px;
+        border-top: 1px solid #d7d3cf;
+        border-bottom: 1px solid #d7d3cf;
+        margin-top: 30px;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        .ring {
+          border: 2px solid #b06934;
+          border-radius: 50%;
+          height: 12px;
+          cursor: pointer;
+          width: 12px;
+        }
+        .methodName {
+          color: #000;
+          font-family: Jost;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 112.953%; /* 22.591px */
+        }
+      }
+    }
+  }
+
+  .right {
+    flex: 1.2;
+    margin-top: 32px;
+    margin-right: 26px;
+    .top {
+      border-radius: 10px;
+      background: #fff;
+      height: fit-content;
+      padding: 32px 24px;
+      .amount {
+        color: #3f373a;
+        font-size: 20px;
+        font-family: Jost;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112.953%;
+        span {
+          color: #b06934;
+          font-size: 24px;
+          font-family: Jost;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+      p {
+        margin-top: 28px;
+        color: #636363;
+        font-size: 16px;
+        font-family: Jost;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 119.453%;
+      }
+      .disabled {
+        cursor: not-allowed;
+        background-color: #636363;
+      }
+
+      .chckbtn {
+        margin-top: 34px;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        font-family: Jost;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+    .bottom {
+      margin-top: 23px;
+      .selectedAddCard {
+        border-radius: 10px;
+        background: #fff;
+        padding: 24px;
+        .header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          h4 {
+            color: #615c5e;
+            font-family: Jost;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 112.953%; /* 20.332px */
+          }
+          h5 {
+            cursor: pointer;
+            color: #b06934;
+            font-family: Jost;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 112.953%; /* 18.073px */
+            text-decoration-line: underline;
+          }
+        }
+        .addressCard {
+          color: #615c5e;
+          font-family: Jost;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 160%; /* 22.4px */
+
+          .addressName {
+          }
+        }
+      }
+    }
+  }
+}

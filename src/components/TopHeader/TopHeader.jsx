@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "./TopHeader.module.scss";
 import { ICONS } from "../../icons";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className={styles.navbar}>
       <div className={styles.left}>
@@ -19,11 +20,30 @@ const Navbar = () => {
       <div className={styles.right}>
         <div className={styles.btn}>La box du moment</div>
         <div className={styles.btn}>Nous contacter</div>
-        <div onClick={() => navigate("/shop")} className={styles.btn}>
+        <div
+          onClick={() => {
+            navigate("/shop");
+          }}
+          className={styles.btn}
+        >
           Shop
         </div>
-        <div className={styles.btn}>Se connecter</div>
-        <Button className={styles.login}>S’enregistrer</Button>
+        <div
+          onClick={() => {
+            navigate("/login");
+          }}
+          className={styles.btn}
+        >
+          Se connecter
+        </div>
+        <Button
+          onClick={() => {
+            navigate("/register");
+          }}
+          className={styles.login}
+        >
+          S’enregistrer
+        </Button>
       </div>
     </div>
   );

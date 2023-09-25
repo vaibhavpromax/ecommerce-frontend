@@ -10,7 +10,13 @@
     width: 18px;
     border-radius: 5px;
     transition: 0.3s ease-in-out;
-    background: #fff;
+
+    &.WHITE {
+      background-color: #fff;
+    }
+    &.BROWN {
+      background-color: #917d6a;
+    }
   }
   .shadow {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1) inset;
@@ -23,14 +29,16 @@
   input {
     display: none;
 
-    &:checked ~ .checkmark {
-      // background: $txt-dark-2;
-      background: #433e40;
-    }
+    // &:checked ~ .checkmark {
+    //   // background: $txt-dark-2;
+    //   background: #433e40;
+    //   display: flex;
+    // }
 
-    &:disabled ~ .checkmark {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    // &:disabled ~ .checkmark {
+    //   // opacity: 0.5;
+    //   display: hidden;
+    //   // cursor: not-allowed;
+    // }
   }
 }

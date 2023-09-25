@@ -1,0 +1,116 @@
+.tracker {
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // width: 100%;
+  // height: 100%;
+  margin-left: 30px;
+  // gap: 30px;
+  // .activity {
+  //   display: flex;
+  //   justify-content: center;
+  //   gap: 16px;
+  //   ::before {
+  //   }
+
+  //   .icon {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //     border-radius: 20px;
+  //     background: #917d6a;
+  //     width: 36px;
+  //     height: 36px;
+  //   }
+  //   .text {
+  //     display: flex;
+  //     flex-direction: column;
+  //     width: 100px;
+  //     h4 {
+  //       color: #3f373a;
+  //       font-family: Jost;
+  //       font-size: 14px;
+  //       font-style: normal;
+  //       font-weight: 500;
+  //       line-height: 119.453%;
+  //     }
+  //     h5 {
+  //       width: 100%;
+  //       color: #636363;
+  //       font-family: Jost;
+  //       font-size: 14px;
+  //       font-style: normal;
+  //       font-weight: 400;
+  //       line-height: 119.453%;
+  //     }
+  //   }
+  // }
+  .progressbarContainer {
+    display: flex;
+    gap: 0.6rem;
+    height: 100%;
+    .progressBar {
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+      justify-content: space-between;
+      .stepWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        .stepCircle {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          z-index: 2;
+          background: #917d6a;
+        }
+        .stepLine {
+          background: #cecac6;
+          position: absolute;
+          height: 2px;
+          transform: rotate(90deg);
+          width: 70px;
+          overflow: hidden;
+        }
+      }
+      .visitedStep {
+        .stepCircle {
+          width: 24px;
+          height: 24px;
+          border: none;
+          color: white;
+          background: #433e40;
+        }
+      }
+    }
+    .singleLabelContainer {
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+      justify-content: space-between;
+      .labelText {
+        color: #3f373a;
+        font-family: Jost;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 119.453%; /* 16.723px */
+        .date {
+          color: #636363;
+          font-family: Jost;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 119.453%; /* 16.723px */
+        }
+      }
+    }
+  }
+}
