@@ -29,7 +29,7 @@ const Checkout = () => {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addAddressModal, setAddAddressModal] = useState(false);
-  const [orderConfirmModal, setOrderConfirmModal] = useState(true);
+  const [orderConfirmModal, setOrderConfirmModal] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false);
@@ -277,14 +277,13 @@ const Checkout = () => {
         paymentMethod={selectedPaymentMethod}
         paymentIntent={paymentIntent}
         setOrderConfirmModal={setOrderConfirmModal}
-        
       />
       <AddCard
         selectedAddress={selectedAddress}
         fetchMethods={fetchPaymentMethods}
         isModal={addcardmodal}
         onCloseModal={closeAddCardModal}
-        setOrderConfirmModal= {setOrderConfirmModal}
+        setOrderConfirmModal={setOrderConfirmModal}
       />
       <OrderConfirmModal
         onModalClose={closeOrderConfirmModal}
