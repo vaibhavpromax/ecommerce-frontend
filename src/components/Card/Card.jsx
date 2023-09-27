@@ -57,7 +57,7 @@ const Card = ({
         localStorage.setItem("wishlist", JSON.stringify(updatedList));
 
         if (renderFromWishlist) fetchWishlist();
-        else fetchProducts();
+        // else fetchProducts();
       });
     } else {
       console.log("Inside");
@@ -69,7 +69,7 @@ const Card = ({
       setLocalWish(updatedList);
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
-      fetchProducts();
+      // fetchProducts();
       toast.success("Removed from wishlist", {
         style: {
           backgroundColor: "#F7F6F5",
@@ -110,7 +110,7 @@ const Card = ({
           );
           setIsWishlisted(true);
         }
-        fetchProducts();
+        // fetchProducts();
       });
     } else {
       if (JSON.parse(localStorage.getItem("wishlist")) == null) {

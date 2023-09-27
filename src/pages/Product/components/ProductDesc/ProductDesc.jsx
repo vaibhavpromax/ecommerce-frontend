@@ -10,6 +10,7 @@ import useProduct from "../../../../apis/useProduct";
 import useCart from "../../../../apis/useCart";
 import { useAuth } from "../../../../contexts/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
+import Skeleton from "../../../../components/Skeleton/Skeleton";
 
 const quantityOptions = {
   1: "1",
@@ -175,7 +176,10 @@ const ProductDesc = () => {
           </div>
         </>
       ) : (
-        <> Loading</>
+        <div className={styles.productLoader}>
+          <Skeleton className={styles.leftLoader} />
+          <Skeleton className={styles.rightLoader} />
+        </div>
       )}
     </div>
   );
