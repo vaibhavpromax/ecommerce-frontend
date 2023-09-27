@@ -11,6 +11,7 @@ const EditImage = ({
   setProductInfo,
   updatedPayload,
   setUpdatedPayload,
+  fetchProductInfo,
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [primaryImage, setPrimaryImage] = useState(null);
@@ -66,6 +67,7 @@ const EditImage = ({
 
   const deleteImageHandler = async (url) => {
     deleteImage(extractKeyfromurl(url), () => {
+      fetchProductInfo();
       toast.success("Image deleted successfully", {
         style: {
           backgroundColor: "#F7F6F5",
@@ -97,8 +99,6 @@ const EditImage = ({
     setImages(secImages);
   }, [productInfo]);
 
-  console.log(primaryImage, hoverPrimary);
-
   return (
     <div className={styles.addImageWrapper}>
       <div className={styles.left}>Images</div>
@@ -109,7 +109,7 @@ const EditImage = ({
       ) : (
         <div className={styles.right}>
           <div className={styles.p}>
-            {primaryImage.image_url ? (
+            {primaryImage?.image_url ? (
               <div
                 onMouseEnter={() => setHoverPrimary(true)}
                 onMouseLeave={() => setHoverPrimary(false)}
@@ -151,7 +151,7 @@ const EditImage = ({
             )}
           </div>
           <div className={styles.secondaryImages}>
-            {images[0].image_url ? (
+            {images[0]?.image_url ? (
               <div
                 onMouseEnter={(e) => setImageHover({ ...imageHover, 0: true })}
                 onMouseLeave={(e) => setImageHover({ ...imageHover, 0: false })}
@@ -161,12 +161,19 @@ const EditImage = ({
                   <img
                     width={135}
                     height={123}
-                    src={images[0].image_url}
+                    src={images[0]?.image_url}
                     alt="secondary"
                   />
                 ) : (
                   <div className={styles.hover}>
-                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
+                    <span
+                      onClick={() => {
+                        deleteImageHandler(images[0]?.image_url);
+                      }}
+                      className={styles.deleteimg}
+                    >
+                      {ICONS.redTrash}
+                    </span>
                     <span className={styles.editimg}>{ICONS.addImage} </span>
                   </div>
                 )}
@@ -185,7 +192,7 @@ const EditImage = ({
               </label>
             )}
 
-            {images[1].image_url ? (
+            {images[1]?.image_url ? (
               <div
                 onMouseEnter={(e) => setImageHover({ ...imageHover, 1: true })}
                 onMouseLeave={(e) => setImageHover({ ...imageHover, 1: false })}
@@ -195,16 +202,21 @@ const EditImage = ({
                   <img
                     width={135}
                     height={123}
-                    src={images[1].image_url}
+                    src={images[1]?.image_url}
                     alt="secondary"
                   />
                 ) : (
                   <div className={styles.hover}>
                     {" "}
-                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
-                    <span className={styles.editimg}>
-                      {ICONS.addImage}{" "}
-                    </span>{" "}
+                    <span
+                      onClick={() => {
+                        deleteImageHandler(images[1]?.image_url);
+                      }}
+                      className={styles.deleteimg}
+                    >
+                      {ICONS.redTrash}
+                    </span>
+                    <span className={styles.editimg}>{ICONS.addImage} </span>{" "}
                   </div>
                 )}
               </div>
@@ -236,10 +248,15 @@ const EditImage = ({
                   />
                 ) : (
                   <div className={styles.hover}>
-                    <span className={styles.deleteimg}>{ICONS.redTrash}</span>
-                    <span className={styles.editimg}>
-                      {ICONS.addImage}{" "}
-                    </span>{" "}
+                    <span
+                      onClick={() => {
+                        deleteImageHandler(images[2]?.image_url);
+                      }}
+                      className={styles.deleteimg}
+                    >
+                      {ICONS.redTrash}
+                    </span>
+                    <span className={styles.editimg}>{ICONS.addImage} </span>{" "}
                   </div>
                 )}
               </div>

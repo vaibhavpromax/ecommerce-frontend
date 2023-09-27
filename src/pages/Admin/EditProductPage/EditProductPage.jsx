@@ -35,13 +35,11 @@ const EditProductPage = () => {
   const { editProduct, editProductLoading, getProductInfo } = useProduct();
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [productInfo, setProductInfo] = useState(product_info);
   const [originalData, setOriginalData] = useState(product_info);
 
-  const fetchProductInfo = () => {
-    getProductInfo(id, (data) => {
-      console.log(data);
+  const fetchProductInfo = async () => {
+    await getProductInfo(id, (data) => {
       setProductInfo(data?.data);
       setOriginalData(data?.data);
     });
@@ -93,7 +91,7 @@ const EditProductPage = () => {
       </div>
       <div className={styles.topBar}>
         <div className={styles.topLeft}>
-          Product #{productInfo?.product_id.split("-")[0]}
+          Product #{productInfo?.product_id?.split("-")[0]}
           <span
             onClick={() => {
               // navigate("/order/23423");
@@ -122,8 +120,8 @@ const EditProductPage = () => {
         <EditProductDescription
           productInfo={productInfo}
           setProductInfo={setProductInfo}
-        />
-        <EditImage productInfo={productInfo} setProductInfo={setProductInfo} />
+        />  
+        <EditImage fetchProductInfo={fetchProductInfo} productInfo={productInfo} setProductInfo={setProductInfo} />
         <EditQuantityPricingShipping
           productInfo={productInfo}
           setProductInfo={setProductInfo}

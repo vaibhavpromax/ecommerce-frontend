@@ -23,7 +23,7 @@ const useImage = () => {
   const deleteImage = async (id, cb) => {
     setDeleteImageLoading(true);
     try {
-      const res = await axios.post(`/ecommerce/admin/delete-image/${id}`);
+      const res = await axios.delete(`/ecommerce/admin/delete-image/${id}`);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);
