@@ -9,6 +9,8 @@ import { ICONS } from "../../../icons";
 import { useNavigate } from "react-router-dom";
 import useUserAuthentication from "../../../apis/userAuthentication";
 import { useAuth } from "../../../contexts/AuthContext";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
 
 const UserLogin = () => {
   const [regData, setRegData] = useState({
@@ -16,7 +18,7 @@ const UserLogin = () => {
     password: "",
   });
   const { setUser } = useAuth();
-  const { loginUser, loginLoading } = useUserAuthentication();
+  const { loginUser, loginLoading, googleAuth } = useUserAuthentication();
   const navigate = useNavigate();
 
   const loginHandler = async () => {
@@ -34,6 +36,34 @@ const UserLogin = () => {
       navigate("/profile");
     }
   }, []);
+
+  // const googleLoginHandler = useGoogleLogin({
+  //   onSuccess: (tokenResponse) => {
+  //     console.log(tokenResponse);
+  //     googleAuth({ token: tokenResponse }, (data) => {
+  //       setUser(data?.data);
+  //       localStorage.setItem("user", JSON.stringify(data.data));
+  //       navigate("/shop");
+  //     });
+  //   },
+  //   onError: toast.error("Error while signing in from google", {
+  //     style: {
+  //       backgroundColor: "#F7F6F5",
+  //       fontFamily: "Jost",
+  //     },
+  //   }),
+  //   flow: "implicit",
+  //   scope: "email profile openid",
+  // });
+
+  const googleLoginHandler = async (credentialResponse) => {
+    console.log(credentialResponse);
+    googleAuth({ token: credentialResponse?.credential }, (data) => {
+      setUser(data?.data);
+      localStorage.setItem("user", JSON.stringify(data.data));
+      navigate("/shop");
+    });
+  };
 
   return (
     <div className={styles.login}>
@@ -72,7 +102,29 @@ const UserLogin = () => {
 
           <div className={styles.buttons}>
             <Button onClick={loginHandler}> Sign in</Button>
-            <Button theme="WHITE">{ICONS.google} Continue with Google </Button>
+            {/*
+            <Button onClick={googleLoginHandler} theme="WHITE">
+            {ICONS.google} Continue with Google{" "}
+            </Button>
+
+          */}
+
+            <GoogleLogin
+              onSuccess={googleLoginHandler}
+              onError={() => {
+                toast.error("Error while signing in from google", {
+                  style: {
+                    backgroundColor: "#F7F6F5",
+                    fontFamily: "Jost",
+                  },
+                });
+              }}
+              text="Continue with google"
+              size="large"
+              auto_select={false}
+              shape="pill"
+              useOneTap={false}
+            />
           </div>
           <div className={styles.bottomText}>
             <span>Already have an account?</span>{" "}

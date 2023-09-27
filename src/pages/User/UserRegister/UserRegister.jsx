@@ -9,6 +9,8 @@ import { ICONS } from "../../../icons";
 import useUserAuthentication from "../../../apis/userAuthentication";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
+import { GoogleLogin } from "@react-oauth/google";
+import toast from "react-hot-toast";
 
 const UserRegister = () => {
   const [regData, setRegData] = useState({
@@ -21,7 +23,7 @@ const UserRegister = () => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
-  const { registerLoading, registerUser } = useUserAuthentication();
+  const { registerLoading, registerUser, googleAuth } = useUserAuthentication();
 
   const registerHandler = () => {
     const payload = {
@@ -44,7 +46,14 @@ const UserRegister = () => {
       navigate("/profile");
     }
   }, []);
-
+  const googleLoginHandler = async (credentialResponse) => {
+    console.log(credentialResponse);
+    googleAuth({ token: credentialResponse?.credential }, (data) => {
+      setUser(data?.data);
+      localStorage.setItem("user", JSON.stringify(data.data));
+      navigate("/shop");
+    });
+  };
   return (
     <div className={styles.register}>
       <div className={styles.registerwrapper}>
@@ -99,7 +108,25 @@ const UserRegister = () => {
 
           <div className={styles.buttons}>
             <Button onClick={registerHandler}> Sign up</Button>
-            <Button theme="WHITE">{ICONS.google} Continue with Google </Button>
+            <GoogleLogin
+              onSuccess={googleLoginHandler}
+              onError={() => {
+                toast.error("Error while signing in from google", {
+                  style: {
+                    backgroundColor: "#F7F6F5",
+                    fontFamily: "Jost",
+                  },
+                });
+              }}
+              text="Continue with google"
+              size="large"
+              auto_select={false}
+              shape="pill"
+              useOneTap={false}
+            />
+            {/*
+          <Button theme="WHITE">{ICONS.google} Continue with Google </Button>
+        */}
           </div>
           <div className={styles.bottomText}>
             <span>Already have an account?</span>{" "}

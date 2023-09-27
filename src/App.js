@@ -12,6 +12,8 @@ import UserRegister from "./pages/User/UserRegister/UserRegister";
 import AuthProvider from "./contexts/AuthContext";
 import Home from "./pages/User/Home/Home";
 import StripeWrapper from "./StripeWrapper";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 function App() {
   return (
     <div className={styles.app}>
@@ -26,9 +28,13 @@ function App() {
           <Route
             path="/*"
             element={
+              <GoogleOAuthProvider
+                clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+              >
                 <AuthProvider>
                   <RoleRoutes />
                 </AuthProvider>
+              </GoogleOAuthProvider>
             }
           ></Route>
         </Routes>
