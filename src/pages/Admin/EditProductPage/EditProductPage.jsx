@@ -62,7 +62,7 @@ const EditProductPage = () => {
 
     console.log(filteredObj);
 
-    await editProduct(filteredObj, (res) => {
+    await editProduct(productInfo?.product_id, filteredObj, (res) => {
       toast.success("Product info edited", {
         style: {
           backgroundColor: "#F7F6F5",
@@ -120,8 +120,12 @@ const EditProductPage = () => {
         <EditProductDescription
           productInfo={productInfo}
           setProductInfo={setProductInfo}
-        />  
-        <EditImage fetchProductInfo={fetchProductInfo} productInfo={productInfo} setProductInfo={setProductInfo} />
+        />
+        <EditImage
+          fetchProductInfo={fetchProductInfo}
+          productInfo={productInfo}
+          setProductInfo={setProductInfo}
+        />
         <EditQuantityPricingShipping
           productInfo={productInfo}
           setProductInfo={setProductInfo}

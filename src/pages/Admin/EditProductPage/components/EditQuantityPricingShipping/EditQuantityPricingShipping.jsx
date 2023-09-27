@@ -95,14 +95,14 @@ const EditQuantityPricingShipping = ({ productInfo, setProductInfo }) => {
                 selling_price: selling_price,
               });
             }}
-            label="Discount"
+            label="Discount (in %)"
           />
           <TextBox
             value={productInfo.selling_price}
             // setValue={(e) =>
             //   setProductInfo({ ...productInfo, selling_price: e })
             // }
-            label="Selling price"
+            label="Selling price (in €)"
           />
         </div>
       </div>

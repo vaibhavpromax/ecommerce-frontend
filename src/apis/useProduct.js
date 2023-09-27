@@ -47,7 +47,7 @@ const useProduct = () => {
     setEditProductLoading(true);
     try {
       const res = await axios.patch(
-        `/ecommerce/admin/edit-product/${id}`,
+        `/ecommerce/admin/update-product/${id}`,
         data
       );
       if (cb && typeof cb === "function") cb(res.data);

@@ -32,8 +32,13 @@ const EditImage = ({
       image_url: null,
     },
   ]);
-  const { uploadImage, uploadImageLoading, deleteImage, editImage } =
-    useImage();
+  const {
+    uploadImage,
+    uploadImageLoading,
+    deleteImage,
+    editImage,
+    attachImageWithProduct,
+  } = useImage();
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
@@ -46,27 +51,30 @@ const EditImage = ({
 
     const formdata = new FormData();
     formdata.append("image", e.target.files[0]);
-    uploadImage(formdata, (res) => {
-      if (isPrimary) {
-        setPrimaryImage(res?.data);
-        setUpdatedPayload({ ...updatedPayload, primary_image: res?.data });
-        return;
-      }
+    formdata.append("product_id", productInfo?.product_id);
+    formdata.append("is_primary", isPrimary);
+    attachImageWithProduct(formdata, (res) => {
+      fetchProductInfo();
+      // if (isPrimary) {
+      //   setPrimaryImage(res?.data);
+      //   setUpdatedPayload({ ...updatedPayload, primary_image: res?.data });
+      //   return;
+      // }
 
-      let newImages = images.map((i, k) => {
-        if (k == key) return { url: res?.data };
-        else return i;
-      });
-      console.log(newImages);
-      setImages(newImages);
-      setUpdatedPayload({ ...updatedPayload, sec_images: newImages });
+      // let newImages = images.map((i, k) => {
+      //   if (k == key) return { url: res?.data };
+      //   else return i;
+      // });
+      // console.log(newImages);
+      // setImages(newImages);
+      // setUpdatedPayload({ ...updatedPayload, sec_images: newImages });
       // setImages([...images, (images[key].url = res?.data)]);
     });
     // }
   };
 
-  const deleteImageHandler = async (url) => {
-    deleteImage(extractKeyfromurl(url), () => {
+  const deleteImageHandler = async (id, url) => {
+    deleteImage(extractKeyfromurl(url), { image_id: id }, () => {
       fetchProductInfo();
       toast.success("Image deleted successfully", {
         style: {
@@ -74,6 +82,15 @@ const EditImage = ({
           fontFamily: "Jost",
         },
       });
+    });
+  };
+
+  const editImageHandler = async (e, url, image_id) => {
+    const formdata = new FormData();
+    formdata.append("image", e.target.files[0]);
+    formdata.append("image_id", image_id);
+    editImage(extractKeyfromurl(url), formdata, () => {
+      fetchProductInfo();
     });
   };
 
@@ -95,7 +112,13 @@ const EditImage = ({
         });
       }
     }
-    console.log(secImages);
+    // console.log(secImages);
+    setImageHover({
+      0: false,
+      1: false,
+      2: false,
+    });
+    setHoverPrimary(false);
     setImages(secImages);
   }, [productInfo]);
 
@@ -126,13 +149,30 @@ const EditImage = ({
                   <div className={styles.primaryHover}>
                     <span
                       onClick={() => {
-                        deleteImageHandler(primaryImage?.image_url);
+                        deleteImageHandler(
+                          primaryImage?.image_id,
+                          primaryImage?.image_url
+                        );
                       }}
                       className={styles.deleteimg}
                     >
                       {ICONS.redTrash}
                     </span>
-                    <span className={styles.editimg}>{ICONS.addImage} </span>
+                    <label htmlFor="primaryImage">
+                      {ICONS.addImage}
+                      <input
+                        type="file"
+                        id="primaryImage"
+                        onChange={(e) => {
+                          editImageHandler(
+                            e,
+                            primaryImage?.image_url,
+                            primaryImage?.image_id
+                          );
+                        }}
+                        style={{ display: "none" }}
+                      />
+                    </label>
                   </div>
                 )}
               </div>
@@ -168,13 +208,30 @@ const EditImage = ({
                   <div className={styles.hover}>
                     <span
                       onClick={() => {
-                        deleteImageHandler(images[0]?.image_url);
+                        deleteImageHandler(
+                          images[0]?.image_id,
+                          images[0]?.image_url
+                        );
                       }}
                       className={styles.deleteimg}
                     >
                       {ICONS.redTrash}
                     </span>
-                    <span className={styles.editimg}>{ICONS.addImage} </span>
+                    <label htmlFor="secImage">
+                      {ICONS.addImage}
+                      <input
+                        type="file"
+                        id="secImage"
+                        onChange={(e) => {
+                          editImageHandler(
+                            e,
+                            images[0]?.image_url,
+                            images[0]?.image_id,
+                          );
+                        }}
+                        style={{ display: "none" }}
+                      />
+                    </label>
                   </div>
                 )}
               </div>
@@ -210,13 +267,30 @@ const EditImage = ({
                     {" "}
                     <span
                       onClick={() => {
-                        deleteImageHandler(images[1]?.image_url);
+                        deleteImageHandler(
+                          images[1]?.image_id,
+                          images[1]?.image_url
+                        );
                       }}
                       className={styles.deleteimg}
                     >
                       {ICONS.redTrash}
                     </span>
-                    <span className={styles.editimg}>{ICONS.addImage} </span>{" "}
+                    <label htmlFor="secImage">
+                      {ICONS.addImage}
+                      <input
+                        type="file"
+                        id="secImage"
+                        onChange={(e) => {
+                          editImageHandler(
+                            e,
+                            images[1]?.image_id,
+                            images[1]?.image_url
+                          );
+                        }}
+                        style={{ display: "none" }}
+                      />
+                    </label>
                   </div>
                 )}
               </div>
@@ -250,13 +324,30 @@ const EditImage = ({
                   <div className={styles.hover}>
                     <span
                       onClick={() => {
-                        deleteImageHandler(images[2]?.image_url);
+                        deleteImageHandler(
+                          images[2]?.image_id,
+                          images[2]?.image_url
+                        );
                       }}
                       className={styles.deleteimg}
                     >
                       {ICONS.redTrash}
                     </span>
-                    <span className={styles.editimg}>{ICONS.addImage} </span>{" "}
+                    <label htmlFor="secImage">
+                      {ICONS.addImage}
+                      <input
+                        type="file"
+                        id="secImage"
+                        onChange={(e) => {
+                          editImageHandler(
+                            e,
+                            images[2]?.image_id,
+                            images[2]?.image_url
+                          );
+                        }}
+                        style={{ display: "none" }}
+                      />
+                    </label>
                   </div>
                 )}
               </div>

@@ -5,6 +5,7 @@ const useImage = () => {
   const [uploadImageLoading, setUploadImageLoading] = useState(false);
   const [deleteImageLoading, setDeleteImageLoading] = useState(false);
   const [editImageLoading, setEditImageLoading] = useState(false);
+  const [attachImageLoading, setAttachImageLoading] = useState(false);
 
   const uploadImage = async (data, cb) => {
     setUploadImageLoading(true);
@@ -20,10 +21,10 @@ const useImage = () => {
     }
   };
 
-  const deleteImage = async (id, cb) => {
+  const deleteImage = async (id, data, cb) => {
     setDeleteImageLoading(true);
     try {
-      const res = await axios.delete(`/ecommerce/admin/delete-image/${id}`);
+      const res = await axios.post(`/ecommerce/admin/delete-image/${id}`, data);
       if (cb && typeof cb === "function") cb(res.data);
     } catch (err) {
       throw new Error(err);
@@ -46,6 +47,20 @@ const useImage = () => {
     }
   };
 
+  const attachImageWithProduct = async (data, cb) => {
+    setAttachImageLoading(true);
+    try {
+      const res = await axios.post(`/ecommerce/admin/attach-image`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setAttachImageLoading(false);
+    }
+  };
+
   return {
     uploadImage,
     uploadImageLoading,
@@ -53,6 +68,7 @@ const useImage = () => {
     deleteImageLoading,
     editImage,
     editImageLoading,
+    attachImageWithProduct,
   };
 };
 
