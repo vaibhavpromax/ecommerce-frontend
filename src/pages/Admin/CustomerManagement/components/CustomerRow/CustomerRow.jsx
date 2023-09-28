@@ -70,8 +70,7 @@ const CustomerRow = ({
           : "Not Ordered"}
       </div>
       <div className={styles.col6}>{customer?.email}</div>
-      <div className={styles.col7}>{customer?.phone_no}</div>
-      <div className={styles.col8}>
+      <div className={styles.col7}>
         <span onClick={deleteCustomerHandler}>{ICONS.redTrash}</span>
       </div>
     </div>

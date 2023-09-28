@@ -129,8 +129,7 @@ const CustomerManagement = () => {
           <div className={styles.col4}>CUSTOMER ID</div>
           <div className={styles.col5}>LAST PURCHASE</div>
           <div className={styles.col6}>EMAIL</div>
-          <div className={styles.col7}>PHONE</div>
-          <div className={styles.col8}>ACTIONS</div>
+          <div className={styles.col7}>ACTIONS</div>
         </div>
         <div ref={containerRef} className={styles.list}>
           {getCustomersLoading ? (

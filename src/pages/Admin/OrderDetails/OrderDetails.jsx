@@ -4,9 +4,9 @@ import Button from "../../../components/Button/Button";
 import { ICONS } from "../../../icons";
 import ProductOrderRow from "./components/ProductOrderRow/ProductOrderRow";
 import useOrder from "../../../apis/useOrder";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import { useParams } from "react-router-dom";
+import CalendarModal from "./components/CalendarModal/CalendarModal";
+import Skeleton from "../../../components/Skeleton/Skeleton";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -298,10 +298,11 @@ const OrderDetails = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [status, setStatus] = useState(STATUSES);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [updateDate, setUpdateDate] = useState("");
-  const { getSingleOrderDetails, editOrderInfo } = useOrder();
+  const [calendarModal, setCalendarModal] = useState(false);
+  const { getSingleOrderDetails, getSingleOrderLoading } = useOrder();
   const { id } = useParams();
   const [order, setOrder] = useState(fakeData);
+  const navigate = useNavigate();
   const fetchOrderDetails = async () => {
     await getSingleOrderDetails(id, (res) => {
       setOrder(res?.data);
@@ -311,9 +312,13 @@ const OrderDetails = () => {
       // });
     });
   };
+  const closeCalendarModal = () => {
+    setCalendarModal(false);
+  };
 
   const makeStatusArray = (order) => {
     const newArr = STATUSES.map((item, i) => {
+      console.log(item?.value, order?.order_status);
       if (item?.value == order?.order_status) setCurrentStep(i);
       if (item.value == "PLACED")
         return {
@@ -349,28 +354,6 @@ const OrderDetails = () => {
     // makeStatusArray(order);
   }, []);
   console.log(order);
-  console.log(updateDate);
-
-  const handleDateChange = async (e) => {
-    let flag = true;
-    status.map(async (item) => {
-      if (!item.date && flag) {
-        const field = item?.dbLabel;
-        await editOrderInfo(order?.order_id, { [field]: e }, () => {
-          fetchOrderDetails();
-          flag = false;
-          toast.success("Order Info Updated", {
-            style: {
-              backgroundColor: "#F7F6F5",
-              fontFamily: "Jost",
-            },
-          });
-          setShowCalendar(false);
-        });
-        return;
-      }
-    });
-  };
 
   return (
     <div className={styles.orderdetails}>
@@ -381,7 +364,13 @@ const OrderDetails = () => {
           {">>"} Order #{order?.order_id?.substring(0, 4)}
         </div>
         <div className={styles.right}>
-          <Button>{ICONS.pen} Edit order</Button>
+          <Button
+            onClick={() => {
+              navigate(`/edit-order/${order?.order_id}`);
+            }}
+          >
+            {ICONS.pen} Edit order
+          </Button>
           {ICONS.bell}
           {/* 
           <div className={styles.profile}>
@@ -393,221 +382,229 @@ const OrderDetails = () => {
         */}
         </div>
       </div>
-
-      <div className={styles.bottom}>
-        <div className={styles.btleft}>
-          <div className={styles.btleftTop}>
-            <div className={styles.btleftHeader}>
-              Order #{order?.order_id?.substring(0, 4)}
-            </div>
-            <div className={styles.btleftBottom}>
-              <div className={styles.proList}>
-                {order?.OrderItems?.map((it, key) => {
-                  return <ProductOrderRow product={it} />;
-                })}
+      {!getSingleOrderLoading ? (
+        <div className={styles.bottom}>
+          <div className={styles.btleft}>
+            <div className={styles.btleftTop}>
+              <div className={styles.btleftHeader}>
+                Order #{order?.order_id?.substring(0, 4)}
               </div>
-              <div className={styles.hrLine}></div>
-              <div className={styles.orderTotal}>
-                <div className={styles.orderLeft}>
-                  <div className={styles.orderLeftRowHead}>
-                    Order comments: {ICONS.pen}
-                  </div>
-                  <div className={styles.orderLeftRowContent}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repellendus aliquam eaque libero provident officiis.
-                  </div>
+              <div className={styles.btleftBottom}>
+                <div className={styles.proList}>
+                  {order?.OrderItems?.map((it, key) => {
+                    return <ProductOrderRow product={it} />;
+                  })}
                 </div>
-                <div className={styles.orderRight}>
-                  <div className={styles.orderRightRow}>
-                    <div className={styles.orderRightRowLeft}>Subtotal:</div>
-                    <div
-                      style={{ fontWeight: "600" }}
-                      className={styles.orderRightRowRight}
-                    >
-                      ${order?.total_price}
+                <div className={styles.hrLine}></div>
+                <div className={styles.orderTotal}>
+                  <div className={styles.orderLeft}>
+                    <div className={styles.orderLeftRowHead}>
+                      Order comments: {ICONS.pen}
+                    </div>
+                    <div className={styles.orderLeftRowContent}>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Repellendus aliquam eaque libero provident officiis.
                     </div>
                   </div>
-                  <div className={styles.orderRightRow}>
-                    <div className={styles.orderRightRowLeft}>Shipping:</div>
-                    <div className={styles.orderRightRowRight}>
-                      ${order?.shipping_price}
-                    </div>
-                  </div>
-                  <div className={styles.orderRightRow}>
-                    <div className={styles.orderRightRowLeft}>Total:</div>
-                    <div
-                      style={{ fontSize: "18px", fontWeight: "600" }}
-                      className={styles.orderRightRowRight}
-                    >
-                      $
-                      {parseFloat(order?.total_price) +
-                        parseFloat(order?.shipping_price)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.orderHistory}>
-            <div className={styles.btBottomHeader}>Order history:</div>
-
-            <div className={styles.progressbarContainer}>
-              <div className={styles.progressBar}>
-                {status.map((s, i) => (
-                  <div
-                    className={`${styles.stepWrapper} ${
-                      currentStep >= i ? styles.visitedStep : ""
-                    }`}
-                  >
-                    <div className={styles.stepCircle}>
-                      <span>{currentStep >= i && ICONS.tick}</span>
-                    </div>
-                    {i !== 0 && (
+                  <div className={styles.orderRight}>
+                    <div className={styles.orderRightRow}>
+                      <div className={styles.orderRightRowLeft}>Subtotal:</div>
                       <div
-                        className={`${styles.stepLine}
-                   ${currentStep >= i ? styles.filled : ""}
-                      `}
-                      ></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className={styles.singleLabelContainer}>
-                {status.map((s, i) => {
-                  return (
-                    <div
-                      className={`${styles.labelText} ${
-                        currentStep > i ? styles.visited : ""
-                      } ${currentStep === i ? styles.current : ""}`}
-                    >
-                      <div className={styles.wrapper}>
-                        {s.label}
-                        <div className={styles.date}>
-                          {s.date ? (
-                            moment(s.date).format("DD MMM, YYYY")
-                          ) : (
-                            <>
-                              {!showCalendar && (
-                                <div
-                                  onClick={() => {
-                                    setShowCalendar(true);
-                                  }}
-                                  className={styles.calendarPlaceholder}
-                                >
-                                  {ICONS.calendar} Insert date
-                                </div>
-                              )}
-                            </>
-                          )}
-                        </div>
+                        style={{ fontWeight: "600" }}
+                        className={styles.orderRightRowRight}
+                      >
+                        ${order?.total_price}
                       </div>
                     </div>
-                  );
-                })}
-                {showCalendar && (
-                  <Calendar
-                    onChange={(e) => {
-                      handleDateChange(e);
-                    }}
-                    value={updateDate}
-                    // defaultActiveStartDate={true}
-                    className={styles.calendar}
-                  />
-                )}
+                    <div className={styles.orderRightRow}>
+                      <div className={styles.orderRightRowLeft}>Shipping:</div>
+                      <div className={styles.orderRightRowRight}>
+                        ${order?.shipping_price}
+                      </div>
+                    </div>
+                    <div className={styles.orderRightRow}>
+                      <div className={styles.orderRightRowLeft}>Total:</div>
+                      <div
+                        style={{ fontSize: "18px", fontWeight: "600" }}
+                        className={styles.orderRightRowRight}
+                      >
+                        $
+                        {parseFloat(order?.total_price) +
+                          parseFloat(order?.shipping_price)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.orderHistory}>
+              <div className={styles.btBottomHeader}>Order history:</div>
+
+              <div className={styles.progressbarContainer}>
+                <div className={styles.progressBar}>
+                  {status.map((s, i) => (
+                    <div
+                      className={`${styles.stepWrapper} ${
+                        currentStep >= i ? styles.visitedStep : ""
+                      }`}
+                    >
+                      <div className={styles.stepCircle}>
+                        <span>{currentStep >= i && ICONS.tick}</span>
+                      </div>
+                      {i !== 0 && (
+                        <div
+                          className={`${styles.stepLine}
+             ${currentStep >= i ? styles.filled : ""}
+                `}
+                        ></div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.singleLabelContainer}>
+                  {status.map((s, i) => {
+                    return (
+                      <div
+                        className={`${styles.labelText} ${
+                          currentStep > i ? styles.visited : ""
+                        } ${currentStep === i ? styles.current : ""}`}
+                      >
+                        <div className={styles.wrapper}>
+                          {s.label}
+                          <div className={styles.date}>
+                            {s.date ? (
+                              moment(s.date).format("DD MMM, YYYY")
+                            ) : (
+                              <>
+                                {!showCalendar && (
+                                  <div
+                                    onClick={() => {
+                                      setCalendarModal(s);
+                                    }}
+                                    className={styles.calendarPlaceholder}
+                                  >
+                                    {ICONS.calendar} Insert date
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
+          <div className={styles.btright}>
+            <div className={styles.section}>
+              <div className={styles.sectionheader}>Customer {ICONS.pen}</div>
+              <div className={styles.sectionContent}>
+                <div className={styles.secLeft}>
+                  <div className={styles.profile}>
+                    <img src={order?.User?.profile_pic_url3} alt="" />
+                  </div>
+                </div>
+                <div className={styles.secRight}>
+                  <div className={styles.name}>
+                    {order?.User?.first_name + " " + order?.User?.last_name}
+                  </div>
+                  <div className={styles.secContent}>{order?.User?.email}</div>
+
+                  <div className={styles.secContent}>
+                    Total orders: {order?.User?.number_of_orders}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.hrRow}></div>
+            <div className={styles.section}>
+              <div className={styles.sectionheader}>
+                Delivery Details {ICONS.pen}
+              </div>
+              <div className={styles.sectionDescRow}>
+                <div className={styles.sectionDescLeft}>Delivery Type:</div>
+                <div className={styles.sectionDescRight}>Standard</div>
+              </div>
+              <div className={styles.sectionDescRow}>
+                <div className={styles.sectionDescLeft}>Address:</div>
+                <div className={styles.sectionDescRight}>
+                  {order?.Address?.street_no +
+                    " " +
+                    order?.Address?.street_name +
+                    " " +
+                    order?.Address?.city +
+                    " " +
+                    order?.Address?.country +
+                    " " +
+                    order?.Address?.postal_code}
+                </div>
+              </div>
+
+              {/* 
+      <div className={styles.sectionDescRow}>
+        <div className={styles.sectionDescLeft}>Tracking number:</div>
+        {" "}
+        <div className={`${styles.yellow}  ${styles.sectionDescRight}`}>
+          #12783456 {" "}
         </div>
-        <div className={styles.btright}>
-          <div className={styles.section}>
-            <div className={styles.sectionheader}>Customer {ICONS.pen}</div>
-            <div className={styles.sectionContent}>
-              <div className={styles.secLeft}>
-                <div className={styles.profile}>
-                  <img src={order?.User?.profile_pic_url3} alt="" />
-                </div>
-              </div>
-              <div className={styles.secRight}>
-                <div className={styles.name}>
-                  {order?.User?.first_name + " " + order?.User?.last_name}
-                </div>
-                <div className={styles.secContent}>{order?.User?.email}</div>
-
-                <div className={styles.secContent}>
-                  Total orders: {order?.User?.number_of_orders}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.hrRow}></div>
-          <div className={styles.section}>
-            <div className={styles.sectionheader}>
-              Delivery Details {ICONS.pen}
-            </div>
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Delivery Type:</div>
-              <div className={styles.sectionDescRight}>Standard</div>
-            </div>
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Address:</div>
-              <div className={styles.sectionDescRight}>
-                {order?.Address?.street_no +
-                  " " +
-                  order?.Address?.street_name +
-                  " " +
-                  order?.Address?.city +
-                  " " +
-                  order?.Address?.country +
-                  " " +
-                  order?.Address?.postal_code}
-              </div>
+        {" "}
+      </div>
+      */}
             </div>
 
-            {/* 
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Tracking number:</div>
-              {" "}
-              <div className={`${styles.yellow}  ${styles.sectionDescRight}`}>
-                #12783456 {" "}
+            <div className={styles.hrRow}></div>
+            <div className={styles.section}>
+              <div className={styles.sectionheader}>
+                Payment info {ICONS.pen}
               </div>
-              {" "}
-            </div>
-            */}
-          </div>
 
-          <div className={styles.hrRow}></div>
-          <div className={styles.section}>
-            <div className={styles.sectionheader}>Payment info {ICONS.pen}</div>
-
-            <div
-              onClick={() => {
-                window.location.href = `https://dashboard.stripe.com/test/payments/${order?.stripe_payment_id}`;
-              }}
-              className={styles.yellow}
-            >
-              {ICONS.arrowRight}Go to stripe Dashboard
-            </div>
-            {/* <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Payment method:</div>
-              <div className={styles.sectionDescRight}>
-                41 Quai des Belges, Martigues, Provence-Alpes-Côte d'Azur, 13500
+              <div
+                onClick={() => {
+                  window.location.href = `https://dashboard.stripe.com/test/payments/${order?.stripe_payment_id}`;
+                }}
+                className={styles.yellow}
+              >
+                {ICONS.arrowRight}Go to stripe Dashboard
               </div>
-            </div>
-            <div className={styles.sectionDescRow}>
-              <div className={styles.sectionDescLeft}>Transaction number:</div>
-              <div className={`${styles.yellow}  ${styles.sectionDescRight}`}>
-                9712783456
-              </div>
-            </div>
-            <div className={styles.yellow}>
-              {ICONS.download} Download invoice
-            </div>
-            
-          */}
-          </div>
+              {/* <div className={styles.sectionDescRow}>
+        <div className={styles.sectionDescLeft}>Payment method:</div>
+        <div className={styles.sectionDescRight}>
+          41 Quai des Belges, Martigues, Provence-Alpes-Côte d'Azur, 13500
         </div>
       </div>
+      <div className={styles.sectionDescRow}>
+        <div className={styles.sectionDescLeft}>Transaction number:</div>
+        <div className={`${styles.yellow}  ${styles.sectionDescRight}`}>
+          9712783456
+        </div>
+      </div>
+      <div className={styles.yellow}>
+        {ICONS.download} Download invoice
+      </div>
+      
+    */}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.loader}>
+          <div className={styles.leftLoader}>
+            <Skeleton className={styles.topLoader} />
+            <Skeleton className={styles.bottomLoader} />
+          </div>
+          <Skeleton className={styles.rightLoader} />
+        </div>
+      )}
+
+      <CalendarModal
+        isModal={calendarModal}
+        order={order}
+        onCloseModal={closeCalendarModal}
+        fetchOrderDetails={fetchOrderDetails}
+      />
     </div>
   );
 };

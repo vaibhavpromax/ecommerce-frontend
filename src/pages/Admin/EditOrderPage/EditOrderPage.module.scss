@@ -1,0 +1,113 @@
+.editOrderPage {
+  .top {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    .left {
+      color: #9f979a;
+      font-family: Jost;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 18.073px */
+    }
+    .yellow {
+      color: var(--highlight, #b06934);
+      font-family: Jost;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 18.073px */
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      cursor: pointer;
+      .profile {
+        img {
+          width: 36px;
+          height: 36px;
+          border-radius: 36px;
+          border: 1px solid #e8e4e1;
+        }
+      }
+    }
+  }
+
+  .topBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 20px;
+    .topLeft {
+      color: var(--font-dark, #3f373a);
+      font-family: Jost;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 24.85px */
+    }
+    .saveBtn {
+      color: #fff;
+      font-family: Jost;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 112.953%; /* 13.554px */
+      width: 116px;
+      height: 36px;
+    }
+  }
+  .editWrapper {
+    height: 70vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .editSection {
+      width: 100%;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      .section {
+        display: flex;
+        gap: 32px;
+        .left {
+          width: 200px;
+          color: var(--font-mid, #615c5e);
+          font-family: Jost;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 112.953%; /* 22.591px */
+        }
+
+        .right {
+          width: 71%;
+          padding: 20px 40px;
+          display: flex;
+          gap: 80px;
+          row-gap: 15px;
+          flex-wrap: wrap;
+          background-color: white;
+          border-radius: 10px;
+          .textbox {
+            width: 30%;
+          }
+        }
+      }
+    }
+    .loader {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      .first {
+        height: 20vh;
+      }
+      .second {
+        height: 20vh;
+      }
+    }
+  }
+}

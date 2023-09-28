@@ -61,11 +61,11 @@ const CustomerPage = () => {
             <div className={styles.label}>Email</div>
             <div className={styles.info}>{customer?.email}</div>
           </div>
+          {/*
           <div className={styles.descGroup}>
             <div className={styles.label}>Contact no.</div>
             <div className={styles.info}>{customer?.phone_no}</div>
           </div>
-          {/*
 <div className={styles.descGroup}>
 <div className={styles.label}>Address</div>
 {customer?.Address?.map((addr, key) => {

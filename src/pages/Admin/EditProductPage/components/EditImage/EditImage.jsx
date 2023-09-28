@@ -226,7 +226,7 @@ const EditImage = ({
                           editImageHandler(
                             e,
                             images[0]?.image_url,
-                            images[0]?.image_id,
+                            images[0]?.image_id
                           );
                         }}
                         style={{ display: "none" }}
@@ -284,8 +284,8 @@ const EditImage = ({
                         onChange={(e) => {
                           editImageHandler(
                             e,
-                            images[1]?.image_id,
-                            images[1]?.image_url
+                            images[1]?.image_url,
+                            images[1]?.image_id
                           );
                         }}
                         style={{ display: "none" }}
@@ -341,8 +341,8 @@ const EditImage = ({
                         onChange={(e) => {
                           editImageHandler(
                             e,
-                            images[2]?.image_id,
-                            images[2]?.image_url
+                            images[2]?.image_url,
+                            images[2]?.image_id
                           );
                         }}
                         style={{ display: "none" }}
