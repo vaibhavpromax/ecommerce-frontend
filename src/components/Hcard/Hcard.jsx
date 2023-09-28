@@ -27,7 +27,7 @@ const HCard = ({
     JSON.parse(localStorage.getItem("cart"))
   );
   const { user } = useAuth();
-  const { setFlag } = useShop();
+  const { setCartLength } = useShop();
   const navigate = useNavigate();
   const { addToCart, addToCartLoading } = useCart();
 
@@ -45,7 +45,9 @@ const HCard = ({
       fetchShop();
       setLocalCart(newArray);
     }
-    setFlag("done");
+    setCartLength((prev) => {
+      return prev - 1;
+    });
   };
 
   const handleCartQuantityUpdate = (count) => {

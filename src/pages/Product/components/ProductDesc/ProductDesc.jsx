@@ -26,7 +26,7 @@ const ProductDesc = () => {
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const { setFlag } = useShop();
+  const { setCartLength } = useShop();
   const { addToCart, addToCartLoading, getCart } = useCart();
   const [product, setProduct] = useState(null);
   const { user } = useAuth();
@@ -64,7 +64,9 @@ const ProductDesc = () => {
             fontFamily: "Jost",
           },
         });
-        setFlag(8);
+        setCartLength((prev) => {
+          return prev - 1;
+        });
         setAddedToCart(true);
       });
     } else {
@@ -77,8 +79,6 @@ const ProductDesc = () => {
           "cart",
           JSON.stringify([{ id: product?.product_id, quantity: quantity }])
         );
-
-        setFlag(9);
       } else {
         console.log("present ", JSON.parse(localStorage.getItem("cart")));
         localStorage.setItem(
@@ -88,8 +88,11 @@ const ProductDesc = () => {
             { id: product?.product_id, quantity: quantity },
           ])
         );
-        setFlag(10);
       }
+
+      setCartLength((prev) => {
+        return prev + 1;
+      });
       setAddedToCart(true);
       toast.success("Added to cart", {
         style: {

@@ -15,14 +15,16 @@ const ImageViewer = ({
   const images = product?.Images;
   const [activeImage, setActiveImage] = useState(images[0]?.image_url);
   const { user } = useAuth();
-  const { setFlag } = useShop();
+  const { setWishlistLength } = useShop();
 
   const { addToWishlist, removeFromWishlist, getWishlist } = useWishlist();
 
   const removeFromWishListHandler = async () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
-        setFlag(11);
+        setWishlistLength((prev) => {
+          return prev - 1;
+        });
         const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
           (item) => {
             return item != product?.product_id;
@@ -36,7 +38,7 @@ const ImageViewer = ({
           },
         });
         localStorage.setItem("wishlist", JSON.stringify(updatedList));
-        fetchProduct();
+        // fetchProduct();
       });
     } else {
       const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
@@ -52,17 +54,20 @@ const ImageViewer = ({
       });
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
-      fetchProduct();
+      // fetchProduct();
 
-      setFlag(12);
+      setWishlistLength((prev) => {
+        return prev - 1;
+      });
     }
   };
 
   const addToWishListHandler = () => {
     if (user) {
       addToWishlist(product.product_id, () => {
-        setFlag(13);
-        // set wishlist in local storage as well for checking on rendering
+        setWishlistLength((prev) => {
+          return prev + 1;
+        }); // set wishlist in local storage as well for checking on rendering
         toast.success("Added to wishlist", {
           style: {
             backgroundColor: "#F7F6F5",
@@ -85,13 +90,12 @@ const ImageViewer = ({
           );
           setIsWishlisted(true);
         }
-        fetchProduct();
+        // fetchProduct();
       });
     } else {
       if (JSON.parse(localStorage.getItem("wishlist")) == null) {
         localStorage.setItem("wishlist", JSON.stringify([product?.product_id]));
         setIsWishlisted(true);
-        setFlag(13);
       } else {
         localStorage.setItem(
           "wishlist",
@@ -101,8 +105,10 @@ const ImageViewer = ({
           ])
         );
         setIsWishlisted(true);
-        setFlag(14);
       }
+      setWishlistLength((prev) => {
+        return prev + 1;
+      });
       toast.success("Added to wishlist", {
         style: {
           backgroundColor: "#F7F6F5",

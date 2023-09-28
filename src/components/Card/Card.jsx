@@ -26,7 +26,7 @@ const Card = ({
   };
   const { removeFromWishlist, addToWishlist, getWishlist } = useWishlist();
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const { setFlag } = useShop();
+  const { setCartLength, setWishlistLength } = useShop();
   const [localWish, setLocalWish] = useState(
     JSON.parse(localStorage.getItem("wishlist"))
   );
@@ -43,7 +43,9 @@ const Card = ({
   const removeFromWishListHandler = async () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
-        setFlag(0);
+        setWishlistLength((prev) => {
+          return prev - 1;
+        });
 
         toast.success("Removed from wishlist", {
           style: {
@@ -72,8 +74,12 @@ const Card = ({
       setLocalWish(updatedList);
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
-      // fetchProducts();
-      setFlag(1);
+      if (renderFromWishlist) {
+        fetchProducts();
+      }
+      setWishlistLength((prev) => {
+        return prev - 1;
+      });
 
       toast.success("Removed from wishlist", {
         style: {
@@ -87,7 +93,9 @@ const Card = ({
   const addToWishListHandler = async () => {
     if (user) {
       addToWishlist(product.product_id, () => {
-        setFlag(2);
+        setWishlistLength((prev) => {
+          return prev + 1;
+        });
         // set wishlist in local storage as well for checking on rendering
         setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
         if (JSON.parse(localStorage.getItem("wishlist")) == null) {
@@ -122,7 +130,6 @@ const Card = ({
       if (JSON.parse(localStorage.getItem("wishlist")) == null) {
         localStorage.setItem("wishlist", JSON.stringify([product?.product_id]));
         setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
-        setFlag(3);
 
         setIsWishlisted(true);
       } else {
@@ -138,8 +145,10 @@ const Card = ({
           ])
         );
         setIsWishlisted(true);
-        setFlag(4);
       }
+      setWishlistLength((prev) => {
+        return prev + 1;
+      });
       toast.success("Added to wishlist", {
         style: {
           backgroundColor: "#F7F6F5",
@@ -155,8 +164,9 @@ const Card = ({
       addToCart(
         { product_id: product.product_id, quantity: counterValue },
         () => {
-          setFlag(5);
-
+          setCartLength((prev) => {
+            return prev + 1;
+          });
           toast.success("Added to cart", {
             style: {
               backgroundColor: "#F7F6F5",
@@ -174,8 +184,9 @@ const Card = ({
           JSON.stringify([{ id: product?.product_id, quantity: counterValue }])
         );
         setLocalCart([{ id: product?.product_id, quantity: counterValue }]);
-        setFlag(6);
-
+        setCartLength((prev) => {
+          return prev + 1;
+        });
         toast.success("Added to cart", {
           style: {
             backgroundColor: "#F7F6F5",
@@ -183,7 +194,6 @@ const Card = ({
           },
         });
       } else {
-        console.log("present ", JSON.parse(localStorage.getItem("cart")));
         localStorage.setItem(
           "cart",
           JSON.stringify([
@@ -201,11 +211,12 @@ const Card = ({
             fontFamily: "Jost",
           },
         });
-        setFlag(7);
+        setCartLength((prev) => {
+          return prev + 1;
+        });
       }
     }
   };
-  // console.log(localWish, localCart);
 
   useEffect(() => {
     localWish?.includes(product.product_id)
