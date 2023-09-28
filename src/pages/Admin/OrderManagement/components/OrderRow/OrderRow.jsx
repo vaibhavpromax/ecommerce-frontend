@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { ICONS } from "../../../../../icons";
 import { formatDate } from "../../../../../utils/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 const OrderRow = ({ order }) => {
   const [showAccordion, setShowAccordion] = useState(false);
   console.log(order);
+  const navigate = useNavigate();
+
   return (
     <div className={styles.orderaccordion}>
       <div className={styles.orderrow}>
@@ -40,7 +43,15 @@ const OrderRow = ({ order }) => {
           </div>
         </div>
         <div className={styles.col3}>
-          <div className={styles.row1}> {ICONS.user} Customer details</div>
+          <div
+            onClick={() => {
+              navigate(`/customer/${order?.user_id}`);
+            }}
+            className={styles.row1}
+          >
+            {" "}
+            {ICONS.user} Customer details
+          </div>
           <div className={styles.row2}> </div>
         </div>
         <div className={styles.col4}>

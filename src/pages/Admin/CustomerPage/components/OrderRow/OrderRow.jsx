@@ -7,7 +7,6 @@ import { formatDate } from "../../../../../utils/dateFormatter";
 
 const OrderRow = ({ order }) => {
   const [showAccordion, setShowAccordion] = useState(false);
-  console.log(order);
   return (
     <div className={styles.orderaccordion}>
       <div className={styles.orderrow}>
@@ -39,10 +38,7 @@ const OrderRow = ({ order }) => {
             {moment(order?.createdAt).format("DD MMM, YYYY")}
           </div>
         </div>
-        <div className={styles.col3}>
-          <div className={styles.row1}> {ICONS.user} Customer details</div>
-          <div className={styles.row2}> </div>
-        </div>
+
         <div className={styles.col4}>
           <div className={styles.orderPrice}>${order?.total_price}</div>
           <div className={styles.orderStatus}>
