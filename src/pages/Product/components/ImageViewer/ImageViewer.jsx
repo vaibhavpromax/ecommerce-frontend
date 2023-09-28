@@ -4,6 +4,7 @@ import { ICONS } from "../../../../icons";
 import useWishlist from "../../../../apis/useWishlist";
 import { useAuth } from "../../../../contexts/AuthContext";
 import toast from "react-hot-toast";
+import { useShop } from "../../../../contexts/ShopContext";
 
 const ImageViewer = ({
   product,
@@ -14,12 +15,14 @@ const ImageViewer = ({
   const images = product?.Images;
   const [activeImage, setActiveImage] = useState(images[0]?.image_url);
   const { user } = useAuth();
+  const { setFlag } = useShop();
 
-  const { addToWishlist, removeFromWishlist } = useWishlist();
+  const { addToWishlist, removeFromWishlist, getWishlist } = useWishlist();
 
-  const removeFromWishListHandler = () => {
+  const removeFromWishListHandler = async () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
+        setFlag(11);
         const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
           (item) => {
             return item != product?.product_id;
@@ -50,12 +53,15 @@ const ImageViewer = ({
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
       fetchProduct();
+
+      setFlag(12);
     }
   };
 
   const addToWishListHandler = () => {
     if (user) {
       addToWishlist(product.product_id, () => {
+        setFlag(13);
         // set wishlist in local storage as well for checking on rendering
         toast.success("Added to wishlist", {
           style: {
@@ -85,6 +91,7 @@ const ImageViewer = ({
       if (JSON.parse(localStorage.getItem("wishlist")) == null) {
         localStorage.setItem("wishlist", JSON.stringify([product?.product_id]));
         setIsWishlisted(true);
+        setFlag(13);
       } else {
         localStorage.setItem(
           "wishlist",
@@ -94,6 +101,7 @@ const ImageViewer = ({
           ])
         );
         setIsWishlisted(true);
+        setFlag(14);
       }
       toast.success("Added to wishlist", {
         style: {

@@ -11,6 +11,7 @@ import useCart from "../../../../apis/useCart";
 import { useAuth } from "../../../../contexts/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import Skeleton from "../../../../components/Skeleton/Skeleton";
+import { useShop } from "../../../../contexts/ShopContext";
 
 const quantityOptions = {
   1: "1",
@@ -25,7 +26,8 @@ const ProductDesc = () => {
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const { addToCart, addToCartLoading } = useCart();
+  const { setFlag } = useShop();
+  const { addToCart, addToCartLoading, getCart } = useCart();
   const [product, setProduct] = useState(null);
   const { user } = useAuth();
   const { id } = useParams();
@@ -44,7 +46,7 @@ const ProductDesc = () => {
     fetchProduct();
   }, []);
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     // const payload = {
     //   product_id: product?.product_id,
     //   quantity: quantity,
@@ -62,6 +64,7 @@ const ProductDesc = () => {
             fontFamily: "Jost",
           },
         });
+        setFlag(8);
         setAddedToCart(true);
       });
     } else {
@@ -74,6 +77,8 @@ const ProductDesc = () => {
           "cart",
           JSON.stringify([{ id: product?.product_id, quantity: quantity }])
         );
+
+        setFlag(9);
       } else {
         console.log("present ", JSON.parse(localStorage.getItem("cart")));
         localStorage.setItem(
@@ -83,6 +88,7 @@ const ProductDesc = () => {
             { id: product?.product_id, quantity: quantity },
           ])
         );
+        setFlag(10);
       }
       setAddedToCart(true);
       toast.success("Added to cart", {

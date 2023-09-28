@@ -9,6 +9,7 @@ import useCart from "../../apis/useCart";
 import Counter from "../Counter/Counter";
 import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
+import { useShop } from "../../contexts/ShopContext";
 
 const Card = ({
   width = "280px",
@@ -23,24 +24,27 @@ const Card = ({
     width,
     height,
   };
-  const { removeFromWishlist, addToWishlist } = useWishlist();
+  const { removeFromWishlist, addToWishlist, getWishlist } = useWishlist();
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const { setFlag } = useShop();
   const [localWish, setLocalWish] = useState(
     JSON.parse(localStorage.getItem("wishlist"))
   );
   const [localCart, setLocalCart] = useState(
     JSON.parse(localStorage.getItem("cart"))
   );
-  const { addToCart, addToCartLoading } = useCart();
+  const { addToCart, addToCartLoading, getCart } = useCart();
   const { user } = useAuth();
   const [counterValue, setCounterValue] = useState(1);
   const openProductHandler = () => {
     navigate(`/product/${product?.product_id}`);
   };
 
-  const removeFromWishListHandler = () => {
+  const removeFromWishListHandler = async () => {
     if (user) {
       removeFromWishlist(product.product_id, () => {
+        setFlag(0);
+
         toast.success("Removed from wishlist", {
           style: {
             backgroundColor: "#F7F6F5",
@@ -60,7 +64,6 @@ const Card = ({
         // else fetchProducts();
       });
     } else {
-      console.log("Inside");
       const updatedList = JSON.parse(localStorage.getItem("wishlist")).filter(
         (item) => {
           return item != product?.product_id;
@@ -70,6 +73,8 @@ const Card = ({
       setIsWishlisted(false);
       localStorage.setItem("wishlist", JSON.stringify(updatedList));
       // fetchProducts();
+      setFlag(1);
+
       toast.success("Removed from wishlist", {
         style: {
           backgroundColor: "#F7F6F5",
@@ -79,9 +84,10 @@ const Card = ({
     }
   };
 
-  const addToWishListHandler = () => {
+  const addToWishListHandler = async () => {
     if (user) {
       addToWishlist(product.product_id, () => {
+        setFlag(2);
         // set wishlist in local storage as well for checking on rendering
         setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
         if (JSON.parse(localStorage.getItem("wishlist")) == null) {
@@ -116,6 +122,8 @@ const Card = ({
       if (JSON.parse(localStorage.getItem("wishlist")) == null) {
         localStorage.setItem("wishlist", JSON.stringify([product?.product_id]));
         setLocalWish(JSON.parse(localStorage.getItem("wishlist")));
+        setFlag(3);
+
         setIsWishlisted(true);
       } else {
         setLocalWish([
@@ -130,6 +138,7 @@ const Card = ({
           ])
         );
         setIsWishlisted(true);
+        setFlag(4);
       }
       toast.success("Added to wishlist", {
         style: {
@@ -146,6 +155,8 @@ const Card = ({
       addToCart(
         { product_id: product.product_id, quantity: counterValue },
         () => {
+          setFlag(5);
+
           toast.success("Added to cart", {
             style: {
               backgroundColor: "#F7F6F5",
@@ -163,6 +174,8 @@ const Card = ({
           JSON.stringify([{ id: product?.product_id, quantity: counterValue }])
         );
         setLocalCart([{ id: product?.product_id, quantity: counterValue }]);
+        setFlag(6);
+
         toast.success("Added to cart", {
           style: {
             backgroundColor: "#F7F6F5",
@@ -182,6 +195,13 @@ const Card = ({
           ...JSON.parse(localStorage.getItem("cart")),
           { id: product?.product_id, quantity: counterValue },
         ]);
+        toast.success("Added to cart", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
+        setFlag(7);
       }
     }
   };

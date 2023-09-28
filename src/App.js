@@ -13,6 +13,7 @@ import AuthProvider from "./contexts/AuthContext";
 import Home from "./pages/User/Home/Home";
 import StripeWrapper from "./StripeWrapper";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import ShopProvider from "./contexts/ShopContext";
 
 function App() {
   return (
@@ -32,7 +33,9 @@ function App() {
                 clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
               >
                 <AuthProvider>
-                  <RoleRoutes />
+                  <ShopProvider>
+                    <RoleRoutes />
+                  </ShopProvider>
                 </AuthProvider>
               </GoogleOAuthProvider>
             }

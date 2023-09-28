@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useCart from "../../apis/useCart";
 import Counter from "../Counter/Counter";
 import { useAuth } from "../../contexts/AuthContext";
+import { useShop } from "../../contexts/ShopContext";
 
 const HCard = ({
   width = "100%",
@@ -26,6 +27,7 @@ const HCard = ({
     JSON.parse(localStorage.getItem("cart"))
   );
   const { user } = useAuth();
+  const { setFlag } = useShop();
   const navigate = useNavigate();
   const { addToCart, addToCartLoading } = useCart();
 
@@ -43,16 +45,14 @@ const HCard = ({
       fetchShop();
       setLocalCart(newArray);
     }
+    setFlag("done");
   };
 
   const handleCartQuantityUpdate = (count) => {
     if (user) {
-      addToCart(
-        { product_id: product?.product_id, quantity: count},
-        () => {
-          fetchCart();
-        }
-      );
+      addToCart({ product_id: product?.product_id, quantity: count }, () => {
+        fetchCart();
+      });
     } else {
       JSON.parse(localStorage.getItem("cart"))?.map((item) => {
         if (item.id == product?.product_id) {

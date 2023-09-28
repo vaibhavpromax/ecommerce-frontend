@@ -9,6 +9,13 @@ import RateProductModal from "../RateProductModal/RateProductModal";
 import moment from "moment";
 import useCart from "../../../../../../apis/useCart";
 
+const orderDate = (status, order) => {
+  if (status == "PLACED") return order?.order_placed_date;
+  if (status == "PROCESSING") return order?.processing_date;
+  if (status == "SHIPPED") return order?.shipped_date;
+  if (status == "DELIVERED") return order?.delivered_date;
+};
+
 const HistoryCard = ({ order }) => {
   const [ratingModal, setRatingModal] = useState(false);
   const [productId, setProductId] = useState("");
@@ -48,7 +55,9 @@ const HistoryCard = ({ order }) => {
           <h4>Status</h4>
           <h5>
             {order?.order_status},
-            {moment(new Date(order?.order_placed_date)).format("MMM, DD ")}
+            {moment(new Date(orderDate(order?.order_status, order))).format(
+              "MMM, DD "
+            )}
           </h5>
         </div>{" "}
         <div className={styles.ver}></div>
@@ -127,7 +136,7 @@ const HistoryCard = ({ order }) => {
 
         <div className={styles.s3}></div>
         <div className={styles.s4}>
-          <Tracker />
+          <Tracker order={order} />
         </div>
       </div>
       <RateProductModal

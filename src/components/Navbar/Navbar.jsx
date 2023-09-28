@@ -4,6 +4,7 @@ import styles from "./Navbar.module.scss";
 import { ICONS } from "../../icons";
 import Button from "../Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useShop } from "../../contexts/ShopContext";
 
 const NAVBAR_COLORS = {
   transparent: "transparent",
@@ -13,6 +14,7 @@ const NAVBAR_COLORS = {
 const Navbar = ({ routes }) => {
   // const [navbarColor, setNavbarColor] = useState(NAVBAR_COLORS.transparent);
   const location = useLocation();
+  const { cartLength, wishlistLength } = useShop();
   const navigate = useNavigate();
   let allRoutes = [];
   routes.forEach((route) => {
@@ -65,6 +67,7 @@ const Navbar = ({ routes }) => {
         >
           {" "}
           {ICONS.heartOutline}Wishlist
+          <div className={styles.length}>0{wishlistLength}</div>
         </div>
         <div
           onClick={() => {
@@ -74,6 +77,7 @@ const Navbar = ({ routes }) => {
         >
           {" "}
           {ICONS.cartOutline}Cart
+          <div className={styles.length}>0{cartLength}</div>
         </div>
         {localStorage.getItem("user") && (
           <div
