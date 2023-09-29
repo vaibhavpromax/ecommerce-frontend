@@ -48,9 +48,6 @@ const ShopProvider = ({ children }) => {
     }
   }, []);
 
-  console.log("wish", wishlistLength);
-  console.log("cart", cartLength);
-
   return (
     <ShopContext.Provider
       value={{

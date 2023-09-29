@@ -27,16 +27,21 @@
       line-height: 112.953%;
       display: flex;
       align-items: center;
+      position: relative;
       gap: 5px;
       .length {
+        position: absolute;
+        right: -15px;
+        bottom: 75%;
         background-color: #4e423a;
         border-radius: 50%;
-        width: 20px;
-        height: 20px; 
+        width: 18px;
+        height: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 12px;
+        font-size: 10px;
+        font-weight: 400;
         font-family: Jost;
         color: white;
       }

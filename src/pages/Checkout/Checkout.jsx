@@ -34,8 +34,9 @@ const Checkout = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [confirmPaymentModal, setConfirmPaymentModal] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState(null);
+  const [isUserBlocked, setIsUserBlocked] = useState(false);
   const { addUserAddress, fetchAddresses, getAddressLoading } = useAddress();
-  const { getCart, getCartLoading } = useCart();
+  const { getCart, getCartLoading, getBlockedStatus } = useCart();
   const { getPaymentMethods, createPaymentIntent } = usePayment();
   const [view, setView] = useState(VIEWS.ADDRESS);
   // const { card, billing_details } = paymentMethod;
@@ -107,10 +108,27 @@ const Checkout = () => {
     );
   };
 
+  const fetchBlockedStatus = async () => {
+    await getBlockedStatus((data) => {
+      setIsUserBlocked(data?.data?.is_blocked);
+
+      if (data?.data?.is_blocked) {
+        toast.error("You are blocked by admin", {
+          style: {
+            backgroundColor: "#F7F6F5",
+            fontFamily: "Jost",
+          },
+        });
+      } else {
+        getAddresses();
+        fetchCart();
+        fetchPaymentMethods();
+      }
+    });
+  };
+
   useEffect(() => {
-    getAddresses();
-    fetchCart();
-    fetchPaymentMethods();
+    fetchBlockedStatus();
   }, []);
 
   return (
@@ -223,9 +241,10 @@ const Checkout = () => {
           </p>
           <Button
             onClick={onCheckoutHandler}
-            className={`${selectedPaymentMethod == null && styles.disabled} ${
-              styles.chckbtn
-            }`}
+            className={`${
+              (selectedPaymentMethod == null || isUserBlocked) &&
+              styles.disabled
+            } ${styles.chckbtn}`}
           >
             Checkout
           </Button>

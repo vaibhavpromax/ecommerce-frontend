@@ -33,7 +33,7 @@ const Navbar = ({ routes }) => {
   //   }
   // }, [location.pathname]);
 
-  console.log(allRoutes);
+  console.log(location);
 
   return (
     <div
@@ -67,7 +67,16 @@ const Navbar = ({ routes }) => {
         >
           {" "}
           {ICONS.heartOutline}Wishlist
-          <div className={styles.length}>0{wishlistLength}</div>
+          <div
+            style={{
+              display:
+                (wishlistLength == 0 || location.pathname === "/wishlist") &&
+                "none",
+            }}
+            className={styles.length}
+          >
+            {wishlistLength}
+          </div>
         </div>
         <div
           onClick={() => {
@@ -77,7 +86,15 @@ const Navbar = ({ routes }) => {
         >
           {" "}
           {ICONS.cartOutline}Cart
-          <div className={styles.length}>0{cartLength}</div>
+          <div
+            style={{
+              display:
+                (cartLength == 0 || location.pathname === "/cart") && "none",
+            }}
+            className={styles.length}
+          >
+            {cartLength}
+          </div>
         </div>
         {localStorage.getItem("user") && (
           <div

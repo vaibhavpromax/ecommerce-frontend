@@ -2,8 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 
 const useCart = () => {
-  const [getCartLoading, setGetCartLoading] = useState(true);
+  const [getCartLoading, setGetCartLoading] = useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
+  const [getBlockedLoading, setGetBlockedLoading] = useState(false);
 
   const getCart = async (cb) => {
     setGetCartLoading(true);
@@ -28,12 +29,25 @@ const useCart = () => {
       setAddToCartLoading(false);
     }
   };
+  const getBlockedStatus = async (cb) => {
+    setGetBlockedLoading(true);
+    try {
+      const res = await axios.post(`/ecommerce/user/get-blocked-status`);
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setGetBlockedLoading(false);
+    }
+  };
 
   return {
     getCart,
     getCartLoading,
     addToCartLoading,
     addToCart,
+    getBlockedLoading,
+    getBlockedStatus,
   };
 };
 
