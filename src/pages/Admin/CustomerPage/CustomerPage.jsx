@@ -5,15 +5,33 @@ import { ICONS } from "../../../icons";
 import Button from "../../../components/Button/Button";
 import OrderRow from "./components/OrderRow/OrderRow";
 import useCustomer from "../../../apis/useCustomer";
+import toast, { Toaster } from "react-hot-toast";
+
 const CustomerPage = () => {
   const { id } = useParams();
   const [customer, setCustomer] = useState(null);
-  const { getSingleCustomerInfo, getSingleCustomerLoading } = useCustomer();
+  const {
+    getSingleCustomerInfo,
+    getSingleCustomerLoading,
+    toggleCustomerBlockStatus,
+  } = useCustomer();
 
   const fetchCustomer = async () => {
     await getSingleCustomerInfo(id, (data) => {
       console.log(data);
       setCustomer(data?.data);
+    });
+  };
+
+  const toggleBlock = async () => {
+    await toggleCustomerBlockStatus((data) => {
+      toast.success("Customer block status updated", {
+        style: {
+          backgroundColor: "#F7F6F5",
+          fontFamily: "Jost",
+        },
+      });
+      fetchCustomer();
     });
   };
 
@@ -23,13 +41,16 @@ const CustomerPage = () => {
 
   return (
     <div className={styles.customerPage}>
+      <Toaster />
       <div className={styles.top}>
         <div className={styles.left}>
           <span className={styles.yellow}>Customers</span>
           {">>"} Customer #{customer?.user_id?.substring(0, 4)}
         </div>
         <div className={styles.right}>
+          {/*
           <Button>{ICONS.pen} Edit details</Button>
+        */}
           {ICONS.bell}
           {/* 
           <div className={styles.profile}>
@@ -80,9 +101,11 @@ const CustomerPage = () => {
                 </div>
               */}
 
-          <div className={styles.blockButton}>
+          <div onClick={toggleBlock} className={styles.blockButton}>
             {ICONS.cancel}
-            Add to Block list
+            {customer?.is_blocked
+              ? "Remove from block list"
+              : "Add to Block list"}
           </div>
         </div>
         <div className={styles.right}>

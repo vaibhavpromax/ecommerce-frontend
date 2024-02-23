@@ -38,7 +38,7 @@ const RoleRoutes = () => {
                   />
                 );
               })}
-              <Route path="*" element={<NotFound />}></Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </>

@@ -7,6 +7,7 @@ const useCustomer = () => {
   const [getSingleCustomerLoading, setGetSingleCustomerLoading] =
     useState(false);
   const [updateCustomerLoading, setUpdateCustomerLoading] = useState(false);
+  const [customerBlockLoading, setCustomerBlockLoading] = useState(false);
 
   const getCustomers = async (cb) => {
     setGetCustomersLoading(true);
@@ -46,6 +47,18 @@ const useCustomer = () => {
     }
   };
 
+  const toggleCustomerBlockStatus = async (id, cb) => {
+    setCustomerBlockLoading(true);
+    try {
+      const res = await axios.patch(`/ecommerce/admin/block-customer/${id}`);
+      if (cb && typeof cb === "function") cb(res.data);
+    } catch (err) {
+      throw new Error(err);
+    } finally {
+      setCustomerBlockLoading(false);
+    }
+  };
+
   const editUser = async (id, data, cb) => {
     setUpdateCustomerLoading(true);
     try {
@@ -67,6 +80,8 @@ const useCustomer = () => {
     getSingleCustomerLoading,
     editUser,
     updateCustomerLoading,
+    toggleCustomerBlockStatus,
+    customerBlockLoading,
     // addProduct,
     // addProductLoading,
   };

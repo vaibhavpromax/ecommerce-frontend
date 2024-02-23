@@ -122,7 +122,8 @@ const ProductManagement = () => {
           <div className={styles.col6}>ADDED ON</div>
           <div className={styles.col7}>BASE PRICE</div>
           <div className={styles.col8}>PURCHASES</div>
-          <div className={styles.col9}>ACTIONS</div>
+          <div className={styles.col9}>INVENTORY</div>
+          <div className={styles.col10}>ACTION</div>
         </div>
         <div className={styles.list}>
           {getProductsLoading ? (

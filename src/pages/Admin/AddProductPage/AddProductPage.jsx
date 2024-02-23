@@ -32,6 +32,7 @@ const AddProductPage = () => {
     discount_end_date: "",
     sec_images: [],
     primary_image: "",
+    shipping_price: "",
   });
 
   const addProductHandler = async () => {

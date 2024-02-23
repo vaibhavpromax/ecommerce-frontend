@@ -17,6 +17,7 @@ const TextBox = ({
       <label>{label}</label>
       <input
         type="text"
+        
         style={{ width: width, height: height }}
         value={value}
         onChange={(e) => handleChange(e)}

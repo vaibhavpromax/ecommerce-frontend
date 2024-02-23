@@ -146,9 +146,11 @@ const ProductDesc = () => {
                 {ICONS.tick} Arrives soon! get it by 24th June if you order
                 today
               </div>
+              {/*
               <div className={styles.l1}>
-                {ICONS.tick} Returns & exchange available
+              {ICONS.tick} Returns & exchange available
               </div>
+            */}
             </div>
             <div className={styles.quant}>
               <Select

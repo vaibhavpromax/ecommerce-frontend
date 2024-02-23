@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./QuantityPricingShipping.module.scss";
 import TextBox from "../../../../../components/TextBox/TextBox";
+import toast, { Toaster } from "react-hot-toast";
+
 const QuantityPricingShipping = ({ productInfo, setProductInfo }) => {
   return (
     <div className={styles.qps}>
@@ -111,6 +113,13 @@ const QuantityPricingShipping = ({ productInfo, setProductInfo }) => {
               setProductInfo({ ...productInfo, inventory_quantity: e })
             }
             label="Inventory quantity"
+          />
+          <TextBox
+            value={productInfo.shipping_price}
+            setValue={(e) =>
+              setProductInfo({ ...productInfo, shipping_price: e })
+            }
+            label="Shipping Price (in €)"
           />
         </div>
       </div>

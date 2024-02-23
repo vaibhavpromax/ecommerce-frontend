@@ -72,7 +72,8 @@ const AdminProductRow = ({
       </div>
       <div className={styles.col7}>{product?.cost_price} $</div>
       <div className={styles.col8}>{product?.quantity_purchased}</div>
-      <div className={styles.col9}>
+      <div className={styles.col9}>{product?.inventory_quantity}</div>
+      <div className={styles.col10}>
         <span
           onClick={() => {
             navigate(`/edit-product/${product?.product_id}`);
